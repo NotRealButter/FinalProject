@@ -140,9 +140,9 @@ public class GamePanel extends JPanel implements ActionListener
         {
             player1.heroX += player1.dx;
             player1.heroY += player1.dy;
-            badGuy.objectX += badGuy.objectdx;
-            badGuy.objectY += badGuy.objectdy;
             badGuy.bouncingBounds();
+            badGuy.objectX += badGuy.objectdx;
+            badGuy.objectY += badGuy.objectdy;            
             player1.heroBounds();
             
             if (player1 != null)
@@ -154,8 +154,7 @@ public class GamePanel extends JPanel implements ActionListener
                     {
                       player1.dx = 0;
                       player1.dy = 0;
-                      badGuy.
-                      //player1.heroX += bad
+                      badGuy.objectdx -= (badGuy.objectdx*2); 
                     }
             repaint();            
             revalidate();
