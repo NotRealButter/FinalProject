@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.7.0_65" class="java.beans.XMLDecoder">
+ <object class="Final_Project_fixed.Options">
+  <void property="color">
+   <object class="java.awt.Color">
+    <int>0</int>
+    <int>0</int>
+    <int>255</int>
+    <int>255</int>
+   </object>
+  </void>
+  <void property="name">
+   <string>Steve</string>
+  </void>
+  <void property="startingHealth">
+   <int>7</int>
+  </void>
+ </object>
+</java>

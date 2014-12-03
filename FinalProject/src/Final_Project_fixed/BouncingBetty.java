@@ -17,25 +17,21 @@ public class BouncingBetty
     public void bouncingBounds()
     {
          if (objectX <= 0)
-            {
-                objectdx = 1;
-                badGuyShape.setBounds(objectX++, objectY, objectWidth, objectHeight);
-            }
-            if (objectX >= 942)
-            {
-                objectdx = -1;
-                badGuyShape.setBounds(objectX--, objectY, objectWidth, objectHeight);
-            }
-            if (objectY <= 0)
-            {
-                objectdy = 1;
-                badGuyShape.setBounds(objectX, objectY++, objectWidth, objectHeight);
-            }
-            if (objectY >= 642)
-            {
-                objectdy = -1;
-                badGuyShape.setBounds(objectX, objectY--, objectWidth, objectHeight);
-            }
+        {
+            objectdx = 1;
+        }
+        if (objectX >= 942)
+        {
+            objectdx = -1;
+        }
+        if (objectY <= 0)
+        {
+            objectdy = 1;
+        }
+        if (objectY >= 642)
+        {
+            objectdy = -1;
+        }
     }
     public void colorFlash()
     {

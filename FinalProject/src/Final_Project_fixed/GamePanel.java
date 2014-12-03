@@ -4,10 +4,12 @@ import java.awt.*;
 import java.awt.Rectangle;
 import java.awt.event.*;
 import java.io.File;
+import java.util.ArrayList;
 import javax.swing.*;
 
 public class GamePanel extends JPanel implements ActionListener
 {
+    Image floorTexture = Toolkit.getDefaultToolkit().getImage("images/floor.jpg");
     myJPanel p2;
     Player player1;
     BouncingBetty badGuy;
@@ -16,6 +18,8 @@ public class GamePanel extends JPanel implements ActionListener
     JLabel health, name;
     Graphics g;
     int flashcount = 0;
+    int roomNumber = 1;
+    Room inThisRoom;
     
     Rectangle baddieShape;
     Rectangle sword;
@@ -36,6 +40,8 @@ public class GamePanel extends JPanel implements ActionListener
         defaultChar();
         loadOptions();
         refreshPlayer();
+        
+        inThisRoom = new Room();
         
         content = new JButton("this is where the game is");
         content.setBounds(390, 500, 220, 20);
@@ -70,6 +76,7 @@ public class GamePanel extends JPanel implements ActionListener
   
         player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
         displaySetup();
+
     }
     
     public void refreshPlayer()
@@ -97,6 +104,29 @@ public class GamePanel extends JPanel implements ActionListener
     {
         player1 = new Player(options);
     }
+    
+    public void inRoom()
+    {
+        switch (roomNumber)
+        {
+            case 1: 
+                inThisRoom.inRoomOne();
+                break;
+            case 2: 
+                inThisRoom.inRoomTwo();
+                break;
+            case 3:
+                inThisRoom.inRoomThree();
+                break;
+            case 4:
+                inThisRoom.inRoomFour();
+                break;
+            case 5:
+                inThisRoom.inRoomFive();
+                break;
+        }
+        
+    }
 
     public void defaultChar()
     {
@@ -116,6 +146,18 @@ public class GamePanel extends JPanel implements ActionListener
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
+        g.drawImage(floorTexture, 0, 0, this);
+        g.drawImage(floorTexture, 340, 0, this);
+        g.drawImage(floorTexture, 0, 340, this);
+        g.drawImage(floorTexture, 340, 340, this);
+        g.drawImage(floorTexture, 680, 0, this);
+        g.drawImage(floorTexture, 680, 340, this);
+        
+        g.setColor(Color.red);
+        for(int i = 0; i < inThisRoom.walls; i++)
+        {
+            g.fillRect(inThisRoom.wallList.get(i).getWallX(), inThisRoom.wallList.get(i).getWallY(), inThisRoom.wallList.get(i).getWallWidth(), inThisRoom.wallList.get(i).getWallHeight());
+        }
         if(gameOptions != null)
         {
             g.setColor(gameOptions.getColor());
@@ -124,11 +166,13 @@ public class GamePanel extends JPanel implements ActionListener
         {
             g.setColor(Color.green);
         }
+        
         g.fillRect(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
         g.setColor(badGuy.badGuyColor);
         g.fillRect(badGuy.objectX,badGuy.objectY, badGuy.objectWidth, badGuy.objectHeight);
         player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
         badGuy.badGuyShape = new Rectangle(badGuy.objectX, badGuy.objectY, badGuy.objectHeight, badGuy.objectWidth);
+        //inThisRoom.wall1
     }
 
     @Override
@@ -152,8 +196,6 @@ public class GamePanel extends JPanel implements ActionListener
             }  
             if (player1.heroShape.intersects(badGuy.badGuyShape))
             {
-                player1.dx = 0;
-                player1.dy = 0;
                 if(badGuy.objectX > player1.heroX+player1.heroWidth)
                 {
                     badGuy.objectdx = 1;
