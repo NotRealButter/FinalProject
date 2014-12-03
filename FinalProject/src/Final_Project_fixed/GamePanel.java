@@ -14,9 +14,20 @@ public class GamePanel extends JPanel implements ActionListener
     BouncingBetty badGuy;
     private Options gameOptions;
     Room inThisRoom;
+            
+    Image frontStanding = Toolkit.getDefaultToolkit().getImage("images/front/front standing.png");
+    Image leftStanding = Toolkit.getDefaultToolkit().getImage("images/left/left standing.png");
+    Image leftSideRight = Toolkit.getDefaultToolkit().getImage("images/left/left right.png");
+    Image leftSideLeft = Toolkit.getDefaultToolkit().getImage("images/left/left left.png");
+    Image rightStanding = Toolkit.getDefaultToolkit().getImage("images/right/right standing.png");
+    Image rightSideRight = Toolkit.getDefaultToolkit().getImage("images/right/right right.png");
+    Image rightSideLeft = Toolkit.getDefaultToolkit().getImage("images/right/right left.png");
+    Image backStanding = Toolkit.getDefaultToolkit().getImage("images/back/back standing.png");
+    Image backRight = Toolkit.getDefaultToolkit().getImage("images/back/back right.png");
+    Image backLeft = Toolkit.getDefaultToolkit().getImage("images/back/back left.png");
+    
     
     Image floorTexture = Toolkit.getDefaultToolkit().getImage("images/floor.jpg");
-
             
     Rectangle baddieShape;
     Rectangle sword;
@@ -168,7 +179,23 @@ public class GamePanel extends JPanel implements ActionListener
             g.setColor(Color.green);
         }
         
-        g.fillRect(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
+         switch (directionFacing)
+        {
+            case 1:
+                g.drawImage(backStanding, player1.heroX, player1.heroY, this);
+                break;
+            case 2:
+                g.drawImage(rightStanding, player1.heroX, player1.heroY, this);
+                break;
+            case 3:
+                g.drawImage(frontStanding, player1.heroX, player1.heroY, this);
+                break;
+            case 4:
+                g.drawImage(leftStanding, player1.heroX, player1.heroY, this);
+                break;
+        }
+        
+       // g.fillRect(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
         g.setColor(badGuy.badGuyColor);
         g.fillRect(badGuy.objectX,badGuy.objectY, badGuy.objectWidth, badGuy.objectHeight);
         player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
