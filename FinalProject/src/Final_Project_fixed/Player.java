@@ -1,16 +1,17 @@
 package Final_Project_fixed;
 
 import java.awt.Color;
-import java.awt.Rectangle;
+import java.awt.*;
 import javax.swing.*;
 
 public class Player
 {
-    GamePanel p1;
+    GamePanel gp1;
+
     String name = "Link";
     Color color = Color.white;
     int health = 4;
-    int heroX = 300,heroY = 300, heroWidth = 20, heroHeight = 20; 
+    int heroX = 300,heroY = 300, heroWidth = 50, heroHeight = 75; 
     int dx = 0,dy = 0;
     // rectangle or rectangle2d
     Rectangle heroShape;
@@ -59,5 +60,9 @@ public class Player
                 dy = 0;
                 heroShape.setBounds(heroX, heroY--, 20, 20);
             }
+    }
+    public void setImage()
+    {
+       
     }
 }

@@ -3,13 +3,15 @@ import javax.swing.*;
 
 public class myJFrame extends JFrame
 {
-    int frameWidth = 1000, frameHeight = 700;
+    int frameWidth = 1000   , frameHeight = 1000;
             
 	public myJFrame ()
 	{
 		super ("Intro page");
 		
   	 	myJPanel mjp = new myJPanel();
+                mjp.frameWidth = frameWidth;
+                mjp.frameHeight = frameHeight;
        		add(mjp);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
                 setResizable(false);

@@ -14,13 +14,15 @@ public class myJPanel extends JPanel implements ActionListener
     OptionsPanel optionsPanel;
     CreditsPanel credits;
     WhichKey listener;
+    Player player1;
+    myJFrame mjf;   
+        
     Timer time, flashing;
     int dx,dy;
+    int frameWidth,frameHeight;
     int flashcount = 1, objectdx = 1, objectdy = 1;
     boolean contact = false;
     int panelStatus = 1;
-    Player player1;
-    
     
     public myJPanel()
     {
@@ -35,17 +37,19 @@ public class myJPanel extends JPanel implements ActionListener
         gp1 = new GamePanel();
         optionsPanel = new OptionsPanel(gp1);
         credits = new CreditsPanel();
-        
-        splash.setBounds(0, 0, 1000, 700);
+                
+        splash.setBounds(0, 0, 1000, 7000);
         splash.toGame.addActionListener(this);
         splash.toOptions.addActionListener(this);
         splash.toCredits.addActionListener(this);
         add(splash);
         
+        gp1.frameWidth = frameWidth;
+        gp1.frameHeight = frameHeight;
+                
         gp1.back.addActionListener(this);
         gp1.addKeyListener(listener);
-        
-        
+                
         optionsPanel.back.addActionListener(this);
         optionsPanel.ok.addActionListener(this);
         
@@ -94,30 +98,34 @@ public class myJPanel extends JPanel implements ActionListener
         
         switch(panelStatus)
         {
-            case 1: removePanels();
-                    gp1.defaultChar();
-                    add(gp1);
-                    revalidate();
-                    repaint();
-                    break;
+            case 1: 
+                removePanels();
+                gp1.defaultChar();
+                add(gp1);
+                revalidate();
+                repaint();
+                break;
                     
-            case 2: removePanels();
-                    add(optionsPanel);
-                    revalidate();
-                    repaint();
-                    break;
+            case 2:
+                removePanels();
+                add(optionsPanel);
+                revalidate();
+                repaint();
+                break;
                 
-            case 3: removePanels();
-                    add(credits);
-                    revalidate();
-                    repaint();
-                    break;
+            case 3: 
+                removePanels();
+                add(credits);
+                revalidate();
+                repaint();
+                break;
                 
-            case 4: removePanels();
-                    add(splash);
-                    revalidate();
-                    repaint();
-                    break;
+            case 4: 
+                removePanels();
+                add(splash);
+                revalidate();
+                repaint();
+                break;
         }
         
         if (select == optionsPanel.ok) // this is why it keeps creating buttons
@@ -153,17 +161,22 @@ public class WhichKey implements KeyListener
         {
             case KeyEvent.VK_UP:
                 gp1.player1.dy = -1;
+                gp1.directionFacing = 1;
                 break;
             case KeyEvent.VK_DOWN:
                 gp1.player1.dy = 1;
+                gp1.directionFacing = 3;
                 break;
             case KeyEvent.VK_LEFT:
                 gp1.player1.dx = -1;
+                gp1.directionFacing = 2;
                 break;
             case KeyEvent.VK_RIGHT:
                 gp1.player1.dx = 1;
+                gp1.directionFacing = 4;
                 break;
             case KeyEvent.VK_SPACE:
+                break;
         }
     }
 

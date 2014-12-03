@@ -12,5 +12,4 @@ public class app
      myJFrame mjf = new myJFrame();
      mjf.setLocationRelativeTo(null);
     }
-    
 }

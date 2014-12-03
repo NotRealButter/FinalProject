@@ -16,7 +16,6 @@ public class SplashPanel extends JPanel
         setBackground(Color.white);
         setOpaque(true);
 
-
         toGame = new JButton("Game");
         toOptions = new JButton("Options");
         toCredits = new JButton("Credits");

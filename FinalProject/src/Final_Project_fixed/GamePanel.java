@@ -9,24 +9,23 @@ import javax.swing.*;
 
 public class GamePanel extends JPanel implements ActionListener
 {
-    myJPanel p2;
+    myJPanel gp1;
     Player player1;
     BouncingBetty badGuy;
     private Options gameOptions;
     Room inThisRoom;
             
     Image frontStanding = Toolkit.getDefaultToolkit().getImage("images/front/front standing.png");
-    Image leftStanding = Toolkit.getDefaultToolkit().getImage("images/left/left standing.png");
-    Image leftSideRight = Toolkit.getDefaultToolkit().getImage("images/left/left right.png");
-    Image leftSideLeft = Toolkit.getDefaultToolkit().getImage("images/left/left left.png");
+    Image leftStanding = Toolkit.getDefaultToolkit().getImage("images/left/left left.png");
+//    Image leftSideRight = Toolkit.getDefaultToolkit().getImage("images/left/left right.png");
+//    Image leftSideLeft = Toolkit.getDefaultToolkit().getImage("images/left/left left.png");
     Image rightStanding = Toolkit.getDefaultToolkit().getImage("images/right/right standing.png");
-    Image rightSideRight = Toolkit.getDefaultToolkit().getImage("images/right/right right.png");
-    Image rightSideLeft = Toolkit.getDefaultToolkit().getImage("images/right/right left.png");
+//    Image rightSideRight = Toolkit.getDefaultToolkit().getImage("images/right/right right.png");
+//    Image rightSideLeft = Toolkit.getDefaultToolkit().getImage("images/right/right left.png");
     Image backStanding = Toolkit.getDefaultToolkit().getImage("images/back/back standing.png");
-    Image backRight = Toolkit.getDefaultToolkit().getImage("images/back/back right.png");
-    Image backLeft = Toolkit.getDefaultToolkit().getImage("images/back/back left.png");
-    
-    
+//    Image backRight = Toolkit.getDefaultToolkit().getImage("images/back/back right.png");
+//    Image backLeft = Toolkit.getDefaultToolkit().getImage("images/back/back left.png");
+        
     Image floorTexture = Toolkit.getDefaultToolkit().getImage("images/floor.jpg");
             
     Rectangle baddieShape;
@@ -38,6 +37,7 @@ public class GamePanel extends JPanel implements ActionListener
     int flashcount = 0;
     int roomNumber = 1;
     int directionFacing = 3;
+    int frameWidth, frameHeight;
     
     Timer time, flashing;
   
@@ -185,14 +185,15 @@ public class GamePanel extends JPanel implements ActionListener
                 g.drawImage(backStanding, player1.heroX, player1.heroY, this);
                 break;
             case 2:
-                g.drawImage(rightStanding, player1.heroX, player1.heroY, this);
-                break;
+                g.drawImage(leftStanding, player1.heroX, player1.heroY, this);
+                break;                
             case 3:
                 g.drawImage(frontStanding, player1.heroX, player1.heroY, this);
                 break;
             case 4:
-                g.drawImage(leftStanding, player1.heroX, player1.heroY, this);
+                g.drawImage(rightStanding, player1.heroX, player1.heroY, this);
                 break;
+                
         }
         
        // g.fillRect(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
@@ -253,9 +254,8 @@ public class GamePanel extends JPanel implements ActionListener
     /**
      * @param gameOptions the gameOptions to set
      */
-    public void setGameOptions(Options gameOptions) {
+    public void setGameOptions(Options gameOptions) 
+    {
         this.gameOptions = gameOptions;
     }
-
-    
 }
