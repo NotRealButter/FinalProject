@@ -9,26 +9,32 @@ import javax.swing.*;
 
 public class GamePanel extends JPanel implements ActionListener
 {
-    Image floorTexture = Toolkit.getDefaultToolkit().getImage("images/floor.jpg");
     myJPanel p2;
     Player player1;
     BouncingBetty badGuy;
     private Options gameOptions;
+    Room inThisRoom;
+    
+    Image floorTexture = Toolkit.getDefaultToolkit().getImage("images/floor.jpg");
+    Image frontStanding = Toolkit.getDefaultToolkit().getImage("images/front/front standing.png");
+    Image sideStanding = Toolkit.getDefaultToolkit().getImage("images/side/standing.png");
+    Image rightSideRight = Toolkit.getDefaultToolkit().getImage("images/side/right right.png");
+    Image rightSideLeft = Toolkit.getDefaultToolkit().getImage("images/side/right left.png");
+    Image backStanding = Toolkit.getDefaultToolkit().getImage("images/back/back standing.png");
+    Image backRight = Toolkit.getDefaultToolkit().getImage("images/back/back right.png");
+    Image backLeft = Toolkit.getDefaultToolkit().getImage("images/back/back left.png");
+            
+    Rectangle baddieShape;
+    Rectangle sword;
+    
     JButton back, content;
     JLabel health, name;
     Graphics g;
     int flashcount = 0;
     int roomNumber = 1;
-    Room inThisRoom;
-    
-    Rectangle baddieShape;
-    Rectangle sword;
     
     Timer time, flashing;
-    
-    Rectangle object;
-   
-
+  
     public GamePanel()
     {
         super();
