@@ -2,7 +2,6 @@ package Final_Project_fixed;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.*;
 import java.io.*;
 import java.util.logging.*;
 import javax.swing.*;
@@ -64,7 +63,6 @@ public class myJPanel extends JPanel implements ActionListener
         remove(gp1);
     }
 
-    
     @Override
     public void actionPerformed(ActionEvent e)
     {
@@ -144,13 +142,12 @@ public class myJPanel extends JPanel implements ActionListener
         }
     }
 
- 
-public class WhichKey implements KeyListener
+ public class WhichKey implements KeyListener
 {
     @Override
     public void keyTyped(KeyEvent keyInput)
     {
-
+//nope
     }
 
     @Override
