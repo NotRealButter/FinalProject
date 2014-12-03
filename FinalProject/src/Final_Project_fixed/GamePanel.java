@@ -75,8 +75,7 @@ public class GamePanel extends JPanel implements ActionListener
         add(name);
         
         badGuy = new BouncingBetty();
-       
-        
+               
         //timers
         time = new Timer(10, this);
         time.addActionListener(this);
@@ -88,7 +87,9 @@ public class GamePanel extends JPanel implements ActionListener
   
         player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
         displaySetup();
-
+        
+        roomNumber = 1;
+        inRoom();
     }
     
     public void refreshPlayer()
@@ -136,8 +137,7 @@ public class GamePanel extends JPanel implements ActionListener
             case 5:
                 inThisRoom.inRoomFive();
                 break;
-        }
-        
+        }        
     }
 
     public void defaultChar()
@@ -166,6 +166,7 @@ public class GamePanel extends JPanel implements ActionListener
         g.drawImage(floorTexture, 680, 340, this);
         
         g.setColor(Color.red);
+        
         for(int i = 0; i < inThisRoom.walls; i++)
         {
             g.fillRect(inThisRoom.wallList.get(i).getWallX(), inThisRoom.wallList.get(i).getWallY(), inThisRoom.wallList.get(i).getWallWidth(), inThisRoom.wallList.get(i).getWallHeight());
@@ -193,7 +194,6 @@ public class GamePanel extends JPanel implements ActionListener
             case 4:
                 g.drawImage(rightStanding, player1.heroX, player1.heroY, this);
                 break;
-                
         }
         
        // g.fillRect(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
