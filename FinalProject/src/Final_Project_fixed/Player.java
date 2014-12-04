@@ -8,14 +8,14 @@ public class Player
 {
     GamePanel gp1;
 
-    Image frontStanding = Toolkit.getDefaultToolkit().getImage("images/front/front standing.png");
-    Image leftStanding = Toolkit.getDefaultToolkit().getImage("images/left/left left.png");
+    Image frontStanding = Toolkit.getDefaultToolkit().getImage("images/front/front standing new.png");
+    Image leftStanding = Toolkit.getDefaultToolkit().getImage("images/left/left left new.png");
 //    Image leftSideRight = Toolkit.getDefaultToolkit().getImage("images/left/left right.png");
 //    Image leftSideLeft = Toolkit.getDefaultToolkit().getImage("images/left/left left.png");
-    Image rightStanding = Toolkit.getDefaultToolkit().getImage("images/right/right standing.png");
+    Image rightStanding = Toolkit.getDefaultToolkit().getImage("images/right/right standing new.png");
 //    Image rightSideRight = Toolkit.getDefaultToolkit().getImage("images/right/right right.png");
 //    Image rightSideLeft = Toolkit.getDefaultToolkit().getImage("images/right/right left.png");
-    Image backStanding = Toolkit.getDefaultToolkit().getImage("images/back/back standing.png");
+    Image backStanding = Toolkit.getDefaultToolkit().getImage("images/back/New Link Back.png");
 //    Image backRight = Toolkit.getDefaultToolkit().getImage("images/back/back right.png");
 //    Image backLeft = Toolkit.getDefaultToolkit().getImage("images/back/back left.png");
     
