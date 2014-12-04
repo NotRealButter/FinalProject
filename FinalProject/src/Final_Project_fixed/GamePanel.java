@@ -17,7 +17,7 @@ public class GamePanel extends JPanel implements ActionListener
             
 
         
-    Image floorTexture = Toolkit.getDefaultToolkit().getImage("images/floor.jpg");
+    Image floorTexture = Toolkit.getDefaultToolkit().getImage("images/floor1.jpg");
             
     Rectangle baddieShape;
     Rectangle sword;
