@@ -15,16 +15,7 @@ public class GamePanel extends JPanel implements ActionListener
     private Options gameOptions;
     Room inThisRoom;
             
-    Image frontStanding = Toolkit.getDefaultToolkit().getImage("images/front/front standing.png");
-    Image leftStanding = Toolkit.getDefaultToolkit().getImage("images/left/left left.png");
-//    Image leftSideRight = Toolkit.getDefaultToolkit().getImage("images/left/left right.png");
-//    Image leftSideLeft = Toolkit.getDefaultToolkit().getImage("images/left/left left.png");
-    Image rightStanding = Toolkit.getDefaultToolkit().getImage("images/right/right standing.png");
-//    Image rightSideRight = Toolkit.getDefaultToolkit().getImage("images/right/right right.png");
-//    Image rightSideLeft = Toolkit.getDefaultToolkit().getImage("images/right/right left.png");
-    Image backStanding = Toolkit.getDefaultToolkit().getImage("images/back/back standing.png");
-//    Image backRight = Toolkit.getDefaultToolkit().getImage("images/back/back right.png");
-//    Image backLeft = Toolkit.getDefaultToolkit().getImage("images/back/back left.png");
+
         
     Image floorTexture = Toolkit.getDefaultToolkit().getImage("images/floor.jpg");
             
@@ -183,16 +174,16 @@ public class GamePanel extends JPanel implements ActionListener
          switch (directionFacing)
         {
             case 1:
-                g.drawImage(backStanding, player1.heroX, player1.heroY, this);
+                g.drawImage(player1.backStanding, player1.heroX, player1.heroY, this);
                 break;
             case 2:
-                g.drawImage(leftStanding, player1.heroX, player1.heroY, this);
+                g.drawImage(player1.leftStanding, player1.heroX, player1.heroY, this);
                 break;                
             case 3:
-                g.drawImage(frontStanding, player1.heroX, player1.heroY, this);
+                g.drawImage(player1.frontStanding, player1.heroX, player1.heroY, this);
                 break;
             case 4:
-                g.drawImage(rightStanding, player1.heroX, player1.heroY, this);
+                g.drawImage(player1.rightStanding, player1.heroX, player1.heroY, this);
                 break;
         }
         
