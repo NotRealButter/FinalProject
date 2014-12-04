@@ -150,11 +150,35 @@ public class GamePanel extends JPanel implements ActionListener
     {
         super.paintComponent(g);
         g.drawImage(floorTexture, 0, 0, this);
-        g.drawImage(floorTexture, 340, 0, this);
-        g.drawImage(floorTexture, 0, 340, this);
-        g.drawImage(floorTexture, 340, 340, this);
-        g.drawImage(floorTexture, 680, 0, this);
-        g.drawImage(floorTexture, 680, 340, this);
+        g.drawImage(floorTexture, 147, 0, this);
+        g.drawImage(floorTexture, 294, 0, this);
+        g.drawImage(floorTexture, 441, 0, this);
+        g.drawImage(floorTexture, 588, 0, this);
+        g.drawImage(floorTexture, 735, 0, this);
+        g.drawImage(floorTexture, 882, 0, this);
+        g.drawImage(floorTexture, 0, 204, this);
+        g.drawImage(floorTexture, 147, 204, this);
+        g.drawImage(floorTexture, 294, 204, this);
+        g.drawImage(floorTexture, 441, 204, this);
+        g.drawImage(floorTexture, 588, 204, this);
+        g.drawImage(floorTexture, 735, 204, this);
+        g.drawImage(floorTexture, 882, 204, this);
+        g.drawImage(floorTexture, 0, 408, this);
+        g.drawImage(floorTexture, 147, 408, this);
+        g.drawImage(floorTexture, 294, 408, this);
+        g.drawImage(floorTexture, 441, 408, this);
+        g.drawImage(floorTexture, 588, 408, this);
+        g.drawImage(floorTexture, 735, 408, this);
+        g.drawImage(floorTexture, 882, 408, this);
+          g.drawImage(floorTexture, 0, 612, this);
+        g.drawImage(floorTexture, 147, 612, this);
+        g.drawImage(floorTexture, 294, 612, this);
+        g.drawImage(floorTexture, 441, 612, this);
+        g.drawImage(floorTexture, 588, 612, this);
+        g.drawImage(floorTexture, 735, 612, this);
+        g.drawImage(floorTexture, 882, 612, this);
+        
+        
         
         g.setColor(Color.red);
         
