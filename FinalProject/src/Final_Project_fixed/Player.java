@@ -8,15 +8,25 @@ public class Player
 {
     GamePanel gp1;
 
+    Image frontStanding = Toolkit.getDefaultToolkit().getImage("images/front/front standing.png");
+    Image leftStanding = Toolkit.getDefaultToolkit().getImage("images/left/left left.png");
+//    Image leftSideRight = Toolkit.getDefaultToolkit().getImage("images/left/left right.png");
+//    Image leftSideLeft = Toolkit.getDefaultToolkit().getImage("images/left/left left.png");
+    Image rightStanding = Toolkit.getDefaultToolkit().getImage("images/right/right standing.png");
+//    Image rightSideRight = Toolkit.getDefaultToolkit().getImage("images/right/right right.png");
+//    Image rightSideLeft = Toolkit.getDefaultToolkit().getImage("images/right/right left.png");
+    Image backStanding = Toolkit.getDefaultToolkit().getImage("images/back/back standing.png");
+//    Image backRight = Toolkit.getDefaultToolkit().getImage("images/back/back right.png");
+//    Image backLeft = Toolkit.getDefaultToolkit().getImage("images/back/back left.png");
+    
     String name = "Link";
     Color color = Color.white;
     int health = 4;
     int heroX = 300,heroY = 300, heroWidth = 50, heroHeight = 75; 
     int dx = 0,dy = 0;
-    // rectangle or rectangle2d
+    // rectangle 
     Rectangle heroShape;
-   //write bounds method
-    
+       
     public Player(String infName, Color infColor, int infHealth)
     {
         name = infName;
@@ -43,22 +53,22 @@ public class Player
             if (heroX <= 0)
             {
                 dx = 0;
-                heroShape.setBounds(heroX++, heroY, 20, 20);
+                heroShape.setBounds(heroX++, heroY, heroWidth, heroHeight);
             }
             if (heroX >= 964)
             {
                 dx = 0;
-                heroShape.setBounds(heroX--, heroY, 20, 20);
+                heroShape.setBounds(heroX--, heroY, heroWidth, heroHeight);
             }
             if (heroY <= 0)
             {
                 dy = 0;
-                heroShape.setBounds(heroX, heroY++, 20, 20);
+                heroShape.setBounds(heroX, heroY++, heroWidth, heroHeight);
             }
             if (heroY >= 642)
             {
                 dy = 0;
-                heroShape.setBounds(heroX, heroY--, 20, 20);
+                heroShape.setBounds(heroX, heroY--, heroWidth, heroHeight);
             }
     }
     public void setImage()
