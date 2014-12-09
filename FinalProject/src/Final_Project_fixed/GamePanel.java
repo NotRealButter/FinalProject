@@ -14,6 +14,7 @@ public class GamePanel extends JPanel implements ActionListener
     BouncingBetty badGuy;
     private Options gameOptions;
     Room inThisRoom;
+    Minotaur maze;
             
 
         
@@ -29,7 +30,7 @@ public class GamePanel extends JPanel implements ActionListener
     int roomNumber = 1;
     int directionFacing = 3;
     int frameWidth, frameHeight;
-    
+
     Timer time, flashing;
   
     public GamePanel()
@@ -48,10 +49,10 @@ public class GamePanel extends JPanel implements ActionListener
         
         content = new JButton("this is where the game is");
         content.setBounds(390, 500, 220, 20);
-        add(content);
+        //add(content);
         back = new JButton("Back");
         back.setBounds(450, 520, 100, 20);
-        add(back);
+        //add(back);
 
         health = new JLabel("health");
         health.setBounds(10, 600, 100, 20);
@@ -81,6 +82,8 @@ public class GamePanel extends JPanel implements ActionListener
         
         roomNumber = 1;
         inRoom();
+        
+        maze = new Minotaur();
     }
     
     public void refreshPlayer()
@@ -149,46 +152,11 @@ public class GamePanel extends JPanel implements ActionListener
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
+        
         g.drawImage(floorTexture, 0, 0, this);
-        g.drawImage(floorTexture, 147, 0, this);
-        g.drawImage(floorTexture, 294, 0, this);
-        g.drawImage(floorTexture, 441, 0, this);
-        g.drawImage(floorTexture, 588, 0, this);
-        g.drawImage(floorTexture, 735, 0, this);
-        g.drawImage(floorTexture, 882, 0, this);
-        g.drawImage(floorTexture, 0, 204, this);
-        g.drawImage(floorTexture, 147, 204, this);
-        g.drawImage(floorTexture, 294, 204, this);
-        g.drawImage(floorTexture, 441, 204, this);
-        g.drawImage(floorTexture, 588, 204, this);
-        g.drawImage(floorTexture, 735, 204, this);
-        g.drawImage(floorTexture, 882, 204, this);
-        g.drawImage(floorTexture, 0, 408, this);
-        g.drawImage(floorTexture, 147, 408, this);
-        g.drawImage(floorTexture, 294, 408, this);
-        g.drawImage(floorTexture, 441, 408, this);
-        g.drawImage(floorTexture, 588, 408, this);
-        g.drawImage(floorTexture, 735, 408, this);
-        g.drawImage(floorTexture, 882, 408, this);
-          g.drawImage(floorTexture, 0, 612, this);
-        g.drawImage(floorTexture, 147, 612, this);
-        g.drawImage(floorTexture, 294, 612, this);
-        g.drawImage(floorTexture, 441, 612, this);
-        g.drawImage(floorTexture, 588, 612, this);
-        g.drawImage(floorTexture, 735, 612, this);
-        g.drawImage(floorTexture, 882, 612, this);
+       
         
-        
-        
-        g.setColor(Color.red);
-        
-        //debug for Collision
-        
-//        g.fillRect(player1.heroX, player1.heroY,  player1.heroWidth, 10);
-//        g.fillRect(player1.heroX, player1.heroY, 10, player1.heroHeight);
-//        g.fillRect(player1.heroX+player1.heroWidth-20, player1.heroY, 20, player1.heroHeight);
-//        g.fillRect(player1.heroX, player1.heroY+player1.heroHeight-20, player1.heroWidth, 20);
-        
+        g.setColor(Color.BLACK);
         
         for(int i = 0; i < inThisRoom.walls; i++)
         {
@@ -225,6 +193,11 @@ public class GamePanel extends JPanel implements ActionListener
         player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
         badGuy.badGuyShape = new Rectangle(badGuy.objectX, badGuy.objectY, badGuy.objectHeight, badGuy.objectWidth);
         //inThisRoom.wall1
+
+        //g.setColor(maze.minotaurColor);
+        g.drawImage(maze.minotaurImage, maze.minotaurx, maze.minotaury, this);
+        //g.fillRect(maze.minotaurx, maze.minotaury, 50, 50);
+        
     }
 
     @Override
@@ -246,16 +219,9 @@ public class GamePanel extends JPanel implements ActionListener
                 player1.heroX += player1.dx;
                 player1.heroY += player1.dy;
             }  
-            
-//            if (player1.topHero.intersects(badGuy.badGuyShape))
-//            {
-//                player1.heroY = player1.heroY - (badGuy.objectdy * 5);
-//            }
-        
-            
             if (player1.heroShape.intersects(badGuy.badGuyShape))
             {
-                if(badGuy.objectX > player1.heroX+player1.heroWidth-4)
+                if(badGuy.objectX > player1.heroX+player1.heroWidth)
                 {
                     badGuy.objectdx = 1;
                 }
@@ -265,13 +231,14 @@ public class GamePanel extends JPanel implements ActionListener
                 }
                   if(badGuy.objectY < player1.heroY)
                 {
-                    badGuy.objectdy = -1;
-                }
-                   if(badGuy.objectY > player1.heroY+player1.heroHeight-4)
-                {
                     badGuy.objectdy = 1;
                 }
+                   if(badGuy.objectY > player1.heroY)
+                {
+                    badGuy.objectdy = -1;
+                }
             }
+            
             repaint();            
             revalidate();
         }  
