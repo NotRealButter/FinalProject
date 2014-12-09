@@ -22,10 +22,14 @@ public class Player
     String name = "Link";
     Color color = Color.white;
     int health = 4;
-    int heroX = 300,heroY = 300, heroWidth = 50, heroHeight = 75; 
+    int heroX = 300,heroY = 300, heroWidth = 38, heroHeight = 50; 
     int dx = 0,dy = 0;
     // rectangle 
     Rectangle heroShape;
+    Rectangle topHero;
+    Rectangle leftHero;
+    Rectangle rightHero;
+    Rectangle bottomHero;
        
     public Player(String infName, Color infColor, int infHealth)
     {
@@ -71,6 +75,14 @@ public class Player
                 heroShape.setBounds(heroX, heroY--, heroWidth, heroHeight);
             }
     }
+    public void heroFourRectangles()
+    {
+         topHero = new Rectangle(heroX, heroY, heroWidth, 10);
+         leftHero = new Rectangle(heroX, heroY, 20, heroHeight);
+         rightHero = new Rectangle(heroX+heroWidth, heroY, 20, heroHeight);
+         bottomHero = new Rectangle(heroX, heroY+heroHeight-20, heroWidth, 20);
+    }
+            
     public void setImage()
     {
        

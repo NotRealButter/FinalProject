@@ -182,6 +182,14 @@ public class GamePanel extends JPanel implements ActionListener
         
         g.setColor(Color.red);
         
+        //debug for Collision
+        
+//        g.fillRect(player1.heroX, player1.heroY,  player1.heroWidth, 10);
+//        g.fillRect(player1.heroX, player1.heroY, 10, player1.heroHeight);
+//        g.fillRect(player1.heroX+player1.heroWidth-20, player1.heroY, 20, player1.heroHeight);
+//        g.fillRect(player1.heroX, player1.heroY+player1.heroHeight-20, player1.heroWidth, 20);
+        
+        
         for(int i = 0; i < inThisRoom.walls; i++)
         {
             g.fillRect(inThisRoom.wallList.get(i).getWallX(), inThisRoom.wallList.get(i).getWallY(), inThisRoom.wallList.get(i).getWallWidth(), inThisRoom.wallList.get(i).getWallHeight());
@@ -238,9 +246,16 @@ public class GamePanel extends JPanel implements ActionListener
                 player1.heroX += player1.dx;
                 player1.heroY += player1.dy;
             }  
+            
+//            if (player1.topHero.intersects(badGuy.badGuyShape))
+//            {
+//                player1.heroY = player1.heroY - (badGuy.objectdy * 5);
+//            }
+        
+            
             if (player1.heroShape.intersects(badGuy.badGuyShape))
             {
-                if(badGuy.objectX > player1.heroX+player1.heroWidth)
+                if(badGuy.objectX > player1.heroX+player1.heroWidth-4)
                 {
                     badGuy.objectdx = 1;
                 }
@@ -250,11 +265,11 @@ public class GamePanel extends JPanel implements ActionListener
                 }
                   if(badGuy.objectY < player1.heroY)
                 {
-                    badGuy.objectdy = 1;
-                }
-                   if(badGuy.objectY > player1.heroY)
-                {
                     badGuy.objectdy = -1;
+                }
+                   if(badGuy.objectY > player1.heroY+player1.heroHeight-4)
+                {
+                    badGuy.objectdy = 1;
                 }
             }
             repaint();            
