@@ -33,7 +33,9 @@ public class Room
    }
    public void inRoomFour()
    {
-       
+       walls = 2;
+        wallList.get(0).createWall(100, 100, 50, 50);
+        wallList.get(1).createWall(400, 400, 100, 25);
    }
    public void inRoomFive()
    {
