@@ -221,7 +221,7 @@ public class GamePanel extends JPanel implements ActionListener
             }  
             if (player1.heroShape.intersects(badGuy.badGuyShape))
             {
-                if(badGuy.objectX > player1.heroX+player1.heroWidth)
+                if(badGuy.objectX > player1.heroX+player1.heroWidth-4)
                 {
                     badGuy.objectdx = 1;
                 }
@@ -231,11 +231,11 @@ public class GamePanel extends JPanel implements ActionListener
                 }
                   if(badGuy.objectY < player1.heroY)
                 {
-                    badGuy.objectdy = 1;
-                }
-                   if(badGuy.objectY > player1.heroY)
-                {
                     badGuy.objectdy = -1;
+                }
+                   if(badGuy.objectY > player1.heroY-4)
+                {
+                    badGuy.objectdy = 1;
                 }
             }
             
