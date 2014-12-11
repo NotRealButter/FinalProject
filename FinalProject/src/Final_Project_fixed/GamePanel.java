@@ -160,7 +160,11 @@ public class GamePanel extends JPanel implements ActionListener
         
         for(int i = 0; i < inThisRoom.walls; i++)
         {
+            g.setColor(Color.GRAY);
             g.fillRect(inThisRoom.wallList.get(i).getWallX(), inThisRoom.wallList.get(i).getWallY(), inThisRoom.wallList.get(i).getWallWidth(), inThisRoom.wallList.get(i).getWallHeight());
+            
+            g.setColor(Color.red);
+            g.fillRect(inThisRoom.doorList.get(i).getDoorX(), inThisRoom.doorList.get(i).getDoorY(), inThisRoom.doorList.get(i).getDoorWidth(), inThisRoom.doorList.get(i).getDoorHeight());
         }
         if(gameOptions != null)
         {
@@ -195,7 +199,7 @@ public class GamePanel extends JPanel implements ActionListener
         //inThisRoom.wall1
 
         //g.setColor(maze.minotaurColor);
-        g.drawImage(maze.minotaurImage, maze.minotaurx, maze.minotaury, this);
+        g.drawImage(maze.minotaurImage, maze.minotaurX, maze.minotaurY, this);
         //g.fillRect(maze.minotaurx, maze.minotaury, 50, 50);
         
     }
@@ -207,6 +211,7 @@ public class GamePanel extends JPanel implements ActionListener
         
         if (select == time)
         {
+            
             player1.heroX += player1.dx;
             player1.heroY += player1.dy;
             badGuy.bouncingBounds();
