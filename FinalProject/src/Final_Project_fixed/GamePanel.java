@@ -211,6 +211,28 @@ public class GamePanel extends JPanel implements ActionListener
         
         if (select == time)
         {
+//            for(int i = 0; i < inThisRoom.walls; i++)
+//            {
+//                if (player1.heroShape.intersects(inThisRoom.wallList.get(i).getWallShape()))
+//                {
+//                    if(inThisRoom.wallList.get(i).getWallX() > player1.heroX+player1.heroWidth-4)
+//                    {
+//                        player1.heroX--;
+//                    }
+//                    else if(inThisRoom.wallList.get(i).getWallX() + inThisRoom.wallList.get(i).getWallWidth() < player1.heroX)
+//                    {
+//                        player1.heroX++;
+//                    }
+//                    else if(inThisRoom.wallList.get(i).getWallY() + inThisRoom.wallList.get(i).getWallHeight()  < player1.heroY)
+//                    {
+//                        player1.dy *= -1;
+//                    }
+//                    else if(inThisRoom.wallList.get(i).getWallY()  > player1.heroY+ player1.heroHeight-4)
+//                    {
+//                        player1.dy *= -1;
+//                    }  
+//                }
+//            }
             
             player1.heroX += player1.dx;
             player1.heroY += player1.dy;
@@ -234,11 +256,11 @@ public class GamePanel extends JPanel implements ActionListener
                 {
                     badGuy.objectdx = -1;
                 }
-                  if(badGuy.objectY < player1.heroY)
+                if(badGuy.objectY < player1.heroY)
                 {
                     badGuy.objectdy = -1;
                 }
-                   if(badGuy.objectY > player1.heroY-4)
+                if(badGuy.objectY > player1.heroY-4)
                 {
                     badGuy.objectdy = 1;
                 }
