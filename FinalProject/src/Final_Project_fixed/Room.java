@@ -7,11 +7,15 @@ public class Room
     ArrayList<Wall> wallList = new ArrayList();
     int walls = 0;
     
+    ArrayList<Door> doorList = new ArrayList();
+    int doors = 0;
+    
     Room()
     {
         for(int i = 0; i < 10; i++)
         {
             wallList.add(new Wall());
+            doorList.add(new Door());
         }
         
     }
@@ -31,10 +35,15 @@ public class Room
        wallList.get(6).createWall(350, 280, 40, 130);
        wallList.get(7).createWall(590, 190, 40, 220);
        wallList.get(8).createWall(680, 100, 40, 400);
+       
+       doors = 2;
+       
+       doorList.get(0).createDoor(0, 250, 10, 200);
+       doorList.get(1).createDoor(0, 0, 100, 100);
     }
    public void inRoomTwo()
    {
-       
+
        
    }
    public void inRoomThree()
