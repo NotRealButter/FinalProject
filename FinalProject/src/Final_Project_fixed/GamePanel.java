@@ -83,7 +83,8 @@ public class GamePanel extends JPanel implements ActionListener
         roomNumber = 1;
         inRoom();
         
-        maze = new Minotaur();
+        maze = new Minotaur(this);
+        
     }
     
     public void refreshPlayer()
@@ -162,7 +163,10 @@ public class GamePanel extends JPanel implements ActionListener
         {
             g.setColor(Color.GRAY);
             g.fillRect(inThisRoom.wallList.get(i).getWallX(), inThisRoom.wallList.get(i).getWallY(), inThisRoom.wallList.get(i).getWallWidth(), inThisRoom.wallList.get(i).getWallHeight());
-            
+
+        }
+        for(int i = 0; i < inThisRoom.doors; i++)
+        {
             g.setColor(Color.red);
             g.fillRect(inThisRoom.doorList.get(i).getDoorX(), inThisRoom.doorList.get(i).getDoorY(), inThisRoom.doorList.get(i).getDoorWidth(), inThisRoom.doorList.get(i).getDoorHeight());
         }
@@ -174,7 +178,7 @@ public class GamePanel extends JPanel implements ActionListener
         {
             g.setColor(Color.green);
         }
-        
+        //g.fillRect(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
          switch (directionFacing)
         {
             case 1:
@@ -198,10 +202,12 @@ public class GamePanel extends JPanel implements ActionListener
         badGuy.badGuyShape = new Rectangle(badGuy.objectX, badGuy.objectY, badGuy.objectHeight, badGuy.objectWidth);
         //inThisRoom.wall1
 
-        //g.setColor(maze.minotaurColor);
+
         g.drawImage(maze.minotaurImage, maze.minotaurX, maze.minotaurY, this);
-        //g.fillRect(maze.minotaurx, maze.minotaury, 50, 50);
+        //g.fillRect(maze.minotaurX, maze.minotaurY, 50, 50);
         
+        //Graphics2D g2d = (Graphics2D) g;
+        //g2d.draw(maze.minotaurShape);
     }
 
     @Override
@@ -243,6 +249,14 @@ public class GamePanel extends JPanel implements ActionListener
                     badGuy.objectdy = 1;
                 }
             }
+            
+            if(player1.heroShape.intersects(maze.minotaurShape))
+            {
+              player1.health = player1.health-1;  
+              player1.heroShape.setBounds(0, 0, player1.heroHeight, player1.heroWidth);
+              System.out.println("moo");
+            }
+                
             
             repaint();            
             revalidate();
