@@ -14,16 +14,13 @@ public class Minotaur implements ActionListener
     Image minotaurImage = Toolkit.getDefaultToolkit().getImage("images/minotaur.png");
     GamePanel game;
     int mazeRun, count, direction;
-    Timer mazeTime;
     
-    public Minotaur()
+    public Minotaur(GamePanel game)
     {
+        this.game = game;
         minotaurShape = new Rectangle( minotaurX, minotaurY, 50, 50);
         trigger = new Rectangle( 0, 0, 10, 10);
-
-        mazeTime = new Timer(10, this);
-        mazeTime.addActionListener(this);
-        mazeTime.start(); 
+        game.time.addActionListener(this);
         
         count = 0;
                 
@@ -36,7 +33,7 @@ public class Minotaur implements ActionListener
         Object select = maze.getSource();
         
         
-        if (select == mazeTime)
+        if (select == game.time)
         {
             if (direction == 1)
             {
@@ -125,8 +122,8 @@ public class Minotaur implements ActionListener
                 minotaurDX = 0;
                 minotaurDY = 0;
                 break;
-                
-                
+            
+            //minotaurShape.setBounds(minotaurX, minotaurY, 50, 50);
                 
         }
 
