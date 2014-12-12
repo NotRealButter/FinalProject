@@ -43,8 +43,8 @@ public class Minotaur implements ActionListener
             {
                 count = count-1;
             }
-            
-            System.out.println(count);
+            minotaurShape.setBounds(minotaurX, minotaurY, 50, 50);
+            //System.out.println(count);
             
             minotaurX += minotaurDX;
             minotaurY += minotaurDY;
@@ -123,7 +123,6 @@ public class Minotaur implements ActionListener
                 minotaurDY = 0;
                 break;
             
-            //minotaurShape.setBounds(minotaurX, minotaurY, 50, 50);
                 
         }
 

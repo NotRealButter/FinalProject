@@ -3,7 +3,8 @@ import javax.swing.*;
 
 public class myJFrame extends JFrame
 {
-    int frameWidth = 1000   , frameHeight = 700;
+
+    int frameWidth = 1005  , frameHeight = 730;
             
 	public myJFrame ()
 	{

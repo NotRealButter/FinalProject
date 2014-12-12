@@ -67,10 +67,10 @@ Door()
     
     void createDoor(int x, int y, int width, int height)
     {
-        x = doorX;
-        y = doorY;
-        width = doorWidth;
-        height = doorHeight;
+        doorX = x;
+        doorY = y;
+        doorWidth = width;
+        doorHeight = height;
         doorShape = new Rectangle(x, y, width, height);
     }  
     
