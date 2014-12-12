@@ -15,7 +15,8 @@ public class GamePanel extends JPanel implements ActionListener
     private Options gameOptions;
     Room inThisRoom;
     Minotaur maze;
-            
+    Door thisDoor;
+    Rectangle openDoor;
 
         
     Image floorTexture = Toolkit.getDefaultToolkit().getImage("images/floor1.jpg");
@@ -30,6 +31,7 @@ public class GamePanel extends JPanel implements ActionListener
     int roomNumber = 1;
     int directionFacing = 3;
     int frameWidth, frameHeight;
+    
 
     Timer time, flashing;
   
@@ -46,6 +48,7 @@ public class GamePanel extends JPanel implements ActionListener
         refreshPlayer();
         
         inThisRoom = new Room();
+        thisDoor = new Door();
         
         content = new JButton("this is where the game is");
         content.setBounds(390, 500, 220, 20);
@@ -81,9 +84,8 @@ public class GamePanel extends JPanel implements ActionListener
         displaySetup();
         
         roomNumber = 1;
-        inRoom();
+        //inRoom();
         
-        maze = new Minotaur(this);
         
     }
     
@@ -113,7 +115,7 @@ public class GamePanel extends JPanel implements ActionListener
         player1 = new Player(options);
     }
     
-    public void inRoom()
+   /* public void inRoom()
     {
         switch (roomNumber)
         {
@@ -125,6 +127,7 @@ public class GamePanel extends JPanel implements ActionListener
                 break;
             case 3:
                 inThisRoom.inRoomThree();
+                maze = new Minotaur(this);
                 break;
             case 4:
                 inThisRoom.inRoomFour();
@@ -133,7 +136,7 @@ public class GamePanel extends JPanel implements ActionListener
                 inThisRoom.inRoomFive();
                 break;
         }        
-    }
+    }*/
 
     public void defaultChar()
     {
@@ -202,10 +205,15 @@ public class GamePanel extends JPanel implements ActionListener
         badGuy.badGuyShape = new Rectangle(badGuy.objectX, badGuy.objectY, badGuy.objectHeight, badGuy.objectWidth);
         //inThisRoom.wall1
 
-
+        if (maze != null)
+        {
         g.drawImage(maze.minotaurImage, maze.minotaurX, maze.minotaurY, this);
         //g.fillRect(maze.minotaurX, maze.minotaurY, 50, 50);
-        
+            if(player1.heroShape.intersects(maze.minotaurShape))
+            {
+              g.drawImage(player1.rightStanding, 0, 0, this);
+            }     
+        }
         //Graphics2D g2d = (Graphics2D) g;
         //g2d.draw(maze.minotaurShape);
     }
@@ -272,14 +280,101 @@ public class GamePanel extends JPanel implements ActionListener
                 }
             }
             
-            if(player1.heroShape.intersects(maze.minotaurShape))
+            if (maze != null)
             {
-              player1.health = player1.health-1;  
-              player1.heroShape.setBounds(0, 0, player1.heroHeight, player1.heroWidth);
-              System.out.println("moo");
+                if(player1.heroShape.intersects(maze.minotaurShape))
+                {
+                player1.health = player1.health-1;  
+                player1.heroX = 0;
+                player1.heroY = 0;
+                }
             }
-                
+        
+        if (thisDoor != null)
+        {
             
+            for(int i = 0; i < inThisRoom.doors; i++)
+            { 
+                openDoor = inThisRoom.doorList.get(i).getDoorShape();
+                
+                if (player1.heroShape.intersects(openDoor))
+                { 
+                    if (roomNumber == 1)
+                    {   System.out.println(roomNumber);
+                        if (inThisRoom.doorList.get(i).getDoorY() <= 10)
+                        {
+                            roomNumber = 2; 
+                            player1.heroX = 483;
+                            player1.heroY = 682;
+                        }
+                        if (inThisRoom.doorList.get(i).getDoorX() >= 980)
+                        {
+                            roomNumber = 3;
+                            player1.heroX = 12;
+                            player1.heroY = 325;
+                        }
+                        if (inThisRoom.doorList.get(i).getDoorY() >= 680)
+                        {
+                            roomNumber = 4;
+                            player1.heroX = 483;
+                            player1.heroY = 12;
+                        }
+                        if (inThisRoom.doorList.get(i).getDoorX() <= 10)
+                        {
+                            roomNumber = 5;
+                            player1.heroX = 988;
+                            player1.heroY = 325;
+                        }
+                    }
+                    /*if (roomNumber == 2)
+                    {   System.out.println(roomNumber);
+                        roomNumber = 1;
+                        player1.heroX = 483;
+                        player1.heroY = 15;
+                    }
+                    if (roomNumber == 3)
+                    {   System.out.println(roomNumber);
+                        roomNumber = 1;
+                        player1.heroX = 985 - player1.heroWidth;
+                        player1.heroY = 325;        
+                    }
+                    if (roomNumber == 4)
+                    {   System.out.println(roomNumber);
+                        roomNumber = 1;
+                        player1.heroX = 483;
+                        player1.heroY = 685 - player1.heroHeight;
+                    }
+                    if (roomNumber == 5)
+                    {System.out.println(roomNumber);
+                        roomNumber = 1;
+                        player1.heroX = 12;
+                        player1.heroY = 325;
+                    }*/
+                    
+                }
+            }
+        }
+        
+        switch (roomNumber)
+        {
+            case 1: 
+                inThisRoom.inRoomOne();
+                break;
+            case 2: 
+                inThisRoom.inRoomTwo();
+                break;
+            case 3:
+                inThisRoom.inRoomThree();
+                maze = new Minotaur(this);
+                break;
+            case 4:
+                inThisRoom.inRoomFour();
+                break;
+            case 5:
+                inThisRoom.inRoomFive();
+                break;
+        }
+        
             repaint();            
             revalidate();
         }  
