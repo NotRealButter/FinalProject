@@ -70,10 +70,10 @@ public class Room
        wallList.get(7).createWall(590, 190, 40, 220);
        wallList.get(8).createWall(680, 100, 40, 400);
        //default walls
-       wallList.get(0).createWall(0, 0, 1000, 10);
-       wallList.get(1).createWall(990, 0, 10, 700);
-       wallList.get(2).createWall(690, 0, 1000, 10);
-       wallList.get(3).createWall(0, 0, 10, 700);
+       wallList.get(9).createWall(0, 0, 1000, 10);
+       wallList.get(10).createWall(990, 0, 10, 700);
+       wallList.get(11).createWall(690, 0, 1000, 10);
+       wallList.get(12).createWall(0, 0, 10, 700);
        //doors
        doors = 1;
        
@@ -97,7 +97,6 @@ public class Room
    public void inRoomFive()
    {
        walls = 4;
-       
        //default walls
        wallList.get(0).createWall(0, 0, 1000, 10);
        wallList.get(1).createWall(990, 0, 10, 700);
