@@ -323,7 +323,7 @@ public class GamePanel extends JPanel implements ActionListener
                         {
                             roomNumber = 2; 
                             player1.heroX = 483;
-                            player1.heroY = 682;
+                            player1.heroY = 688 - player1.heroHeight;
                         }
                         if (inThisRoom.doorList.get(i).getDoorX() >= 980)
                         {
@@ -340,39 +340,39 @@ public class GamePanel extends JPanel implements ActionListener
                         if (inThisRoom.doorList.get(i).getDoorX() <= 10)
                         {
                             roomNumber = 5;
-                            player1.heroX = 988;
+                            player1.heroX = 988 - player1.heroWidth;
                             player1.heroY = 325;
                         }
                         break;
                     }
-                    /*case 2:
+                    case 2:
                     {   System.out.println(roomNumber);
                         roomNumber = 1;
-                        player1.heroX = 483;
-                        player1.heroY = 15;
+                        player1.heroX = 0;
+                        player1.heroY = 12;
                         break;
                     }
                     case 3:
                     {   System.out.println(roomNumber);
                         roomNumber = 1;
-                        player1.heroX = 985 - player1.heroWidth;
-                        player1.heroY = 325;   
+                        player1.heroX = 988 - player1.heroWidth;
+                        player1.heroY = 0;   
                         break;
                     }
                     case 4:
                     {   System.out.println(roomNumber);
                         roomNumber = 1;
-                        player1.heroX = 483;
-                        player1.heroY = 685 - player1.heroHeight;
+                        player1.heroX = 0;
+                        player1.heroY = 688 - player1.heroHeight;
                         break;
                     }
                     case 5:
                     {System.out.println(roomNumber);
                         roomNumber = 1;
                         player1.heroX = 12;
-                        player1.heroY = 325;
+                        player1.heroY = 0;
                         break;
-                    }*/
+                    }
                 }
             }
         }
