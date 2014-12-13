@@ -22,7 +22,7 @@ public class Player
     String name = "Link";
     Color color = Color.white;
     int health = 4;
-    int heroX = 300,heroY = 300, heroWidth = 38, heroHeight = 50; 
+    int heroX = 483,heroY = 325, heroWidth = 38, heroHeight = 50; 
     int dx = 0,dy = 0;
     // rectangle 
     Rectangle heroShape;

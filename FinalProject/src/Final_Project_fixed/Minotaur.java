@@ -4,8 +4,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class Minotaur implements ActionListener
-{
+public class Minotaur
+        {
     
     Rectangle minotaurShape, trigger;
     boolean mazeTrap = false;
@@ -18,113 +18,60 @@ public class Minotaur implements ActionListener
     public Minotaur(GamePanel game)
     {
         this.game = game;
-        //minotaurShape = new Rectangle( minotaurX, minotaurY, 50, 50);
+        minotaurShape = new Rectangle( minotaurX, minotaurY, 50, 50);
         trigger = new Rectangle(510, 340, 10, 10);
-        game.time.addActionListener(this);
         
         count = 0;
 
     }
 
 
-    @Override
-    public void actionPerformed(ActionEvent maze) 
+    public void minotaurAtttack()
     {
-        Object select = maze.getSource();
-        
-        if (select == game.time)
-        {
-
-            if (direction == 1)
-            {
-                count = count+1;
-            }
-            if (direction == -1)
-            {
-                count = count-1;
-            }
+            count = count+1;
             
             minotaurX += minotaurDX;
             minotaurY += minotaurDY;
 
             if (count == 0)
             {
-                direction = 1;
-                mazeRun = 1;
+                minotaurDX = 1;
+                minotaurDY = 0;
             }
             if (count == 150)
             {
-                mazeRun = 2;
+                minotaurDX = 0;
+                minotaurDY = -1;
             }
             if (count == 240)
             {
-                mazeRun = 3;
+                minotaurDX = -1 * direction;
+                minotaurDY = 0;
             }
             if (count == 480)
             {
-                mazeRun = 4;
+                minotaurDX = 0;
+                minotaurDY = 1 * direction;
             }
             if (count == 660)
             {
-                mazeRun = 5;
+                minotaurDX = 1 * direction;
+                minotaurDY = 0;
             }
             if (count == 990)
             {
-                mazeRun = 6;
+                minotaurDX = 0;
+                minotaurDY = -1 * direction;
             }
             if (count == 1260)
             {
-                mazeRun = 7;
+                minotaurDX = -1 * direction;
+                minotaurDY = 0;
             }
             if (count == 1630)
             {
-                mazeRun = 8;
-            }
-        }
-        
-        switch (mazeRun)
-        {
-            case 1:
-                direction = 1;
-                minotaurDX = 1;
-                minotaurDY = 0; 
-                break;
-            case 2:
-                minotaurDX = 0;
-                minotaurDY = -1 * direction;
-                break;
-            case 3:
-                minotaurDX = -1 * direction;
-                minotaurDY = 0;
-                break;
-            case 4:
-                minotaurDX = 0;
-                minotaurDY = 1 * direction;
-                break;
-            case 5:
-                minotaurDX = 1 * direction;
-                minotaurDY = 0;
-                break;
-            case 6:
-                minotaurDX = 0;
-                minotaurDY = -1 * direction;
-                break;
-            case 7:
-                minotaurDX = -1 * direction;
-                minotaurDY = 0;
-                break;
-            case 8:
-                //direction = -1;
                 minotaurDX = 0;
                 minotaurDY = 0;
-                break;
-            
-                
-        }
-
-        
-    }
-
-    
-            
+            } 
+    }         
 }

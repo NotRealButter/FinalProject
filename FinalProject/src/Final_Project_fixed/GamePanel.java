@@ -27,7 +27,7 @@ public class GamePanel extends JPanel implements ActionListener
     JButton back, content;
     JLabel health, name;
     Graphics g;
-    int flashcount = 0;
+    int flashcount = 0, doorDelay = 0;
     int roomNumber = 1;
     int directionFacing = 3;
     int frameWidth, frameHeight;
@@ -69,7 +69,7 @@ public class GamePanel extends JPanel implements ActionListener
         name.setBackground(Color.white);
         add(name);
         
-        badGuy = new BouncingBetty();
+        
                
         //timers
         time = new Timer(10, this);
@@ -86,6 +86,8 @@ public class GamePanel extends JPanel implements ActionListener
         roomNumber = 1;
         //inRoom();
         trap = false;
+        
+        badGuy = new BouncingBetty(this);
     }
     
     public void refreshPlayer()
@@ -159,12 +161,9 @@ public class GamePanel extends JPanel implements ActionListener
         
         g.drawImage(floorTexture, 0, 0, this);
        
-        
-        g.setColor(Color.BLACK);
-        
         for(int i = 0; i < inThisRoom.walls; i++)
         {
-            g.setColor(Color.GRAY);
+            g.setColor(Color.BLACK);
             g.fillRect(inThisRoom.wallList.get(i).getWallX(), inThisRoom.wallList.get(i).getWallY(), inThisRoom.wallList.get(i).getWallWidth(), inThisRoom.wallList.get(i).getWallHeight());
 
         }
@@ -199,10 +198,9 @@ public class GamePanel extends JPanel implements ActionListener
         }
         
        // g.fillRect(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
-        g.setColor(badGuy.badGuyColor);
-        g.fillRect(badGuy.objectX,badGuy.objectY, badGuy.objectWidth, badGuy.objectHeight);
+       
         player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
-        badGuy.badGuyShape = new Rectangle(badGuy.objectX, badGuy.objectY, badGuy.objectHeight, badGuy.objectWidth);
+        //badGuy.badGuyShape = new Rectangle(badGuy.objectX, badGuy.objectY, badGuy.objectHeight, badGuy.objectWidth);
         //inThisRoom.wall1
 
         if (maze != null)
@@ -211,6 +209,14 @@ public class GamePanel extends JPanel implements ActionListener
         //g.fillRect(maze.minotaurX, maze.minotaurY, 50, 50);
         Graphics2D g2d = (Graphics2D) g;
         g2d.draw(maze.trigger);         
+        }
+        
+        if (badGuy != null)
+        {
+            g.setColor(badGuy.badGuyColor);
+            g.fillRect(badGuy.objectX, badGuy.objectY, badGuy.objectWidth, badGuy.objectHeight);
+            //Graphics2D g2d = (Graphics2D) g;
+            //g2d.draw(badGuy.badGuyShape);
         }
         
     }
@@ -247,9 +253,42 @@ public class GamePanel extends JPanel implements ActionListener
             
             player1.heroX += player1.dx;
             player1.heroY += player1.dy;
-            badGuy.bouncingBounds();
+            
+        if (roomNumber != 5)
+        {
+            badGuy = null;
+        }
+        if (badGuy != null)
+        {
             badGuy.objectX += badGuy.objectdx;
-            badGuy.objectY += badGuy.objectdy;            
+            badGuy.objectY += badGuy.objectdy;
+            
+            badGuy.bettyBounds();
+
+                // collision bounds
+            if (player1.heroShape.intersects(badGuy.badGuyShape))
+                {
+                    if(badGuy.objectX > player1.heroX+player1.heroWidth-4)
+                    {
+                        badGuy.objectdx = 1;
+                    }
+                    if(badGuy.objectX < player1.heroX)
+                    {
+                        badGuy.objectdx = -1;
+                    }
+                    if(badGuy.objectY < player1.heroY)
+                    {
+                        badGuy.objectdy = -1;
+                    }
+                    if(badGuy.objectY > player1.heroY-4)
+                    {
+                    badGuy.objectdy = 1;
+                    }
+                }
+            }
+            
+            
+                        
             player1.heroBounds();
             
             if (player1 != null)
@@ -257,30 +296,7 @@ public class GamePanel extends JPanel implements ActionListener
                 player1.heroX += player1.dx;
                 player1.heroY += player1.dy;
             }  
-            if (player1.heroShape.intersects(badGuy.badGuyShape))
-            {
-                if(badGuy.objectX > player1.heroX+player1.heroWidth-4)
-                {
-                    badGuy.objectdx = 1;
-                }
-                 if(badGuy.objectX < player1.heroX)
-                {
-                    badGuy.objectdx = -1;
-                }
-                if(badGuy.objectY < player1.heroY)
-                {
-                    badGuy.objectdy = -1;
-                }
-                if(badGuy.objectY > player1.heroY-4)
-                {
-                    badGuy.objectdy = 1;
-                }
-            }
             
-           /* if (roomNumber != 3)
-            {
-                maze = null;
-            }*/
             if (roomNumber != 3)
             {
                 maze = null;
@@ -294,7 +310,9 @@ public class GamePanel extends JPanel implements ActionListener
                 }    
                 if (trap == true)
                 {
-                    maze.minotaurShape = new Rectangle( maze.minotaurX, maze.minotaurY, 50, 50);
+                    maze.minotaurAtttack();
+                    System.out.println(trap);
+                    
                     if(player1.heroShape.intersects(maze.minotaurShape))
                     {
                         player1.health = player1.health-1;  
@@ -305,10 +323,13 @@ public class GamePanel extends JPanel implements ActionListener
                     
                 }
             }
-        
-    if (thisDoor != null)
+         
+
+if (thisDoor != null)
+{
+    doorDelay = doorDelay+1;
+    if (doorDelay >= 10)
     {
-            
         for(int i = 0; i < inThisRoom.doors; i++)
         { 
             openDoor = inThisRoom.doorList.get(i).getDoorShape();
@@ -324,60 +345,68 @@ public class GamePanel extends JPanel implements ActionListener
                             roomNumber = 2; 
                             player1.heroX = 483;
                             player1.heroY = 688 - player1.heroHeight;
+                            doorDelay = 0;
                         }
                         if (inThisRoom.doorList.get(i).getDoorX() >= 980)
                         {
                             roomNumber = 3;
                             player1.heroX = 12;
                             player1.heroY = 325;
+                            doorDelay = 0;
                         }
                         if (inThisRoom.doorList.get(i).getDoorY() >= 680)
                         {
                             roomNumber = 4;
                             player1.heroX = 483;
                             player1.heroY = 12;
+                            doorDelay = 0;
                         }
                         if (inThisRoom.doorList.get(i).getDoorX() <= 10)
                         {
                             roomNumber = 5;
                             player1.heroX = 988 - player1.heroWidth;
                             player1.heroY = 325;
+                            doorDelay = 0;
                         }
                         break;
                     }
                     case 2:
                     {
                         roomNumber = 1;
-                        player1.heroX = 0;
+                        player1.heroX = 483;
                         player1.heroY = 12;
+                        doorDelay = 0;
                         break;
                     }
                     case 3:
                     {
                         roomNumber = 1;
                         player1.heroX = 988 - player1.heroWidth;
-                        player1.heroY = 0;   
+                        player1.heroY = 325;  
+                        doorDelay = 0;
                         break;
                     }
                     case 4:
                     {
                         roomNumber = 1;
-                        player1.heroX = 0;
+                        player1.heroX = 483;
                         player1.heroY = 688 - player1.heroHeight;
+                        doorDelay = 0;
                         break;
                     }
                     case 5:
                     {
                         roomNumber = 1;
                         player1.heroX = 12;
-                        player1.heroY = 0;
+                        player1.heroY = 325;
+                        doorDelay = 0;
                         break;
                     }
                 }
             }
         }
     }    
-        
+}      
         switch (roomNumber)
         {
             case 1: 
@@ -392,19 +421,23 @@ public class GamePanel extends JPanel implements ActionListener
                 break;
             case 4:
                 inThisRoom.inRoomFour();
+                //badGuy = new BouncingBetty(this);
                 break;
             case 5:
                 inThisRoom.inRoomFive();
+                
                 break;
         }
             repaint();            
             revalidate();
-    }
-       
-        if (select == flashing)
-        {
-            badGuy.colorFlash();
         }
+        if (badGuy != null)
+        {
+            if (select == flashing)
+            {
+                badGuy.colorFlash();
+            }
+        }    
     }
 
     /**
