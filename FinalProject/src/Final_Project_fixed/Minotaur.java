@@ -18,7 +18,7 @@ public class Minotaur implements ActionListener
     public Minotaur(GamePanel game)
     {
         this.game = game;
-        minotaurShape = new Rectangle( minotaurX, minotaurY, 50, 50);
+        //minotaurShape = new Rectangle( minotaurX, minotaurY, 50, 50);
         trigger = new Rectangle(510, 340, 10, 10);
         game.time.addActionListener(this);
         
@@ -32,7 +32,6 @@ public class Minotaur implements ActionListener
     {
         Object select = maze.getSource();
         
-        
         if (select == game.time)
         {
 
@@ -44,14 +43,10 @@ public class Minotaur implements ActionListener
             {
                 count = count-1;
             }
-            //minotaurShape.setBounds(minotaurX, minotaurY, 50, 50);
-            //trigger.setBounds(minotaurX, minotaurY, 50, 50);
             
             minotaurX += minotaurDX;
             minotaurY += minotaurDY;
-            
 
-            
             if (count == 0)
             {
                 direction = 1;

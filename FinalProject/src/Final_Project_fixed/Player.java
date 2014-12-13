@@ -69,7 +69,7 @@ public class Player
                 dy = 0;
                 heroShape.setBounds(heroX, heroY++, heroWidth, heroHeight);
             }
-            if (heroY >= 642)
+            if (heroY >= 650)
             {
                 dy = 0;
                 heroShape.setBounds(heroX, heroY--, heroWidth, heroHeight);

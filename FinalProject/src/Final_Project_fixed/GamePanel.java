@@ -15,9 +15,9 @@ public class GamePanel extends JPanel implements ActionListener
     private Options gameOptions;
     Room inThisRoom;
     Minotaur maze;
+    boolean trap;
     Door thisDoor;
     Rectangle openDoor;
-    boolean trap = false;
         
     Image floorTexture = Toolkit.getDefaultToolkit().getImage("images/floor1.jpg");
             
@@ -85,8 +85,7 @@ public class GamePanel extends JPanel implements ActionListener
         
         roomNumber = 1;
         //inRoom();
-        
-        
+        trap = false;
     }
     
     public void refreshPlayer()
@@ -285,24 +284,25 @@ public class GamePanel extends JPanel implements ActionListener
             if (roomNumber != 3)
             {
                 maze = null;
+                trap = false;
             }
             if (maze != null)
             {
-                if(player1.heroShape.intersects(maze.minotaurShape))
-                {
-                player1.health = player1.health-1;  
-                player1.heroX = 12;
-                player1.heroY = 325;
-                roomNumber = 1;
-                }
                 if (player1.heroShape.intersects(maze.trigger))
                 {
-                trap = true;
-                System.out.println(trap);
-                }
-                if (trap = true)
+                    trap = true;
+                }    
+                if (trap == true)
                 {
-                
+                    maze.minotaurShape = new Rectangle( maze.minotaurX, maze.minotaurY, 50, 50);
+                    if(player1.heroShape.intersects(maze.minotaurShape))
+                    {
+                        player1.health = player1.health-1;  
+                        player1.heroX = 12;
+                        player1.heroY = 325;
+                        
+                    }
+                    
                 }
             }
         
@@ -317,8 +317,8 @@ public class GamePanel extends JPanel implements ActionListener
             {    
                 switch (roomNumber)
                 {
-                        case 1: //for loop idea
-                    {   System.out.println(roomNumber);
+                    case 1: //for loop idea
+                    {   
                         if (inThisRoom.doorList.get(i).getDoorY() <= 10)
                         {
                             roomNumber = 2; 
@@ -346,28 +346,28 @@ public class GamePanel extends JPanel implements ActionListener
                         break;
                     }
                     case 2:
-                    {   System.out.println(roomNumber);
+                    {
                         roomNumber = 1;
                         player1.heroX = 0;
                         player1.heroY = 12;
                         break;
                     }
                     case 3:
-                    {   System.out.println(roomNumber);
+                    {
                         roomNumber = 1;
                         player1.heroX = 988 - player1.heroWidth;
                         player1.heroY = 0;   
                         break;
                     }
                     case 4:
-                    {   System.out.println(roomNumber);
+                    {
                         roomNumber = 1;
                         player1.heroX = 0;
                         player1.heroY = 688 - player1.heroHeight;
                         break;
                     }
                     case 5:
-                    {System.out.println(roomNumber);
+                    {
                         roomNumber = 1;
                         player1.heroX = 12;
                         player1.heroY = 0;
@@ -388,10 +388,7 @@ public class GamePanel extends JPanel implements ActionListener
                 break;
             case 3:
                 inThisRoom.inRoomThree();
-                //if (trap == true)
-                //{
                 maze = new Minotaur(this);
-                //}
                 break;
             case 4:
                 inThisRoom.inRoomFour();
