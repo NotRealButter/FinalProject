@@ -42,7 +42,7 @@ public class Room
        
        doorList.get(0).createDoor(450, 690, 100, 10);
    }
-   public void inRoomThree()
+   public void inRoomThree()//garrett's room
    {
        //walls
        walls = 9;
