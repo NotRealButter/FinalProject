@@ -19,11 +19,11 @@ public class Minotaur implements ActionListener
     {
         this.game = game;
         minotaurShape = new Rectangle( minotaurX, minotaurY, 50, 50);
-        trigger = new Rectangle( 0, 0, 10, 10);
+        trigger = new Rectangle(510, 340, 10, 10);
         game.time.addActionListener(this);
         
         count = 0;
-                
+
     }
 
 
@@ -35,6 +35,7 @@ public class Minotaur implements ActionListener
         
         if (select == game.time)
         {
+
             if (direction == 1)
             {
                 count = count+1;
@@ -43,8 +44,8 @@ public class Minotaur implements ActionListener
             {
                 count = count-1;
             }
-            minotaurShape.setBounds(minotaurX, minotaurY, 50, 50);
-            //System.out.println(count);
+            //minotaurShape.setBounds(minotaurX, minotaurY, 50, 50);
+            //trigger.setBounds(minotaurX, minotaurY, 50, 50);
             
             minotaurX += minotaurDX;
             minotaurY += minotaurDY;

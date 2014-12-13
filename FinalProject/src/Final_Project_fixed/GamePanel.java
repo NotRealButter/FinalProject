@@ -17,7 +17,7 @@ public class GamePanel extends JPanel implements ActionListener
     Minotaur maze;
     Door thisDoor;
     Rectangle openDoor;
-
+    boolean trap = false;
         
     Image floorTexture = Toolkit.getDefaultToolkit().getImage("images/floor1.jpg");
             
@@ -138,6 +138,7 @@ public class GamePanel extends JPanel implements ActionListener
         }        
     }*/
 
+
     public void defaultChar()
     {
         if(player1 == null)
@@ -209,13 +210,10 @@ public class GamePanel extends JPanel implements ActionListener
         {
         g.drawImage(maze.minotaurImage, maze.minotaurX, maze.minotaurY, this);
         //g.fillRect(maze.minotaurX, maze.minotaurY, 50, 50);
-            if(player1.heroShape.intersects(maze.minotaurShape))
-            {
-              g.drawImage(player1.rightStanding, 0, 0, this);
-            }     
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.draw(maze.trigger);         
         }
-        //Graphics2D g2d = (Graphics2D) g;
-        //g2d.draw(maze.minotaurShape);
+        
     }
 
     @Override
@@ -280,26 +278,46 @@ public class GamePanel extends JPanel implements ActionListener
                 }
             }
             
+           /* if (roomNumber != 3)
+            {
+                maze = null;
+            }*/
+            if (roomNumber != 3)
+            {
+                maze = null;
+            }
             if (maze != null)
             {
                 if(player1.heroShape.intersects(maze.minotaurShape))
                 {
                 player1.health = player1.health-1;  
-                player1.heroX = 0;
-                player1.heroY = 0;
+                player1.heroX = 12;
+                player1.heroY = 325;
+                roomNumber = 1;
+                }
+                if (player1.heroShape.intersects(maze.trigger))
+                {
+                trap = true;
+                System.out.println(trap);
+                }
+                if (trap = true)
+                {
+                
                 }
             }
         
-        if (thisDoor != null)
-        {
+    if (thisDoor != null)
+    {
             
-            for(int i = 0; i < inThisRoom.doors; i++)
-            { 
-                openDoor = inThisRoom.doorList.get(i).getDoorShape();
+        for(int i = 0; i < inThisRoom.doors; i++)
+        { 
+            openDoor = inThisRoom.doorList.get(i).getDoorShape();
                 
-                if (player1.heroShape.intersects(openDoor))
-                { 
-                    if (roomNumber == 1)
+            if (player1.heroShape.intersects(openDoor))
+            {    
+                switch (roomNumber)
+                {
+                        case 1: //for loop idea
                     {   System.out.println(roomNumber);
                         if (inThisRoom.doorList.get(i).getDoorY() <= 10)
                         {
@@ -325,35 +343,40 @@ public class GamePanel extends JPanel implements ActionListener
                             player1.heroX = 988;
                             player1.heroY = 325;
                         }
+                        break;
                     }
-                    /*if (roomNumber == 2)
+                    /*case 2:
                     {   System.out.println(roomNumber);
                         roomNumber = 1;
                         player1.heroX = 483;
                         player1.heroY = 15;
+                        break;
                     }
-                    if (roomNumber == 3)
+                    case 3:
                     {   System.out.println(roomNumber);
                         roomNumber = 1;
                         player1.heroX = 985 - player1.heroWidth;
-                        player1.heroY = 325;        
+                        player1.heroY = 325;   
+                        break;
                     }
-                    if (roomNumber == 4)
+                    case 4:
                     {   System.out.println(roomNumber);
                         roomNumber = 1;
                         player1.heroX = 483;
                         player1.heroY = 685 - player1.heroHeight;
+                        break;
                     }
-                    if (roomNumber == 5)
+                    case 5:
                     {System.out.println(roomNumber);
                         roomNumber = 1;
                         player1.heroX = 12;
                         player1.heroY = 325;
+                        break;
                     }*/
-                    
                 }
             }
         }
+    }    
         
         switch (roomNumber)
         {
@@ -365,7 +388,10 @@ public class GamePanel extends JPanel implements ActionListener
                 break;
             case 3:
                 inThisRoom.inRoomThree();
+                //if (trap == true)
+                //{
                 maze = new Minotaur(this);
+                //}
                 break;
             case 4:
                 inThisRoom.inRoomFour();
@@ -374,10 +400,10 @@ public class GamePanel extends JPanel implements ActionListener
                 inThisRoom.inRoomFive();
                 break;
         }
-        
             repaint();            
             revalidate();
-        }  
+    }
+       
         if (select == flashing)
         {
             badGuy.colorFlash();
