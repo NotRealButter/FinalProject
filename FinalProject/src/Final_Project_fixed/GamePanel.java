@@ -311,7 +311,6 @@ public class GamePanel extends JPanel implements ActionListener
                 if (trap == true)
                 {
                     maze.minotaurAtttack();
-                    System.out.println(trap);
                     
                     if(player1.heroShape.intersects(maze.minotaurShape))
                     {
