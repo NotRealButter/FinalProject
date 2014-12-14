@@ -43,7 +43,7 @@ public class BouncingBetty
     {
         
             flashcount++;
-            
+            System.out.println(flashcount);
             if (flashcount == 4)
             {
                 flashcount = 1;

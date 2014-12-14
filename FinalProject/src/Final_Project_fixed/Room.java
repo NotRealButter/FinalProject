@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Room 
 {
- 
     ArrayList<Wall> wallList = new ArrayList();
     int walls = 0;
     
