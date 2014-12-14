@@ -17,7 +17,8 @@ public class GamePanel extends JPanel implements ActionListener
     Minotaur maze;
     boolean trap;
     Door thisDoor;
-    Rectangle openDoor;
+    Wall thisWall;
+    Rectangle openDoor, touchedWall;
         
     Image floorTexture = Toolkit.getDefaultToolkit().getImage("images/floor1.jpg");
             
@@ -49,6 +50,7 @@ public class GamePanel extends JPanel implements ActionListener
         
         inThisRoom = new Room();
         thisDoor = new Door();
+        thisWall = new Wall();
         
         content = new JButton("this is where the game is");
         content.setBounds(390, 500, 220, 20);
@@ -80,7 +82,7 @@ public class GamePanel extends JPanel implements ActionListener
         flashing.addActionListener(this);
         flashing.start();
   
-        player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
+        //player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
         displaySetup();
         
         roomNumber = 1;
@@ -184,22 +186,22 @@ public class GamePanel extends JPanel implements ActionListener
          switch (directionFacing)
         {
             case 1:
-                g.drawImage(player1.backStanding, player1.heroX, player1.heroY, this);
+                g.drawImage(player1.backStanding, player1.heroX, player1.heroY-20, this);
                 break;
             case 2:
-                g.drawImage(player1.leftStanding, player1.heroX, player1.heroY, this);
+                g.drawImage(player1.leftStanding, player1.heroX, player1.heroY-20, this);
                 break;                
             case 3:
-                g.drawImage(player1.frontStanding, player1.heroX, player1.heroY, this);
+                g.drawImage(player1.frontStanding, player1.heroX, player1.heroY-20, this);
                 break;
             case 4:
-                g.drawImage(player1.rightStanding, player1.heroX, player1.heroY, this);
+                g.drawImage(player1.rightStanding, player1.heroX, player1.heroY-20, this);
                 break;
         }
         
        // g.fillRect(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
        
-        player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
+        //player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
         //badGuy.badGuyShape = new Rectangle(badGuy.objectX, badGuy.objectY, badGuy.objectHeight, badGuy.objectWidth);
         //inThisRoom.wall1
 
@@ -228,6 +230,7 @@ public class GamePanel extends JPanel implements ActionListener
         
         if (select == time)
         {
+            
 //            for(int i = 0; i < inThisRoom.walls; i++)
 //            {
 //                if (player1.heroShape.intersects(inThisRoom.wallList.get(i).getWallShape()))
@@ -250,6 +253,24 @@ public class GamePanel extends JPanel implements ActionListener
 //                    }  
 //                }
 //            }
+            switch(player1.dy)
+            {
+            case -1:
+                directionFacing = 1;
+                break;
+            case 1:
+                directionFacing = 3;
+                break;
+            }
+            switch(player1.dx)
+            {
+                case -1:
+                    directionFacing = 2;
+                    break;
+                case 1:
+                    directionFacing = 4;
+                    break;
+            }        
             
             player1.heroX += player1.dx;
             player1.heroY += player1.dy;
@@ -288,7 +309,7 @@ public class GamePanel extends JPanel implements ActionListener
             }
             
             
-                        
+            player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);           
             player1.heroBounds();
             
             if (player1 != null)
@@ -322,7 +343,40 @@ public class GamePanel extends JPanel implements ActionListener
                     
                 }
             }
-         
+            
+            if (thisWall != null)
+            {   
+                for(int i = 0; i < inThisRoom.walls; i++)
+                {
+                    touchedWall = inThisRoom.wallList.get(i).getWallShape();
+                
+                    if (player1.heroShape.intersects(touchedWall))
+                    {
+                        switch(player1.dy)
+                        {
+                            case -1:
+                                player1.dy = 0;
+                                player1.heroY = player1.heroY+5;
+                            break;
+                            case 1:
+                                player1.dy = 0;
+                                player1.heroY = player1.heroY-5;
+                            break;
+                        }
+                        switch(player1.dx)
+                        {
+                            case -1:
+                                player1.dx = 0;
+                                player1.heroX = player1.heroX+5;
+                                break;
+                            case 1:
+                                player1.dx = 0;
+                                player1.heroX = player1.heroX-5;
+                                break;
+                        }      
+                    }  
+                }
+            }
 
 if (thisDoor != null)
 {
@@ -342,7 +396,7 @@ if (thisDoor != null)
                         if (inThisRoom.doorList.get(i).getDoorY() <= 10)
                         {
                             roomNumber = 2; 
-                            player1.heroX = 483;
+                            player1.heroX = 485;
                             player1.heroY = 688 - player1.heroHeight;
                             doorDelay = 0;
                         }
@@ -350,13 +404,13 @@ if (thisDoor != null)
                         {
                             roomNumber = 3;
                             player1.heroX = 12;
-                            player1.heroY = 325;
+                            player1.heroY = 335;
                             doorDelay = 0;
                         }
                         if (inThisRoom.doorList.get(i).getDoorY() >= 680)
                         {
                             roomNumber = 4;
-                            player1.heroX = 483;
+                            player1.heroX = 485;
                             player1.heroY = 12;
                             doorDelay = 0;
                         }
@@ -364,7 +418,7 @@ if (thisDoor != null)
                         {
                             roomNumber = 5;
                             player1.heroX = 988 - player1.heroWidth;
-                            player1.heroY = 325;
+                            player1.heroY = 335;
                             doorDelay = 0;
                         }
                         break;
@@ -372,7 +426,7 @@ if (thisDoor != null)
                     case 2:
                     {
                         roomNumber = 1;
-                        player1.heroX = 483;
+                        player1.heroX = 485;
                         player1.heroY = 12;
                         doorDelay = 0;
                         break;
@@ -381,14 +435,14 @@ if (thisDoor != null)
                     {
                         roomNumber = 1;
                         player1.heroX = 988 - player1.heroWidth;
-                        player1.heroY = 325;  
+                        player1.heroY = 335;  
                         doorDelay = 0;
                         break;
                     }
                     case 4:
                     {
                         roomNumber = 1;
-                        player1.heroX = 483;
+                        player1.heroX = 485;
                         player1.heroY = 688 - player1.heroHeight;
                         doorDelay = 0;
                         break;
@@ -397,7 +451,7 @@ if (thisDoor != null)
                     {
                         roomNumber = 1;
                         player1.heroX = 12;
-                        player1.heroY = 325;
+                        player1.heroY = 335;
                         doorDelay = 0;
                         break;
                     }

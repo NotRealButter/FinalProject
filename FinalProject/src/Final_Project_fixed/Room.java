@@ -13,7 +13,7 @@ public class Room
     
     Room()
     {
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < 20; i++)
         {
             wallList.add(new Wall());
             doorList.add(new Door());
@@ -57,7 +57,7 @@ public class Room
    public void inRoomThree()//garrett's room
    {
        //walls
-       walls = 10;
+       walls = 13;
        //horizontal
        wallList.get(0).createWall(260, 100, 460, 40);
        wallList.get(1).createWall(260, 190, 370, 40);
@@ -71,9 +71,9 @@ public class Room
        wallList.get(8).createWall(680, 100, 40, 400);
        //default walls
        wallList.get(9).createWall(0, 0, 1000, 10);
-       //wallList.get(10).createWall(990, 0, 10, 700);
-       //wallList.get(11).createWall(0, 690, 1000, 10);
-       //wallList.get(12).createWall(0, 0, 10, 700);
+       wallList.get(10).createWall(990, 0, 10, 700);
+       wallList.get(11).createWall(0, 690, 1000, 10);
+       wallList.get(12).createWall(0, 0, 10, 700);
        //doors
        doors = 1;
        

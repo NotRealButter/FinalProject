@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class Wall 
 {
-private int wallX;
+    private int wallX;
     private int wallY;
     private int wallWidth;
     private int wallHeight;

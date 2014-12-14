@@ -16,11 +16,7 @@ public class myJPanel extends JPanel implements ActionListener
     Player player1;
     myJFrame mjf;   
         
-    Timer time, flashing;
-    int dx,dy;
     int frameWidth,frameHeight;
-    int flashcount = 1, objectdx = 1, objectdy = 1;
-    boolean contact = false;
     int panelStatus = 1;
     
     public myJPanel()
@@ -126,7 +122,7 @@ public class myJPanel extends JPanel implements ActionListener
                 break;
         }
         
-        if (select == optionsPanel.ok) // this is why it keeps creating buttons
+        if (select == optionsPanel.ok) 
         {
             optionsPanel.saveOptions();
             gp1.createPlayer(optionsPanel.getGameOptions());
@@ -140,7 +136,8 @@ public class myJPanel extends JPanel implements ActionListener
             gp1.displaySetup();
                 
         }
-    }
+     
+}
 
  public class WhichKey implements KeyListener
 {
@@ -158,22 +155,19 @@ public class myJPanel extends JPanel implements ActionListener
         {
             case KeyEvent.VK_UP:
                 gp1.player1.dy = -1;
-                gp1.directionFacing = 1;
                 break;
             case KeyEvent.VK_DOWN:
                 gp1.player1.dy = 1;
-                gp1.directionFacing = 3;
                 break;
             case KeyEvent.VK_LEFT:
                 gp1.player1.dx = -1;
-                gp1.directionFacing = 2;
                 break;
             case KeyEvent.VK_RIGHT:
                 gp1.player1.dx = 1;
-                gp1.directionFacing = 4;
                 break;
             case KeyEvent.VK_SPACE:
                 break;
+            
         }
     }
 
