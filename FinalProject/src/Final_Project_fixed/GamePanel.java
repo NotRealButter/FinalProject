@@ -21,10 +21,6 @@ public class GamePanel extends JPanel implements ActionListener
     Rectangle openDoor, touchedWall;
         
     Image floorTexture = Toolkit.getDefaultToolkit().getImage("images/floor1.jpg");
-    Image roomFiveFloor = Toolkit.getDefaultToolkit().getImage("images/roomFiveFloor.png");
-    Image roomThreeFloor = Toolkit.getDefaultToolkit().getImage("images/sand.jpg");
-
-    Image roomFiveLocked = Toolkit.getDefaultToolkit().getImage("images/roomFiveSub.png");
 
             
     Rectangle baddieShape;
@@ -38,6 +34,7 @@ public class GamePanel extends JPanel implements ActionListener
     int directionFacing = 3;
     int frameWidth, frameHeight;
     
+    Boolean button1 = false,button2 = false,button3 = false;    
 
     Timer time, flashing, flicker;
   
@@ -89,11 +86,9 @@ public class GamePanel extends JPanel implements ActionListener
         flicker.addActionListener(this);
         flicker.start();
   
-        //player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
-        displaySetup();
+    displaySetup();
         
         roomNumber = 1;
-        //inRoom();
         addMonster = false;
         maze = new Minotaur(this);
         badGuy = new BouncingBetty(this);
@@ -126,7 +121,7 @@ public class GamePanel extends JPanel implements ActionListener
         player1 = new Player(options);
     }
     
-   /* public void inRoom()
+   public void inRoom()
     {
         switch (roomNumber)
         {
@@ -138,7 +133,6 @@ public class GamePanel extends JPanel implements ActionListener
                 break;
             case 3:
                 inThisRoom.inRoomThree();
-                maze = new Minotaur(this);
                 break;
             case 4:
                 inThisRoom.inRoomFour();
@@ -147,7 +141,7 @@ public class GamePanel extends JPanel implements ActionListener
                 inThisRoom.inRoomFive();
                 break;
         }        
-    }*/
+    }
 
 
     public void defaultChar()
@@ -170,18 +164,27 @@ public class GamePanel extends JPanel implements ActionListener
         super.paintComponent(g);
         if (roomNumber == 5)
         {
-            g.drawImage(roomFiveFloor, 0, 0, this);
-            g.drawImage(roomFiveLocked, 350, 100,this);
-            g.drawImage(inThisRoom.candleFlicker, 350, 332,this);
-            g.drawImage(inThisRoom.candleFlicker, 600, 332,this);
-            g.drawImage(inThisRoom.candleFlicker, 400, 332,this);
-            g.drawImage(inThisRoom.candleFlicker, 550, 332,this);
-            g.drawImage(inThisRoom.candleFlicker, 400, 382,this);
-            g.drawImage(inThisRoom.candleFlicker, 550, 382,this);
-        }
-        if (roomNumber == 3)
-        {
-            g.drawImage(roomThreeFloor, 0, 0, this);
+            g.drawImage(inThisRoom.roomFiveFloor, 0, 0, this);
+            g.drawImage(inThisRoom.roomFiveLocked, 340, 100,this);
+            g.drawImage(inThisRoom.candleFlicker, 330, 332,this);
+            g.drawImage(inThisRoom.candleFlicker, 580, 332,this);
+            g.drawImage(inThisRoom.candleFlicker, 380, 332,this);
+            g.drawImage(inThisRoom.candleFlicker, 530, 332,this);
+            g.drawImage(inThisRoom.candleFlicker, 380, 382,this);
+            g.drawImage(inThisRoom.candleFlicker, 530, 382,this);
+            
+            if (button1 == true)
+            {
+                g.drawImage(inThisRoom.buttonActivated,173,375,this);
+            }
+            if (button2 == true)
+            {
+                g.drawImage(inThisRoom.buttonActivated,442,579,this);
+            }
+            if (button3 == true)
+            {
+                g.drawImage(inThisRoom.buttonActivated,771,376,this);
+            }
         }
         else
         {
@@ -359,45 +362,60 @@ public class GamePanel extends JPanel implements ActionListener
                 }
         }
             
-            player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);           
-            player1.heroBounds();
-            
-            if (player1 != null)
+        player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);           
+        player1.heroBounds();
+
+        if (player1 != null)
+        {
+            player1.heroX += player1.dx;
+            player1.heroY += player1.dy;
+        }  
+
+        if (roomNumber != 3)
+        {
+            addMonster = false;
+            maze.minotaurX = 390;
+            maze.minotaurY = 320;
+            maze.count = 0;
+        }
+        if (roomNumber == 3)
+        {
+            if (player1.heroShape.intersects(maze.trigger))
             {
-                player1.heroX += player1.dx;
-                player1.heroY += player1.dy;
-            }  
-            
-            if (roomNumber != 3)
-            {
-                addMonster = false;
-                maze.minotaurX = 390;
-                maze.minotaurY = 320;
-                maze.count = 0;
+                addMonster = true;
             }
-            if (roomNumber == 3)
+
+            if (addMonster == true)
             {
-                if (player1.heroShape.intersects(maze.trigger))
+                maze.minotaurAtttack();
+                maze.minotaurShape = new Rectangle( maze.minotaurX, maze.minotaurY, 50, 50);
+                if(player1.heroShape.intersects(maze.minotaurShape))
                 {
-                    addMonster = true;
+                    player1.health = player1.health-1;  
+                    player1.heroX = 12;
+                    player1.heroY = 325;  
+                    addMonster = false;
+                    maze.minotaurX = 390;
+                    maze.minotaurY = 320;
+                    maze.count = 0;
                 }
-                
-                if (addMonster == true)
-                {
-                    maze.minotaurAtttack();
-                    maze.minotaurShape = new Rectangle( maze.minotaurX, maze.minotaurY, 50, 50);
-                    if(player1.heroShape.intersects(maze.minotaurShape))
-                    {
-                        player1.health = player1.health-1;  
-                        player1.heroX = 12;
-                        player1.heroY = 325;  
-                        addMonster = false;
-                        maze.minotaurX = 390;
-                        maze.minotaurY = 320;
-                        maze.count = 0;
-                    }
-                }   
+            }   
+        }
+        if(roomNumber ==5)
+        {
+            if (player1.heroShape.intersects(inThisRoom.r5Button1))
+            {
+                button1.equals(true);
             }
+            if (player1.heroShape.intersects(inThisRoom.r5Button2))
+            {
+                button2.equals(true);
+            }
+            if (player1.heroShape.intersects(inThisRoom.r5Button3))
+            {
+                button3.equals(true);
+            }
+        }    
             
         if (thisWall != null)
         {   
@@ -518,27 +536,10 @@ public class GamePanel extends JPanel implements ActionListener
                     }
                 }
             }    
-        }      
-        switch (roomNumber)
-        {
-            case 1: 
-                inThisRoom.inRoomOne();
-                break;
-            case 2: 
-                inThisRoom.inRoomTwo();
-                break;
-            case 3:
-                inThisRoom.inRoomThree();
-                break;
-            case 4:
-                inThisRoom.inRoomFour();
-                break;
-            case 5:
-                inThisRoom.inRoomFive();
-                break;
-        }
-            repaint();            
-            revalidate();
+        }    
+        inRoom();
+        repaint();            
+        revalidate();
         }
         if (badGuy != null)
         {

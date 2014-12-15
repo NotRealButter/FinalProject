@@ -11,17 +11,21 @@ import javax.swing.Timer;
 public class Room 
 {
     Image candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle1.png");
+    Image roomFiveFloor = Toolkit.getDefaultToolkit().getImage("images/roomFive/roomFiveFloor.png");
+    Image roomFiveLocked = Toolkit.getDefaultToolkit().getImage("images/roomFive/roomFiveSub.png");
+    Image buttonActivated = Toolkit.getDefaultToolkit().getImage("images/roomFive/activatedInterior.png");
+
     
     ArrayList<Wall> wallList = new ArrayList();
-    int walls = 0;
-    
     ArrayList<Door> doorList = new ArrayList();
     ArrayList<Image> lionList = new ArrayList();
     ArrayList<Rectangle> lionRectums = new ArrayList();
+    
     Timer flicker;
-    int doors = 0, flickerCount = 0;
-    boolean  roomTwoItem = false, roomFive;
+    int walls = 0, doors = 0, flickerCount = 0;
+    boolean roomTwo = false, roomTwoItem = false, roomFive = false;
     JLabel derp = new JLabel();
+    Rectangle r5Button1, r5Button2, r5Button3;
     
     Room()
     {
@@ -41,7 +45,6 @@ public class Room
     {
        walls = 4;
        derp.setText(null);
-
        //default walls
        wallList.get(0).createWall(0, 0, 1000, 10);
        wallList.get(1).createWall(990, 0, 10, 700);
@@ -61,6 +64,8 @@ public class Room
    {
        
        walls = 4;
+       roomTwo = false;
+       roomFive = false;
               
        Image lion1 = Toolkit.getDefaultToolkit().getImage("images/lion1.png");
        Image lion2 = Toolkit.getDefaultToolkit().getImage("images/lion2.png");
@@ -87,6 +92,8 @@ public class Room
    }
    public void inRoomThree()//garrett's room
    {
+       roomFive = false;
+       roomTwo = true;
        derp.setText(null);
        //walls
        walls = 13;
@@ -115,7 +122,8 @@ public class Room
    {
        walls = 4;
        derp.setText(null);
-
+       roomTwo = false;
+       roomFive = false;
        //default walls
        wallList.get(0).createWall(0, 0, 1000, 10);
        wallList.get(1).createWall(990, 0, 10, 700);
@@ -132,16 +140,20 @@ public class Room
        walls = 8;
        roomFive = true;
        derp.setText(null);
+       roomFive = false;
+       roomTwo = false;
        //default walls
        wallList.get(0).createWall(0, 0, 1000, 10);
        wallList.get(1).createWall(990, 0, 10, 700);
        wallList.get(2).createWall(0, 690, 1000, 10);
        wallList.get(3).createWall(0, 0, 10, 700);
        //added walls
-       wallList.get(4).createWall(350, 100, 250, 20);
-       wallList.get(5).createWall(350, 300, 250, 20);
-       wallList.get(6).createWall(350, 100, 20, 200);
-       wallList.get(7).createWall(600, 100, 20, 220);       
+       wallList.get(4).createWall(340, 100, 250, 20);
+       wallList.get(5).createWall(340, 300, 250, 20);
+       wallList.get(6).createWall(340, 100, 20, 200);
+       wallList.get(7).createWall(590, 100, 20, 220); 
+       
+       
        
        //doors
        doors = 1;
@@ -155,8 +167,12 @@ public class Room
         switch(flickerCount)
         {
             case 1:
-                candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle1.png");
-                break;
+       roomTwo = false;
+       
+       r5Button1 = new Rectangle (173,375, 68,68);
+       r5Button2 = new Rectangle (442,579, 68, 68);
+       r5Button3 = new Rectangle (771,376, 68, 68);
+       
             case 2:
                 candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle2.png");
                 break;
@@ -177,3 +193,5 @@ public class Room
             
    }
 }
+//                candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle1.png");
+//                break;
