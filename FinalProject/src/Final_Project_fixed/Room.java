@@ -11,18 +11,21 @@ import javax.swing.Timer;
 public class Room 
 {
     Image candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle1.png");
+    Image roomFiveFloor = Toolkit.getDefaultToolkit().getImage("images/roomFive/roomFiveFloor.png");
+    Image roomFiveLocked = Toolkit.getDefaultToolkit().getImage("images/roomFive/roomFiveSub.png");
+    Image buttonActivated = Toolkit.getDefaultToolkit().getImage("images/roomFive/activatedInterior.png");
 
     
     ArrayList<Wall> wallList = new ArrayList();
-    int walls = 0;
-    
     ArrayList<Door> doorList = new ArrayList();
     ArrayList<Image> lionList = new ArrayList();
     ArrayList<Rectangle> lionRectums = new ArrayList();
+    
     Timer flicker;
-    int doors = 0, flickerCount = 0;
+    int walls = 0, doors = 0, flickerCount = 0;
     boolean roomTwo = false, roomTwoItem = false, roomFive = false;
     JLabel derp = new JLabel();
+    Rectangle r5Button1, r5Button2, r5Button3;
     
     Room()
     {
@@ -140,16 +143,23 @@ public class Room
        roomFive = true;
        derp.setText(null);
        roomTwo = false;
+       
+       r5Button1 = new Rectangle (173,375, 68,68);
+       r5Button2 = new Rectangle (442,579, 68, 68);
+       r5Button3 = new Rectangle (771,376, 68, 68);
+       
        //default walls
        wallList.get(0).createWall(0, 0, 1000, 10);
        wallList.get(1).createWall(990, 0, 10, 700);
        wallList.get(2).createWall(0, 690, 1000, 10);
        wallList.get(3).createWall(0, 0, 10, 700);
        //added walls
-       wallList.get(4).createWall(350, 100, 250, 20);
-       wallList.get(5).createWall(350, 300, 250, 20);
-       wallList.get(6).createWall(350, 100, 20, 200);
-       wallList.get(7).createWall(600, 100, 20, 220);       
+       wallList.get(4).createWall(340, 100, 250, 20);
+       wallList.get(5).createWall(340, 300, 250, 20);
+       wallList.get(6).createWall(340, 100, 20, 200);
+       wallList.get(7).createWall(590, 100, 20, 220); 
+       
+       
        
        //doors
        doors = 1;
@@ -163,8 +173,8 @@ public class Room
         switch(flickerCount)
         {
             case 1:
-                candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle1.png");
-                break;
+//                candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle1.png");
+//                break;
             case 2:
                 candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle2.png");
                 break;
