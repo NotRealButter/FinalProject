@@ -1,7 +1,7 @@
 package Final_Project_fixed;
 
 import java.awt.*;
-import java.awt.Rectangle;
+//import java.awt.Rectangle;
 import java.awt.event.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class GamePanel extends JPanel implements ActionListener
     JButton back, content;
     JLabel health, name;
     Graphics g;
-    int flashcount = 0, doorDelay = 0;
+    int flashcount = 0, collisionDelay = 0;
     int roomNumber = 1;
     int directionFacing = 3;
     int frameWidth, frameHeight;
@@ -70,9 +70,7 @@ public class GamePanel extends JPanel implements ActionListener
         name.setBounds (670, 600, 300, 20);
         name.setBackground(Color.white);
         add(name);
-        
-        
-               
+           
         //timers
         time = new Timer(10, this);
         time.addActionListener(this);
@@ -89,7 +87,7 @@ public class GamePanel extends JPanel implements ActionListener
         //inRoom();
         trap = false;
         
-        badGuy = new BouncingBetty(this);
+        //badGuy = new BouncingBetty(this);
     }
     
     public void refreshPlayer()
@@ -99,6 +97,7 @@ public class GamePanel extends JPanel implements ActionListener
             player1 = new Player(gameOptions);
         }
     }
+    
     public void loadOptions()
     {
         File optionsFile = new File("Options.xml");
@@ -229,13 +228,13 @@ public class GamePanel extends JPanel implements ActionListener
          switch (directionFacing)
         {
             case 1:
-                g.drawImage(player1.backStanding, player1.heroX, player1.heroY-20, this);
+                g.drawImage(player1.backStanding, player1.heroX-3, player1.heroY-20, this);
                 break;
             case 2:
                 g.drawImage(player1.leftStanding, player1.heroX, player1.heroY-20, this);
                 break;                
             case 3:
-                g.drawImage(player1.frontStanding, player1.heroX, player1.heroY-20, this);
+                g.drawImage(player1.frontStanding, player1.heroX-3, player1.heroY-20, this);
                 break;
             case 4:
                 g.drawImage(player1.rightStanding, player1.heroX, player1.heroY-20, this);
@@ -382,12 +381,14 @@ public class GamePanel extends JPanel implements ActionListener
                         player1.heroY = 325;
                         
                     }
-                    
                 }
             }
             
-            if (thisWall != null)
-            {   
+        if (thisWall != null)
+        {   
+            collisionDelay = collisionDelay+1;
+            if (collisionDelay >= 10)
+            {
                 for(int i = 0; i < inThisRoom.walls; i++)
                 {
                     touchedWall = inThisRoom.wallList.get(i).getWallShape();
@@ -418,12 +419,13 @@ public class GamePanel extends JPanel implements ActionListener
                         }      
                     }  
                 }
-            }
+        }    
+        }
 
 if (thisDoor != null)
 {
-    doorDelay = doorDelay+1;
-    if (doorDelay >= 10)
+    collisionDelay = collisionDelay+1;
+    if (collisionDelay >= 10)
     {
         for(int i = 0; i < inThisRoom.doors; i++)
         { 
@@ -440,28 +442,28 @@ if (thisDoor != null)
                             roomNumber = 2; 
                             player1.heroX = 485;
                             player1.heroY = 688 - player1.heroHeight;
-                            doorDelay = 0;
+                            collisionDelay = 0;
                         }
                         if (inThisRoom.doorList.get(i).getDoorX() >= 980)
                         {
                             roomNumber = 3;
                             player1.heroX = 12;
                             player1.heroY = 335;
-                            doorDelay = 0;
+                            collisionDelay = 0;
                         }
                         if (inThisRoom.doorList.get(i).getDoorY() >= 680)
                         {
                             roomNumber = 4;
                             player1.heroX = 485;
                             player1.heroY = 12;
-                            doorDelay = 0;
+                            collisionDelay = 0;
                         }
                         if (inThisRoom.doorList.get(i).getDoorX() <= 10)
                         {
                             roomNumber = 5;
                             player1.heroX = 988 - player1.heroWidth;
                             player1.heroY = 335;
-                            doorDelay = 0;
+                            collisionDelay = 0;
                         }
                         break;
                     }
@@ -470,7 +472,7 @@ if (thisDoor != null)
                         roomNumber = 1;
                         player1.heroX = 485;
                         player1.heroY = 12;
-                        doorDelay = 0;
+                        collisionDelay = 0;
                         break;
                     }
                     case 3:
@@ -478,7 +480,7 @@ if (thisDoor != null)
                         roomNumber = 1;
                         player1.heroX = 988 - player1.heroWidth;
                         player1.heroY = 335;  
-                        doorDelay = 0;
+                        collisionDelay = 0;
                         break;
                     }
                     case 4:
@@ -486,7 +488,7 @@ if (thisDoor != null)
                         roomNumber = 1;
                         player1.heroX = 485;
                         player1.heroY = 688 - player1.heroHeight;
-                        doorDelay = 0;
+                        collisionDelay = 0;
                         break;
                     }
                     case 5:
@@ -494,7 +496,7 @@ if (thisDoor != null)
                         roomNumber = 1;
                         player1.heroX = 12;
                         player1.heroY = 335;
-                        doorDelay = 0;
+                        collisionDelay = 0;
                         break;
                     }
                 }
@@ -516,7 +518,7 @@ if (thisDoor != null)
                 break;
             case 4:
                 inThisRoom.inRoomFour();
-                //badGuy = new BouncingBetty(this);
+                badGuy = new BouncingBetty(this);
                 break;
             case 5:
                 inThisRoom.inRoomFive();
