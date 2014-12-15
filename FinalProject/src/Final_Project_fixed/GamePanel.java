@@ -12,10 +12,10 @@ public class GamePanel extends JPanel implements ActionListener
     myJPanel gp1;
     Player player1;
     BouncingBetty badGuy;
+    Minotaur maze;
     private Options gameOptions;
     Room inThisRoom;
-    Minotaur maze;
-    boolean trap;
+    boolean addMonster;
     Door thisDoor;
     Wall thisWall;
     Rectangle openDoor, touchedWall;
@@ -85,9 +85,9 @@ public class GamePanel extends JPanel implements ActionListener
         
         roomNumber = 1;
         //inRoom();
-        trap = false;
-        
-        //badGuy = new BouncingBetty(this);
+        addMonster = false;
+        maze = new Minotaur(this);
+        badGuy = new BouncingBetty(this);
     }
     
     public void refreshPlayer()
@@ -201,10 +201,16 @@ public class GamePanel extends JPanel implements ActionListener
                         inThisRoom.derp.setBounds(new Rectangle((1005/2), (730/2), 100,100));
                         
                     }
+                    if(i!=3)
+                    {
+                        player1.heroX = 486;
+                        player1.heroY = 688-player1.heroHeight;
+                        directionFacing = 1;
+                    }
                 }
             }
-            
         }
+        
         for(int i = 0; i < inThisRoom.walls; i++)
         {
             g.setColor(Color.BLACK);
@@ -224,7 +230,7 @@ public class GamePanel extends JPanel implements ActionListener
         {
             g.setColor(Color.green);
         }
-        //g.fillRect(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
+        
          switch (directionFacing)
         {
             case 1:
@@ -246,21 +252,19 @@ public class GamePanel extends JPanel implements ActionListener
         //player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
         
         //inThisRoom.wall1
-
-        if (maze != null)
+        Graphics2D g2d = (Graphics2D) g;
+        if (roomNumber == 3)
         {
         g.drawImage(maze.minotaurImage, maze.minotaurX, maze.minotaurY, this);
-        //g.fillRect(maze.minotaurX, maze.minotaurY, 50, 50);
-        Graphics2D g2d = (Graphics2D) g;
+        //g2d.draw(maze.minotaurShape);
         g2d.draw(maze.trigger);         
         }
         
-        if (badGuy != null)
+        if (roomNumber == 4)
         {
             g.setColor(badGuy.badGuyColor);
             g.fillRect(badGuy.objectX, badGuy.objectY, badGuy.objectWidth, badGuy.objectHeight);
-            //Graphics2D g2d = (Graphics2D) g;
-            //g2d.draw(badGuy.badGuyShape);
+            g2d.draw(badGuy.badGuyShape); // i like the way this makes the betty look like it has a bit of a tail
         }
         
     }
@@ -316,12 +320,11 @@ public class GamePanel extends JPanel implements ActionListener
             
             player1.heroX += player1.dx;
             player1.heroY += player1.dy;
-        if(roomNumber != 2)
+        
+    
+        if (roomNumber == 4)
         {
-            badGuy = null;
-        }
-        if (badGuy != null)
-        {
+            badGuy.badGuyShape = new Rectangle(badGuy.objectX, badGuy.objectY, badGuy.objectHeight, badGuy.objectWidth);
             badGuy.objectX += badGuy.objectdx;
             badGuy.objectY += badGuy.objectdy;
             
@@ -347,8 +350,7 @@ public class GamePanel extends JPanel implements ActionListener
                     badGuy.objectdy = 1;
                     }
                 }
-            }
-            
+        }
             
             player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);           
             player1.heroBounds();
@@ -361,27 +363,33 @@ public class GamePanel extends JPanel implements ActionListener
             
             if (roomNumber != 3)
             {
-                maze = null;
-                trap = false;
+                addMonster = false;
+                maze.minotaurX = 390;
+                maze.minotaurY = 320;
+                maze.count = 0;
             }
-            if (maze != null)
+            if (roomNumber == 3)
             {
                 if (player1.heroShape.intersects(maze.trigger))
                 {
-                    trap = true;
-                }    
-                if (trap == true)
+                    addMonster = true;
+                }
+                
+                if (addMonster == true)
                 {
                     maze.minotaurAtttack();
-                    
+                    maze.minotaurShape = new Rectangle( maze.minotaurX, maze.minotaurY, 50, 50);
                     if(player1.heroShape.intersects(maze.minotaurShape))
                     {
                         player1.health = player1.health-1;  
                         player1.heroX = 12;
-                        player1.heroY = 325;
-                        
+                        player1.heroY = 325;  
+                        addMonster = false;
+                        maze.minotaurX = 390;
+                        maze.minotaurY = 320;
+                        maze.count = 0;
                     }
-                }
+                }   
             }
             
         if (thisWall != null)
@@ -514,15 +522,12 @@ if (thisDoor != null)
                 break;
             case 3:
                 inThisRoom.inRoomThree();
-                maze = new Minotaur(this);
                 break;
             case 4:
                 inThisRoom.inRoomFour();
-                badGuy = new BouncingBetty(this);
                 break;
             case 5:
                 inThisRoom.inRoomFive();
-                
                 break;
         }
             repaint();            
