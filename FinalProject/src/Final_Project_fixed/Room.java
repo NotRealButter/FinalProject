@@ -22,8 +22,10 @@ public class Room
     ArrayList<Rectangle> lionRectums = new ArrayList();
     
     Timer flicker;
-    int walls = 0, doors = 0, flickerCount = 0;
-    boolean roomTwo = false, roomTwoItem = false, roomFive = false;
+    int walls = 0, doors = 0, flickerCount = 0, x = 0;
+    double r = 1.0;
+    boolean roomTwo = false, roomTwoItem = false, roomFive = false, r5PuzzleSolved = false;
+    boolean r5Button1Press = false,r5Button2Press = false, r5Button3Press = false;   
     JLabel derp = new JLabel();
     Rectangle r5Button1, r5Button2, r5Button3;
     
@@ -143,10 +145,9 @@ public class Room
        roomFive = true;
        derp.setText(null);
        roomTwo = false;
-       
        r5Button1 = new Rectangle (173,375, 68,68);
        r5Button2 = new Rectangle (442,579, 68, 68);
-       r5Button3 = new Rectangle (771,376, 68, 68);
+       r5Button3 = new Rectangle (711,376, 68, 68);
        
        //default walls
        wallList.get(0).createWall(0, 0, 1000, 10);
@@ -168,7 +169,7 @@ public class Room
    }
    public void candleFlicker()
    {
-        System.out.println(flickerCount);
+//        System.out.println(flickerCount);
         
         switch(flickerCount)
         {
@@ -193,5 +194,11 @@ public class Room
         }
         flickerCount++;
             
+   }
+   public void buttonReset ()
+   {
+       r5Button1Press = false;
+       r5Button2Press = false;
+       r5Button3Press = false;
    }
 }
