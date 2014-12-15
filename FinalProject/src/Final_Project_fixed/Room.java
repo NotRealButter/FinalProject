@@ -14,6 +14,7 @@ public class Room
     Image roomFiveFloor = Toolkit.getDefaultToolkit().getImage("images/roomFive/roomFiveFloor.png");
     Image roomFiveLocked = Toolkit.getDefaultToolkit().getImage("images/roomFive/roomFiveSub.png");
     Image buttonActivated = Toolkit.getDefaultToolkit().getImage("images/roomFive/activatedInterior.png");
+    Image roomThreeFloor = Toolkit.getDefaultToolkit().getImage("images/sand.jpg");
 
     
     ArrayList<Wall> wallList = new ArrayList();

@@ -29,7 +29,7 @@ public class Minotaur
 
     public void minotaurAtttack()
     {
-            count = count+1;
+            count++;
             
             minotaurX += minotaurDX;
             minotaurY += minotaurDY;

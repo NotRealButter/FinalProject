@@ -186,6 +186,10 @@ public class GamePanel extends JPanel implements ActionListener
                 g.drawImage(inThisRoom.buttonActivated,771,376,this);
             }
         }
+        if (roomNumber == 3)
+            {
+               g.drawImage(inThisRoom.roomThreeFloor, 0, 0, this);     
+            }
         else
         {
             g.drawImage(floorTexture, 0, 0, this);
