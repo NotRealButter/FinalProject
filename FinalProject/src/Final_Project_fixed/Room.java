@@ -10,11 +10,11 @@ import javax.swing.Timer;
 
 public class Room 
 {
-    Image candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle1.png");
+    Image candleFlicker = Toolkit.getDefaultToolkit().getImage("images/Candle/candle1.png");
     Image roomFiveFloor = Toolkit.getDefaultToolkit().getImage("images/roomFive/roomFiveFloor.png");
-    Image roomFiveLocked = Toolkit.getDefaultToolkit().getImage("images/roomFive/roomFiveSub.png");
     Image buttonActivated = Toolkit.getDefaultToolkit().getImage("images/roomFive/activatedInterior.png");
     Image roomThreeFloor = Toolkit.getDefaultToolkit().getImage("images/sand.jpg");
+    Image roomFivePit = Toolkit.getDefaultToolkit().getImage("images/roomFive/pit.png");
 
     
     ArrayList<Wall> wallList = new ArrayList();
@@ -140,7 +140,7 @@ public class Room
    }
    public void inRoomFive()
    {
-        walls = 8;
+        walls = 9;
         roomFive = true;
         roomFive = false;
         roomTwo = false;
@@ -155,9 +155,10 @@ public class Room
         wallList.get(3).createWall(0, 0, 10, 700);
         //added walls
         wallList.get(4).createWall(340, 100, 250, 20);
-        wallList.get(5).createWall(340, 300, 250, 20);
+        wallList.get(5).createWall(340, 300, 125, 20);
         wallList.get(6).createWall(340, 100, 20, 200);
         wallList.get(7).createWall(590, 100, 20, 220); 
+        wallList.get(8).createWall(465, 300, 125, 20);
 
         //doors
         doors = 1;
@@ -166,28 +167,24 @@ public class Room
    }
    public void candleFlicker()
    {
-//        System.out.println(flickerCount);
+        //System.out.println(flickerCount);
         
         switch(flickerCount)
         {
             case 1:
-       roomTwo = false;
-       
-       r5Button1 = new Rectangle (173,375, 68,68);
-       r5Button2 = new Rectangle (442,579, 68, 68);
-       r5Button3 = new Rectangle (771,376, 68, 68);
-       
+                candleFlicker = Toolkit.getDefaultToolkit().getImage("images/Candle/candle1.png");
+                break;
             case 2:
-                candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle2.png");
+                candleFlicker = Toolkit.getDefaultToolkit().getImage("images/Candle/candle2.png");
                 break;
             case 3:
-                candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle3.png");
+                candleFlicker = Toolkit.getDefaultToolkit().getImage("images/Candle/candle3.png");
                 break;
             case 4:
-                candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle2.png");
+                candleFlicker = Toolkit.getDefaultToolkit().getImage("images/Candle/candle2.png");
                 break;
             case 5:
-                candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle1.png");
+                candleFlicker = Toolkit.getDefaultToolkit().getImage("images/Candle/candle1.png");
                 break;
             case 6:
                 flickerCount = 1;
@@ -202,6 +199,9 @@ public class Room
        r5Button2Press = false;
        r5Button3Press = false;
    }
+   public void r5DoorOpen()
+   {
+       
+   }
 }
-//                candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle1.png");
-//                break;
+
