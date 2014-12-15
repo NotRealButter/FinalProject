@@ -11,7 +11,6 @@ import javax.swing.Timer;
 public class Room 
 {
     Image candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle1.png");
-
     
     ArrayList<Wall> wallList = new ArrayList();
     int walls = 0;
@@ -21,7 +20,7 @@ public class Room
     ArrayList<Rectangle> lionRectums = new ArrayList();
     Timer flicker;
     int doors = 0, flickerCount = 0;
-    boolean roomTwo = false, roomTwoItem = false;
+    boolean roomTwoItem = false;
     JLabel derp = new JLabel();
     
     Room()
@@ -42,7 +41,6 @@ public class Room
     {
        walls = 4;
        derp.setText(null);
-       roomTwo = false;
        //default walls
        wallList.get(0).createWall(0, 0, 1000, 10);
        wallList.get(1).createWall(990, 0, 10, 700);
@@ -63,7 +61,6 @@ public class Room
        
        walls = 4;
        
-       roomTwo = true;
               
        Image lion1 = Toolkit.getDefaultToolkit().getImage("images/lion1.png");
        Image lion2 = Toolkit.getDefaultToolkit().getImage("images/lion2.png");
@@ -90,7 +87,6 @@ public class Room
    }
    public void inRoomThree()//garrett's room
    {
-       roomTwo = false;
        derp.setText(null);
        //walls
        walls = 13;
@@ -119,7 +115,6 @@ public class Room
    {
        walls = 4;
        derp.setText(null);
-       roomTwo = false;
        //default walls
        wallList.get(0).createWall(0, 0, 1000, 10);
        wallList.get(1).createWall(990, 0, 10, 700);
@@ -135,7 +130,6 @@ public class Room
    {
        walls = 8;
        derp.setText(null);
-       roomTwo = false;
        //default walls
        wallList.get(0).createWall(0, 0, 1000, 10);
        wallList.get(1).createWall(990, 0, 10, 700);

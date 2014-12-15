@@ -175,7 +175,7 @@ public class GamePanel extends JPanel implements ActionListener
   
         }
        
-        if(inThisRoom.roomTwo)
+        if(roomNumber == 2)
         {
             for(int i = 0; i < 5; i++)
             {
