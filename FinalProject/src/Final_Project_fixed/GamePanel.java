@@ -22,6 +22,7 @@ public class GamePanel extends JPanel implements ActionListener
         
     Image floorTexture = Toolkit.getDefaultToolkit().getImage("images/floor1.jpg");
     Image roomFiveFloor = Toolkit.getDefaultToolkit().getImage("images/roomFiveFloor.png");
+    Image roomThreeFloor = Toolkit.getDefaultToolkit().getImage("images/sand.jpg");
             
     Rectangle baddieShape;
     Rectangle sword;
@@ -169,6 +170,10 @@ public class GamePanel extends JPanel implements ActionListener
             g.drawImage(roomFiveFloor, 0, 0, this);
             g.drawImage(inThisRoom.candleFlicker, 100, 100,this);
         }
+        if (roomNumber == 3)
+        {
+            g.drawImage(roomThreeFloor, 0, 0, this);
+        }
         else
         {
             g.drawImage(floorTexture, 0, 0, this);
@@ -270,7 +275,10 @@ public class GamePanel extends JPanel implements ActionListener
         {
         g.drawImage(maze.minotaurImage, maze.minotaurX, maze.minotaurY, this);
         //g2d.draw(maze.minotaurShape);
-        g2d.draw(maze.trigger);         
+            if (addMonster == false)
+            {
+                g2d.draw(maze.trigger);   
+            }
         }
         
         if (roomNumber == 4)

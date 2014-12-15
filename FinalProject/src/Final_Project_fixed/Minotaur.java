@@ -39,6 +39,7 @@ public class Minotaur
             {
                 minotaurDX = D;
                 minotaurDY = 0;
+                D = 1;
             }
             if (count == 150)
             {
@@ -54,24 +55,24 @@ public class Minotaur
             {
                 minotaurDX = 0;
                 minotaurDY = D;
-                
+                D = 2;
             }
             if (count == 660)
             {
                 minotaurDX = D;
                 minotaurDY = 0;
             }
-            if (count == 990)
+            if (count == 825)
             {
                 minotaurDX = 0;
                 minotaurDY = -D;
             }
-            if (count == 1260)
+            if (count == 960)
             {
                 minotaurDX = -D;
                 minotaurDY = 0;
             }
-            if (count == 1630)
+            if (count == 1145)
             {
                 minotaurDX = 0;
                 minotaurDY = 0;
