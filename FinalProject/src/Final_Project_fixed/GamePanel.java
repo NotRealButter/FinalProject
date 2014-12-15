@@ -165,13 +165,14 @@ public class GamePanel extends JPanel implements ActionListener
         if (roomNumber == 5)
         {
             g.drawImage(inThisRoom.roomFiveFloor, 0, 0, this);
-            g.drawImage(inThisRoom.roomFiveLocked, 340, 100,this);
             g.drawImage(inThisRoom.candleFlicker, 330, 332,this);
             g.drawImage(inThisRoom.candleFlicker, 580, 332,this);
             g.drawImage(inThisRoom.candleFlicker, 380, 332,this);
             g.drawImage(inThisRoom.candleFlicker, 530, 332,this);
             g.drawImage(inThisRoom.candleFlicker, 380, 382,this);
             g.drawImage(inThisRoom.candleFlicker, 530, 382,this);
+          //  g.drawImage(inThisRoom.roomFivePit, 100, 100,this);
+            
             
             if (inThisRoom.r5Button1Press == true)
             {
@@ -186,18 +187,14 @@ public class GamePanel extends JPanel implements ActionListener
                 g.drawImage(inThisRoom.buttonActivated,711,376,this);
             }
         }
-        if (roomNumber == 3)
+        else if (roomNumber == 3)
             {
                g.drawImage(inThisRoom.roomThreeFloor, 0, 0, this);     
             }
-        else
+       
+        else if(roomNumber == 2)
         {
             g.drawImage(floorTexture, 0, 0, this);
-  
-        }
-       
-        if(roomNumber == 2)
-        {
             for(int i = 0; i < 5; i++)
             {
                 switch(i)
@@ -245,6 +242,11 @@ public class GamePanel extends JPanel implements ActionListener
             }
         }
         
+        else
+        {
+            g.drawImage(floorTexture, 0, 0, this);
+  
+        }
         for(int i = 0; i < inThisRoom.walls; i++)
         {
             g.setColor(Color.BLACK);
@@ -421,6 +423,7 @@ public class GamePanel extends JPanel implements ActionListener
                     if(player1.heroShape.intersects(inThisRoom.r5Button3) && inThisRoom.r5Button1Press && inThisRoom.r5Button2Press )
                     {
                         inThisRoom.r5Button3Press = true;
+                        inThisRoom.r5DoorOpen();
                     }
                     if(player1.heroShape.intersects(inThisRoom.r5Button3) && !inThisRoom.r5Button2Press)
                     {
@@ -439,6 +442,7 @@ public class GamePanel extends JPanel implements ActionListener
                     if(player1.heroShape.intersects(inThisRoom.r5Button3) && inThisRoom.r5Button1Press && inThisRoom.r5Button2Press )
                     {
                         inThisRoom.r5Button3Press = true;
+                        inThisRoom.r5DoorOpen();
                     }
                     if(player1.heroShape.intersects(inThisRoom.r5Button3) && !inThisRoom.r5Button1Press)
                     {
@@ -457,6 +461,7 @@ public class GamePanel extends JPanel implements ActionListener
                     if(player1.heroShape.intersects(inThisRoom.r5Button2) && inThisRoom.r5Button1Press && inThisRoom.r5Button3Press )
                     {
                         inThisRoom.r5Button2Press = true;
+                        inThisRoom.r5DoorOpen();
                     }
                     if(player1.heroShape.intersects(inThisRoom.r5Button2) && !inThisRoom.r5Button1Press)
                     {
@@ -615,7 +620,7 @@ public class GamePanel extends JPanel implements ActionListener
             }
         }    
         
-        if (select == flicker && inThisRoom.roomFive)
+        if (select == flicker && roomNumber == 5)
         {
             inThisRoom.candleFlicker();
         }
