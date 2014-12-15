@@ -14,6 +14,7 @@ public class Room
     Image roomFiveFloor = Toolkit.getDefaultToolkit().getImage("images/roomFive/roomFiveFloor.png");
     Image roomFiveLocked = Toolkit.getDefaultToolkit().getImage("images/roomFive/roomFiveSub.png");
     Image buttonActivated = Toolkit.getDefaultToolkit().getImage("images/roomFive/activatedInterior.png");
+    Image roomThreeFloor = Toolkit.getDefaultToolkit().getImage("images/sand.jpg");
 
     
     ArrayList<Wall> wallList = new ArrayList();
@@ -47,8 +48,6 @@ public class Room
     {
        walls = 4;
        derp.setText(null);
-       roomTwo = false;
-       roomFive = false;
        //default walls
        wallList.get(0).createWall(0, 0, 1000, 10);
        wallList.get(1).createWall(990, 0, 10, 700);
@@ -68,8 +67,8 @@ public class Room
    {
        
        walls = 4;
+       roomTwo = false;
        roomFive = false;
-       roomTwo = true;
               
        Image lion1 = Toolkit.getDefaultToolkit().getImage("images/lion1.png");
        Image lion2 = Toolkit.getDefaultToolkit().getImage("images/lion2.png");
@@ -96,8 +95,8 @@ public class Room
    }
    public void inRoomThree()//garrett's room
    {
-       roomTwo = false;
        roomFive = false;
+       roomTwo = true;
        derp.setText(null);
        //walls
        walls = 13;
@@ -126,8 +125,8 @@ public class Room
    {
        walls = 4;
        derp.setText(null);
-       roomFive = false;
        roomTwo = false;
+       roomFive = false;
        //default walls
        wallList.get(0).createWall(0, 0, 1000, 10);
        wallList.get(1).createWall(990, 0, 10, 700);
@@ -144,6 +143,7 @@ public class Room
        walls = 8;
        roomFive = true;
        derp.setText(null);
+       roomFive = false;
        roomTwo = false;
        r5Button1 = new Rectangle (173,375, 68,68);
        r5Button2 = new Rectangle (442,579, 68, 68);
@@ -174,8 +174,12 @@ public class Room
         switch(flickerCount)
         {
             case 1:
-//                candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle1.png");
-//                break;
+       roomTwo = false;
+       
+       r5Button1 = new Rectangle (173,375, 68,68);
+       r5Button2 = new Rectangle (442,579, 68, 68);
+       r5Button3 = new Rectangle (771,376, 68, 68);
+       
             case 2:
                 candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle2.png");
                 break;
@@ -202,3 +206,5 @@ public class Room
        r5Button3Press = false;
    }
 }
+//                candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle1.png");
+//                break;

@@ -186,13 +186,17 @@ public class GamePanel extends JPanel implements ActionListener
                 g.drawImage(inThisRoom.buttonActivated,711,376,this);
             }
         }
+        if (roomNumber == 3)
+            {
+               g.drawImage(inThisRoom.roomThreeFloor, 0, 0, this);     
+            }
         else
         {
             g.drawImage(floorTexture, 0, 0, this);
   
         }
        
-        if(inThisRoom.roomTwo)
+        if(roomNumber == 2)
         {
             for(int i = 0; i < 5; i++)
             {
@@ -282,7 +286,10 @@ public class GamePanel extends JPanel implements ActionListener
         {
         g.drawImage(maze.minotaurImage, maze.minotaurX, maze.minotaurY, this);
         //g2d.draw(maze.minotaurShape);
-        g2d.draw(maze.trigger);         
+            if (addMonster == false)
+            {
+                g2d.draw(maze.trigger);   
+            }
         }
         
         if (roomNumber == 4)
