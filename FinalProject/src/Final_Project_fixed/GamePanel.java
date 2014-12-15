@@ -201,7 +201,7 @@ public class GamePanel extends JPanel implements ActionListener
                         inThisRoom.derp.setBounds(new Rectangle((1005/2), (730/2), 100,100));
                         
                     }
-                    if(i!=3)
+                    if(i!=3)// this resets player location if you want to use it
                     {
                         player1.heroX = 486;
                         player1.heroY = 688-player1.heroHeight;
