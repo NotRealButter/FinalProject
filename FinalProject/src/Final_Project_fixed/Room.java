@@ -1,6 +1,10 @@
 package Final_Project_fixed;
 
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 
 public class Room 
 {
@@ -9,8 +13,12 @@ public class Room
     int walls = 0;
     
     ArrayList<Door> doorList = new ArrayList();
-    int doors = 0;
     
+    ArrayList<Image> lionList = new ArrayList();
+    ArrayList<Rectangle> lionRectums = new ArrayList();
+    int doors = 0;
+    boolean roomTwo = false, roomTwoItem = false;
+    JLabel derp = new JLabel();
     Room()
     {
         for(int i = 0; i < 20; i++)
@@ -18,13 +26,18 @@ public class Room
             wallList.add(new Wall());
             doorList.add(new Door());
         }
+        for(int i = 0; i < 5; i++)
+       {
+           lionRectums.add(new Rectangle());
+       }
         
     }
     
    public void inRoomOne()
     {
        walls = 4;
-       
+       derp.setText(null);
+       roomTwo = false;
        //default walls
        wallList.get(0).createWall(0, 0, 1000, 10);
        wallList.get(1).createWall(990, 0, 10, 700);
@@ -42,7 +55,23 @@ public class Room
     }
    public void inRoomTwo()
    {
+       
        walls = 4;
+       
+       roomTwo = true;
+       
+       
+       Image lion1 = Toolkit.getDefaultToolkit().getImage("images/lion1.png");
+       Image lion2 = Toolkit.getDefaultToolkit().getImage("images/lion2.png");
+       Image lion3 = Toolkit.getDefaultToolkit().getImage("images/lion3.png");
+       Image lion4 = Toolkit.getDefaultToolkit().getImage("images/lion4.png");
+       Image lion5 = Toolkit.getDefaultToolkit().getImage("images/lion5.png");
+       
+       lionList.add(lion1);
+       lionList.add(lion2);
+       lionList.add(lion3);
+       lionList.add(lion4);
+       lionList.add(lion5);
        
        //default walls
        wallList.get(0).createWall(0, 0, 1000, 10);
@@ -53,9 +82,12 @@ public class Room
        doors = 1;
        
        doorList.get(0).createDoor(450, 690, 100, 10);
+       
    }
    public void inRoomThree()//garrett's room
    {
+       roomTwo = false;
+       derp.setText(null);
        //walls
        walls = 13;
        //horizontal
@@ -82,7 +114,8 @@ public class Room
    public void inRoomFour()
    {
        walls = 4;
-       
+       derp.setText(null);
+       roomTwo = false;
        //default walls
        wallList.get(0).createWall(0, 0, 1000, 10);
        wallList.get(1).createWall(990, 0, 10, 700);
@@ -97,6 +130,8 @@ public class Room
    public void inRoomFive()
    {
        walls = 4;
+       derp.setText(null);
+       roomTwo = false;
        //default walls
        wallList.get(0).createWall(0, 0, 1000, 10);
        wallList.get(1).createWall(990, 0, 10, 700);

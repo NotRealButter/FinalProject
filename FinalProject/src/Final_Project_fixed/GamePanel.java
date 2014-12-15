@@ -163,6 +163,49 @@ public class GamePanel extends JPanel implements ActionListener
         
         g.drawImage(floorTexture, 0, 0, this);
        
+        if(inThisRoom.roomTwo)
+        {
+            for(int i = 0; i < 5; i++)
+            {
+                switch(i)
+                {
+                    case 0:
+                        g.drawImage(inThisRoom.lionList.get(i), 300, 300, this);
+                        inThisRoom.lionRectums.set(i, new Rectangle(300,300,inThisRoom.lionList.get(i).getWidth(this),inThisRoom.lionList.get(i).getHeight(this)));
+                        break;
+                    case 1:
+                        g.drawImage(inThisRoom.lionList.get(i), 100, 300, this);
+                        inThisRoom.lionRectums.set(i, new Rectangle(100,300,inThisRoom.lionList.get(i).getWidth(this),inThisRoom.lionList.get(i).getHeight(this)));
+                        break;
+                    case 2:
+                        g.drawImage(inThisRoom.lionList.get(i), 600, 300, this);
+                        inThisRoom.lionRectums.set(i, new Rectangle(600,300,inThisRoom.lionList.get(i).getWidth(this),inThisRoom.lionList.get(i).getHeight(this)));
+                        break;
+                    case 3:
+                        g.drawImage(inThisRoom.lionList.get(i), 725, 500, this);
+                        inThisRoom.lionRectums.set(i, new Rectangle(725,500,inThisRoom.lionList.get(i).getWidth(this),inThisRoom.lionList.get(i).getHeight(this)));
+                        break;
+                    case 4:
+                        g.drawImage(inThisRoom.lionList.get(i), 30, 30, this);
+                        inThisRoom.lionRectums.set(i, new Rectangle(30,30,inThisRoom.lionList.get(i).getWidth(this),inThisRoom.lionList.get(i).getHeight(this)));
+                        break;
+                }
+                if(player1.heroShape.intersects(inThisRoom.lionRectums.get(i)))
+                {
+                    if(i == 3)
+                    {
+                        inThisRoom.roomTwoItem = true;
+                        inThisRoom.derp.setText("<html><center>You found the item!</center><html>");
+                        inThisRoom.derp.setFont(inThisRoom.derp.getFont().deriveFont(20.0f));
+                        inThisRoom.derp.setForeground(Color.RED);
+                        this.add(inThisRoom.derp);
+                        inThisRoom.derp.setBounds(new Rectangle((1005/2), (730/2), 100,100));
+                        
+                    }
+                }
+            }
+            
+        }
         for(int i = 0; i < inThisRoom.walls; i++)
         {
             g.setColor(Color.BLACK);
@@ -202,7 +245,7 @@ public class GamePanel extends JPanel implements ActionListener
        // g.fillRect(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
        
         //player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
-        //badGuy.badGuyShape = new Rectangle(badGuy.objectX, badGuy.objectY, badGuy.objectHeight, badGuy.objectWidth);
+        
         //inThisRoom.wall1
 
         if (maze != null)
@@ -274,8 +317,7 @@ public class GamePanel extends JPanel implements ActionListener
             
             player1.heroX += player1.dx;
             player1.heroY += player1.dy;
-            
-        if (roomNumber != 5)
+        if(roomNumber != 2)
         {
             badGuy = null;
         }
