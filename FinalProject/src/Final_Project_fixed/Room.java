@@ -1,21 +1,26 @@
 package Final_Project_fixed;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JLabel;
+import javax.swing.Timer;
 
 public class Room 
 {
+    Image candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle1.png");
+
+    
     ArrayList<Wall> wallList = new ArrayList();
     int walls = 0;
     
     ArrayList<Door> doorList = new ArrayList();
-    
     ArrayList<Image> lionList = new ArrayList();
     ArrayList<Rectangle> lionRectums = new ArrayList();
-    int doors = 0;
+    Timer flicker;
+    int doors = 0, flickerCount = 0;
     boolean roomTwo = false, roomTwoItem = false;
     JLabel derp = new JLabel();
     
@@ -59,8 +64,7 @@ public class Room
        walls = 4;
        
        roomTwo = true;
-       
-       
+              
        Image lion1 = Toolkit.getDefaultToolkit().getImage("images/lion1.png");
        Image lion2 = Toolkit.getDefaultToolkit().getImage("images/lion2.png");
        Image lion3 = Toolkit.getDefaultToolkit().getImage("images/lion3.png");
@@ -138,15 +142,37 @@ public class Room
        wallList.get(2).createWall(0, 690, 1000, 10);
        wallList.get(3).createWall(0, 0, 10, 700);
        //added walls
-       wallList.get(4).createWall(300, 100, 250, 20);
-       wallList.get(5).createWall(300, 200, 250, 20);
-       wallList.get(6).createWall(300, 100, 20, 100);
-       wallList.get(7).createWall(550, 100, 20, 120);
-       
+       wallList.get(4).createWall(350, 100, 250, 20);
+       wallList.get(5).createWall(350, 300, 250, 20);
+       wallList.get(6).createWall(350, 100, 20, 200);
+       wallList.get(7).createWall(600, 100, 20, 220);       
        
        //doors
        doors = 1;
        
        doorList.get(0).createDoor(990, 300 , 10, 100);
+   }
+   public void candleFlicker()
+   {
+        flickerCount++;
+            System.out.println(flickerCount);
+            if (flickerCount == 4)
+            {
+                flickerCount = 1;
+            }
+            if (flickerCount == 1)
+            {
+                candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle1.png");
+
+            }
+            if (flickerCount == 2)
+            {
+                candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle2.png");
+
+            }
+            if (flickerCount == 3)
+            {
+                candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle3.png");
+            } 
    }
 }

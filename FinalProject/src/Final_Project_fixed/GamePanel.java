@@ -35,7 +35,7 @@ public class GamePanel extends JPanel implements ActionListener
     int frameWidth, frameHeight;
     
 
-    Timer time, flashing;
+    Timer time, flashing, flicker;
   
     public GamePanel()
     {
@@ -80,6 +80,10 @@ public class GamePanel extends JPanel implements ActionListener
         flashing = new Timer(100, this);
         flashing.addActionListener(this);
         flashing.start();
+        
+        flicker = new Timer(200, this);
+        flicker.addActionListener(this);
+        flicker.start();
   
         //player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
         displaySetup();
@@ -163,10 +167,11 @@ public class GamePanel extends JPanel implements ActionListener
         if (roomNumber == 5)
         {
             g.drawImage(roomFiveFloor, 0, 0, this);
+            g.drawImage(inThisRoom.candleFlicker, 100, 100,this);
         }
         else
         {
-                  g.drawImage(floorTexture, 0, 0, this);
+            g.drawImage(floorTexture, 0, 0, this);
   
         }
        
@@ -543,6 +548,12 @@ public class GamePanel extends JPanel implements ActionListener
                 badGuy.colorFlash();
             }
         }    
+        
+        if(select == flicker)
+        {
+            inThisRoom.candleFlicker();
+        }
+    
     }
 
     /**
