@@ -22,6 +22,7 @@ public class GamePanel extends JPanel implements ActionListener
         
     Image floorTexture = Toolkit.getDefaultToolkit().getImage("images/floor1.jpg");
     Image roomFiveFloor = Toolkit.getDefaultToolkit().getImage("images/roomFiveFloor.png");
+    Image roomFiveLocked = Toolkit.getDefaultToolkit().getImage("images/roomFiveSub.png");
             
     Rectangle baddieShape;
     Rectangle sword;
@@ -167,7 +168,13 @@ public class GamePanel extends JPanel implements ActionListener
         if (roomNumber == 5)
         {
             g.drawImage(roomFiveFloor, 0, 0, this);
-            g.drawImage(inThisRoom.candleFlicker, 100, 100,this);
+            g.drawImage(roomFiveLocked, 350, 100,this);
+            g.drawImage(inThisRoom.candleFlicker, 350, 332,this);
+            g.drawImage(inThisRoom.candleFlicker, 600, 332,this);
+            g.drawImage(inThisRoom.candleFlicker, 400, 332,this);
+            g.drawImage(inThisRoom.candleFlicker, 550, 332,this);
+            g.drawImage(inThisRoom.candleFlicker, 400, 382,this);
+            g.drawImage(inThisRoom.candleFlicker, 550, 382,this);
         }
         else
         {
