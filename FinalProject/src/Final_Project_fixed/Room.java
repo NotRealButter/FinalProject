@@ -20,7 +20,7 @@ public class Room
     ArrayList<Rectangle> lionRectums = new ArrayList();
     Timer flicker;
     int doors = 0, flickerCount = 0;
-    boolean roomTwoItem = false;
+    boolean  roomTwoItem = false, roomFive;
     JLabel derp = new JLabel();
     
     Room()
@@ -41,6 +41,7 @@ public class Room
     {
        walls = 4;
        derp.setText(null);
+
        //default walls
        wallList.get(0).createWall(0, 0, 1000, 10);
        wallList.get(1).createWall(990, 0, 10, 700);
@@ -60,7 +61,6 @@ public class Room
    {
        
        walls = 4;
-       
               
        Image lion1 = Toolkit.getDefaultToolkit().getImage("images/lion1.png");
        Image lion2 = Toolkit.getDefaultToolkit().getImage("images/lion2.png");
@@ -115,6 +115,7 @@ public class Room
    {
        walls = 4;
        derp.setText(null);
+
        //default walls
        wallList.get(0).createWall(0, 0, 1000, 10);
        wallList.get(1).createWall(990, 0, 10, 700);
@@ -129,6 +130,7 @@ public class Room
    public void inRoomFive()
    {
        walls = 8;
+       roomFive = true;
        derp.setText(null);
        //default walls
        wallList.get(0).createWall(0, 0, 1000, 10);
@@ -148,25 +150,30 @@ public class Room
    }
    public void candleFlicker()
    {
-        flickerCount++;
-            System.out.println(flickerCount);
-            if (flickerCount == 4)
-            {
-                flickerCount = 1;
-            }
-            if (flickerCount == 1)
-            {
+        System.out.println(flickerCount);
+        
+        switch(flickerCount)
+        {
+            case 1:
                 candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle1.png");
-
-            }
-            if (flickerCount == 2)
-            {
+                break;
+            case 2:
                 candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle2.png");
-
-            }
-            if (flickerCount == 3)
-            {
+                break;
+            case 3:
                 candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle3.png");
-            } 
+                break;
+            case 4:
+                candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle2.png");
+                break;
+            case 5:
+                candleFlicker = Toolkit.getDefaultToolkit().getImage("images/candle/candle1.png");
+                break;
+            case 6:
+                flickerCount = 1;
+                break;
+        }
+        flickerCount++;
+            
    }
 }
