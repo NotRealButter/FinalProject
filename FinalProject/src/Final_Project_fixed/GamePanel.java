@@ -21,6 +21,7 @@ public class GamePanel extends JPanel implements ActionListener
     Rectangle openDoor, touchedWall;
         
     Image floorTexture = Toolkit.getDefaultToolkit().getImage("images/floor1.jpg");
+    Image roomFiveFloor = Toolkit.getDefaultToolkit().getImage("images/roomFiveFloor.png");
             
     Rectangle baddieShape;
     Rectangle sword;
@@ -159,8 +160,15 @@ public class GamePanel extends JPanel implements ActionListener
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        
-        g.drawImage(floorTexture, 0, 0, this);
+        if (roomNumber == 5)
+        {
+            g.drawImage(roomFiveFloor, 0, 0, this);
+        }
+        else
+        {
+                  g.drawImage(floorTexture, 0, 0, this);
+  
+        }
        
         if(inThisRoom.roomTwo)
         {
@@ -422,88 +430,88 @@ public class GamePanel extends JPanel implements ActionListener
         }    
         }
 
-if (thisDoor != null)
-{
-    collisionDelay = collisionDelay+1;
-    if (collisionDelay >= 10)
-    {
-        for(int i = 0; i < inThisRoom.doors; i++)
-        { 
-            openDoor = inThisRoom.doorList.get(i).getDoorShape();
-                
-            if (player1.heroShape.intersects(openDoor))
-            {    
-                switch (roomNumber)
-                {
-                    case 1: //for loop idea
-                    {   
-                        if (inThisRoom.doorList.get(i).getDoorY() <= 10)
+        if (thisDoor != null)
+        {
+            collisionDelay = collisionDelay+1;
+            if (collisionDelay >= 10)
+            {
+                for(int i = 0; i < inThisRoom.doors; i++)
+                { 
+                    openDoor = inThisRoom.doorList.get(i).getDoorShape();
+
+                    if (player1.heroShape.intersects(openDoor))
+                    {    
+                        switch (roomNumber)
                         {
-                            roomNumber = 2; 
-                            player1.heroX = 485;
-                            player1.heroY = 688 - player1.heroHeight;
-                            collisionDelay = 0;
+                            case 1: //for loop idea
+                            {   
+                                if (inThisRoom.doorList.get(i).getDoorY() <= 10)
+                                {
+                                    roomNumber = 2; 
+                                    player1.heroX = 485;
+                                    player1.heroY = 688 - player1.heroHeight;
+                                    collisionDelay = 0;
+                                }
+                                if (inThisRoom.doorList.get(i).getDoorX() >= 980)
+                                {
+                                    roomNumber = 3;
+                                    player1.heroX = 12;
+                                    player1.heroY = 335;
+                                    collisionDelay = 0;
+                                }
+                                if (inThisRoom.doorList.get(i).getDoorY() >= 680)
+                                {
+                                    roomNumber = 4;
+                                    player1.heroX = 485;
+                                    player1.heroY = 12;
+                                    collisionDelay = 0;
+                                }
+                                if (inThisRoom.doorList.get(i).getDoorX() <= 10)
+                                {
+                                    roomNumber = 5;
+                                    player1.heroX = 988 - player1.heroWidth;
+                                    player1.heroY = 335;
+                                    collisionDelay = 0;
+                                }
+                                break;
+                            }
+                            case 2:
+                            {
+                                roomNumber = 1;
+                                player1.heroX = 485;
+                                player1.heroY = 12;
+                                collisionDelay = 0;
+                                break;
+                            }
+                            case 3:
+                            {
+                                roomNumber = 1;
+                                player1.heroX = 988 - player1.heroWidth;
+                                player1.heroY = 335;  
+                                collisionDelay = 0;
+                                break;
+                            }
+                            case 4:
+                            {
+                                roomNumber = 1;
+                                player1.heroX = 485;
+                                player1.heroY = 688 - player1.heroHeight;
+                                collisionDelay = 0;
+                                break;
+                            }
+                            case 5:
+                            {
+                                roomNumber = 1;
+                                player1.heroX = 12;
+                                player1.heroY = 335;
+                                collisionDelay = 0;
+                                break;
+                            }
                         }
-                        if (inThisRoom.doorList.get(i).getDoorX() >= 980)
-                        {
-                            roomNumber = 3;
-                            player1.heroX = 12;
-                            player1.heroY = 335;
-                            collisionDelay = 0;
-                        }
-                        if (inThisRoom.doorList.get(i).getDoorY() >= 680)
-                        {
-                            roomNumber = 4;
-                            player1.heroX = 485;
-                            player1.heroY = 12;
-                            collisionDelay = 0;
-                        }
-                        if (inThisRoom.doorList.get(i).getDoorX() <= 10)
-                        {
-                            roomNumber = 5;
-                            player1.heroX = 988 - player1.heroWidth;
-                            player1.heroY = 335;
-                            collisionDelay = 0;
-                        }
-                        break;
-                    }
-                    case 2:
-                    {
-                        roomNumber = 1;
-                        player1.heroX = 485;
-                        player1.heroY = 12;
-                        collisionDelay = 0;
-                        break;
-                    }
-                    case 3:
-                    {
-                        roomNumber = 1;
-                        player1.heroX = 988 - player1.heroWidth;
-                        player1.heroY = 335;  
-                        collisionDelay = 0;
-                        break;
-                    }
-                    case 4:
-                    {
-                        roomNumber = 1;
-                        player1.heroX = 485;
-                        player1.heroY = 688 - player1.heroHeight;
-                        collisionDelay = 0;
-                        break;
-                    }
-                    case 5:
-                    {
-                        roomNumber = 1;
-                        player1.heroX = 12;
-                        player1.heroY = 335;
-                        collisionDelay = 0;
-                        break;
                     }
                 }
-            }
-        }
-    }    
-}      
+            }    
+        }      
         switch (roomNumber)
         {
             case 1: 

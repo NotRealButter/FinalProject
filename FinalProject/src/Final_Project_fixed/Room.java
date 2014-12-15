@@ -18,6 +18,7 @@ public class Room
     int doors = 0;
     boolean roomTwo = false, roomTwoItem = false;
     JLabel derp = new JLabel();
+    
     Room()
     {
         for(int i = 0; i < 20; i++)
@@ -128,7 +129,7 @@ public class Room
    }
    public void inRoomFive()
    {
-       walls = 4;
+       walls = 8;
        derp.setText(null);
        roomTwo = false;
        //default walls
@@ -136,6 +137,13 @@ public class Room
        wallList.get(1).createWall(990, 0, 10, 700);
        wallList.get(2).createWall(0, 690, 1000, 10);
        wallList.get(3).createWall(0, 0, 10, 700);
+       //added walls
+       wallList.get(4).createWall(300, 100, 250, 20);
+       wallList.get(5).createWall(300, 200, 250, 20);
+       wallList.get(6).createWall(300, 100, 20, 100);
+       wallList.get(7).createWall(550, 100, 20, 120);
+       
+       
        //doors
        doors = 1;
        
