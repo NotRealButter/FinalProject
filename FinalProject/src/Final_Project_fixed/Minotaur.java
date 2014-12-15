@@ -3,6 +3,7 @@ package Final_Project_fixed;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+//import java.awt.Rectangle;
 
 public class Minotaur
         {
@@ -45,33 +46,33 @@ public class Minotaur
             }
             if (count == 240)
             {
-                minotaurDX = -1 * direction;
+                minotaurDX = -1;
                 minotaurDY = 0;
             }
             if (count == 480)
             {
                 minotaurDX = 0;
-                minotaurDY = 1 * direction;
+                minotaurDY = 1;
             }
             if (count == 660)
             {
-                minotaurDX = 1 * direction;
+                minotaurDX = 1;
                 minotaurDY = 0;
             }
             if (count == 990)
             {
                 minotaurDX = 0;
-                minotaurDY = -1 * direction;
+                minotaurDY = -1;
             }
             if (count == 1260)
             {
-                minotaurDX = -1 * direction;
+                minotaurDX = -1;
                 minotaurDY = 0;
             }
             if (count == 1630)
             {
                 minotaurDX = 0;
                 minotaurDY = 0;
-            } 
+            }
     }         
 }

@@ -8,7 +8,6 @@ import javax.swing.JLabel;
 
 public class Room 
 {
- 
     ArrayList<Wall> wallList = new ArrayList();
     int walls = 0;
     

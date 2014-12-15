@@ -33,8 +33,8 @@ public class SplashPanel extends JPanel
         toOptions.setBackground(Color.blue);
         toCredits.setBackground(Color.green);
 
-        toGame.setText("Game");
-        toOptions.setText("Options");
+        toGame.setText("Load Game");
+        toOptions.setText("New Game");
         toCredits.setText("Credits");
     }
 }
