@@ -140,32 +140,29 @@ public class Room
    }
    public void inRoomFive()
    {
-       walls = 8;
-       roomFive = true;
-       derp.setText(null);
-       roomFive = false;
-       roomTwo = false;
-       r5Button1 = new Rectangle (173,375, 68,68);
-       r5Button2 = new Rectangle (442,579, 68, 68);
-       r5Button3 = new Rectangle (711,376, 68, 68);
-       
-       //default walls
-       wallList.get(0).createWall(0, 0, 1000, 10);
-       wallList.get(1).createWall(990, 0, 10, 700);
-       wallList.get(2).createWall(0, 690, 1000, 10);
-       wallList.get(3).createWall(0, 0, 10, 700);
-       //added walls
-       wallList.get(4).createWall(340, 100, 250, 20);
-       wallList.get(5).createWall(340, 300, 250, 20);
-       wallList.get(6).createWall(340, 100, 20, 200);
-       wallList.get(7).createWall(590, 100, 20, 220); 
-       
-       
-       
-       //doors
-       doors = 1;
-       
-       doorList.get(0).createDoor(990, 300 , 10, 100);
+        walls = 8;
+        roomFive = true;
+        roomFive = false;
+        roomTwo = false;
+        r5Button1 = new Rectangle (173,375, 68,68);
+        r5Button2 = new Rectangle (442,579, 68, 68);
+        r5Button3 = new Rectangle (711,376, 68, 68);
+
+        //default walls
+        wallList.get(0).createWall(0, 0, 1000, 10);
+        wallList.get(1).createWall(990, 0, 10, 700);
+        wallList.get(2).createWall(0, 690, 1000, 10);
+        wallList.get(3).createWall(0, 0, 10, 700);
+        //added walls
+        wallList.get(4).createWall(340, 100, 250, 20);
+        wallList.get(5).createWall(340, 300, 250, 20);
+        wallList.get(6).createWall(340, 100, 20, 200);
+        wallList.get(7).createWall(590, 100, 20, 220); 
+
+        //doors
+        doors = 1;
+
+        doorList.get(0).createDoor(990, 300 , 10, 100);
    }
    public void candleFlicker()
    {
