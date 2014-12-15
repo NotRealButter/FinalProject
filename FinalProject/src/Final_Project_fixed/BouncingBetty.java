@@ -20,19 +20,19 @@ public class BouncingBetty
     
     public void bettyBounds()
     {
-         if (objectX <= 0)
+         if (objectX <= 10)
         {
             objectdx = 1;
         }
-        if (objectX >= 942)
+        if (objectX >= 980)
         {
             objectdx = -1;
         }
-        if (objectY <= 0)
+        if (objectY <= 10)
         {
             objectdy = 1;
         }
-        if (objectY >= 642)
+        if (objectY >= 680)
         {
             objectdy = -1;
         }
@@ -43,7 +43,7 @@ public class BouncingBetty
     {
         
             flashcount++;
-           // System.out.println(flashcount);
+            
             if (flashcount == 4)
             {
                 flashcount = 1;

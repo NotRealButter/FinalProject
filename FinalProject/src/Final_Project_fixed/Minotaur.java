@@ -14,7 +14,7 @@ public class Minotaur
     Player player1;
     Image minotaurImage = Toolkit.getDefaultToolkit().getImage("images/minotaur.png");
     GamePanel game;
-    int mazeRun, count, direction;
+    int mazeRun, count, D;
     
     public Minotaur(GamePanel game)
     {
@@ -23,7 +23,7 @@ public class Minotaur
         trigger = new Rectangle(510, 340, 10, 10);
         
         count = 0;
-
+        D = 1;
     }
 
 
@@ -34,39 +34,41 @@ public class Minotaur
             minotaurX += minotaurDX;
             minotaurY += minotaurDY;
 
-            if (count == 0)
+            
+            if (count <= 150)
             {
-                minotaurDX = 1;
+                minotaurDX = D;
                 minotaurDY = 0;
             }
             if (count == 150)
             {
                 minotaurDX = 0;
-                minotaurDY = -1;
+                minotaurDY = -D;
             }
             if (count == 240)
             {
-                minotaurDX = -1;
+                minotaurDX = -D;
                 minotaurDY = 0;
             }
             if (count == 480)
             {
                 minotaurDX = 0;
-                minotaurDY = 1;
+                minotaurDY = D;
+                
             }
             if (count == 660)
             {
-                minotaurDX = 1;
+                minotaurDX = D;
                 minotaurDY = 0;
             }
             if (count == 990)
             {
                 minotaurDX = 0;
-                minotaurDY = -1;
+                minotaurDY = -D;
             }
             if (count == 1260)
             {
-                minotaurDX = -1;
+                minotaurDX = -D;
                 minotaurDY = 0;
             }
             if (count == 1630)

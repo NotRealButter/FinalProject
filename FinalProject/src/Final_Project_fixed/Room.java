@@ -58,7 +58,7 @@ public class Room
        
        
     }
-   public void inRoomTwo()
+   public void inRoomTwo() //Kristens room
    {
        
        walls = 4;
