@@ -331,7 +331,15 @@ public class GamePanel extends JPanel implements ActionListener
             g.drawImage(gameOver, 0, 0, this);
         }
     }
-
+    public void resetWalls()
+    {
+        inThisRoom.wallList.clear();
+        for(int i = 0; i < 30; i++)
+        {
+            
+            inThisRoom.wallList.add(new Wall());
+        }
+    }
     @Override
     public void actionPerformed(ActionEvent e)
     {
@@ -620,6 +628,7 @@ public class GamePanel extends JPanel implements ActionListener
                                     }
                                     case 2:
                                     {
+                                        resetWalls();
                                         roomNumber = 1;
                                         player1.heroX = 485;
                                         player1.heroY = 12;
@@ -628,6 +637,7 @@ public class GamePanel extends JPanel implements ActionListener
                                     }
                                     case 3:
                                     {
+                                        resetWalls();
                                         roomNumber = 1;
                                         player1.heroX = 988 - player1.heroWidth;
                                         player1.heroY = 335;  
@@ -636,6 +646,7 @@ public class GamePanel extends JPanel implements ActionListener
                                     }
                                     case 4:
                                     {
+                                        resetWalls();
                                         roomNumber = 1;
                                         player1.heroX = 485;
                                         player1.heroY = 688 - player1.heroHeight;
@@ -644,6 +655,7 @@ public class GamePanel extends JPanel implements ActionListener
                                     }
                                     case 5:
                                     {
+                                        resetWalls();
                                         roomNumber = 1;
                                         player1.heroX = 12;
                                         player1.heroY = 335;
