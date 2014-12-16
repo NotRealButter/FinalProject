@@ -72,7 +72,7 @@ public class GamePanel extends JPanel implements ActionListener
         name.setBounds (670, 600, 300, 20);
         name.setBackground(Color.white);
         add(name);
-           
+        
         //timers
         time = new Timer(10, this);
         time.addActionListener(this);
