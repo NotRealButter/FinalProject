@@ -14,6 +14,7 @@ public class Room
     Image roomFiveFloor = Toolkit.getDefaultToolkit().getImage("images/roomFive/roomFiveFloor.png");
     Image buttonActivated = Toolkit.getDefaultToolkit().getImage("images/roomFive/activatedInterior.png");
     Image roomThreeFloor = Toolkit.getDefaultToolkit().getImage("images/sand.jpg");
+    Image roomFourFloor = Toolkit.getDefaultToolkit().getImage("images/carpet.jpg");
     Image roomFivePit = Toolkit.getDefaultToolkit().getImage("images/roomFive/pit.png");
     Image roomFiveItem = Toolkit.getDefaultToolkit().getImage("images/roomFive/iconOfWisdom.png");
     Image roomThreeItem = Toolkit.getDefaultToolkit().getImage("images/roomFive/iconOfWisdom.png");
