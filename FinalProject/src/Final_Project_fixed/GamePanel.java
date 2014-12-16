@@ -34,7 +34,7 @@ public class GamePanel extends JPanel implements ActionListener
     int directionFacing = 3;
     int frameWidth, frameHeight;
     
-    Boolean button1 = false,button2 = false,button3 = false;    
+     
 
     Timer time, flashing, flicker;
   
@@ -166,39 +166,41 @@ public class GamePanel extends JPanel implements ActionListener
         if (roomNumber == 5)
         {
             g.drawImage(inThisRoom.roomFiveFloor, 0, 0, this);
-            g.drawImage(inThisRoom.roomFiveLocked, 340, 100,this);
             g.drawImage(inThisRoom.candleFlicker, 330, 332,this);
             g.drawImage(inThisRoom.candleFlicker, 580, 332,this);
             g.drawImage(inThisRoom.candleFlicker, 380, 332,this);
             g.drawImage(inThisRoom.candleFlicker, 530, 332,this);
             g.drawImage(inThisRoom.candleFlicker, 380, 382,this);
             g.drawImage(inThisRoom.candleFlicker, 530, 382,this);
+          //  g.drawImage(inThisRoom.roomFivePit, 100, 100,this);
             
-            if (button1 == true)
+            
+            if (inThisRoom.r5Button1Press == true)
             {
                 g.drawImage(inThisRoom.buttonActivated,173,375,this);
             }
-            if (button2 == true)
+            if (inThisRoom.r5Button2Press == true)
             {
                 g.drawImage(inThisRoom.buttonActivated,442,579,this);
             }
-            if (button3 == true)
+            if (inThisRoom.r5Button3Press == true)
             {
-                g.drawImage(inThisRoom.buttonActivated,771,376,this);
+                g.drawImage(inThisRoom.buttonActivated,711,376,this);
+            }
+            if (inThisRoom.r5PuzzleSolved == true)
+            {
+                g.drawImage(inThisRoom.roomFiveItem,468,196,this);
+                inThisRoom.r5SpecialItem = new Rectangle (468,196,16,16);
             }
         }
-        if (roomNumber == 3)
+        else if (roomNumber == 3)
             {
                g.drawImage(inThisRoom.roomThreeFloor, 0, 0, this);     
             }
-        else
+       
+        else if(roomNumber == 2)
         {
             g.drawImage(floorTexture, 0, 0, this);
-  
-        }
-       
-        if(roomNumber == 2)
-        {
             for(int i = 0; i < 5; i++)
             {
                 switch(i)
@@ -282,11 +284,6 @@ public class GamePanel extends JPanel implements ActionListener
                 break;
         }
         
-       // g.fillRect(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
-       
-        //player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);
-        
-        //inThisRoom.wall1
         Graphics2D g2d = (Graphics2D) g;
         if (roomNumber == 3)
         {
@@ -369,8 +366,6 @@ public class GamePanel extends JPanel implements ActionListener
         }
             
         player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);           
-        player1.heroBounds();
-
         if (player1 != null)
         {
             player1.heroX += player1.dx;
@@ -407,22 +402,81 @@ public class GamePanel extends JPanel implements ActionListener
                 }
             }   
         }
+        if(roomNumber != 5)
+        {
+            inThisRoom.buttonReset();
+        }
         if(roomNumber ==5)
         {
-            if (player1.heroShape.intersects(inThisRoom.r5Button1))
-            {
-                button1.equals(true);
-            }
-            if (player1.heroShape.intersects(inThisRoom.r5Button2))
-            {
-                button2.equals(true);
-            }
-            if (player1.heroShape.intersects(inThisRoom.r5Button3))
-            {
-                button3.equals(true);
-            }
-        }    
             
+            switch(inThisRoom.x)
+            {
+                case 0:
+                    if(player1.heroShape.intersects(inThisRoom.r5Button1) && !inThisRoom.r5Button2Press && !inThisRoom.r5Button3Press )
+                    {
+                        inThisRoom.r5Button1Press = true;
+                    }
+                    if(player1.heroShape.intersects(inThisRoom.r5Button2) && inThisRoom.r5Button1Press && !inThisRoom.r5Button3Press )
+                    {
+                        inThisRoom.r5Button2Press = true;
+                    }
+                    if(player1.heroShape.intersects(inThisRoom.r5Button3) && inThisRoom.r5Button1Press && inThisRoom.r5Button2Press )
+                    {
+                        inThisRoom.r5Button3Press = true;
+                        inThisRoom.r5PuzzleSolved = true;
+                    }
+                    if(player1.heroShape.intersects(inThisRoom.r5Button3) && !inThisRoom.r5Button2Press)
+                    {
+                        inThisRoom.buttonReset();
+                    }
+                break;
+                case 1:
+                    if(player1.heroShape.intersects(inThisRoom.r5Button2) && !inThisRoom.r5Button1Press && !inThisRoom.r5Button3Press )
+                    {
+                        inThisRoom.r5Button2Press = true;
+                    }
+                    if(player1.heroShape.intersects(inThisRoom.r5Button1) && inThisRoom.r5Button2Press && !inThisRoom.r5Button3Press )
+                    {
+                        inThisRoom.r5Button1Press = true;
+                    }
+                    if(player1.heroShape.intersects(inThisRoom.r5Button3) && inThisRoom.r5Button1Press && inThisRoom.r5Button2Press )
+                    {
+                        inThisRoom.r5Button3Press = true;
+                        inThisRoom.r5PuzzleSolved = true;
+                    }
+                    if(player1.heroShape.intersects(inThisRoom.r5Button3) && !inThisRoom.r5Button1Press)
+                    {
+                        inThisRoom.buttonReset();
+                    }
+                break;
+                case 2:
+                    if(player1.heroShape.intersects(inThisRoom.r5Button3) && !inThisRoom.r5Button2Press && !inThisRoom.r5Button1Press )
+                    {
+                        inThisRoom.r5Button3Press = true;
+                    }
+                    if(player1.heroShape.intersects(inThisRoom.r5Button1) && inThisRoom.r5Button3Press && !inThisRoom.r5Button2Press )
+                    {
+                        inThisRoom.r5Button1Press = true;
+                    }
+                    if(player1.heroShape.intersects(inThisRoom.r5Button2) && inThisRoom.r5Button1Press && inThisRoom.r5Button3Press )
+                    {
+                        inThisRoom.r5Button2Press = true;
+                        inThisRoom.r5PuzzleSolved = true;
+                    }
+                    if(player1.heroShape.intersects(inThisRoom.r5Button2) && !inThisRoom.r5Button1Press)
+                    {
+                        inThisRoom.buttonReset();
+                    }
+                break;
+            }
+            if (inThisRoom.r5SpecialItem != null &&player1.heroShape.intersects(inThisRoom.r5SpecialItem))
+            {
+                inThisRoom.roomFiveItem = null;
+                player1.hasWisdom = true;
+                
+            }
+        }
+                   
         if (thisWall != null)
         {   
             collisionDelay = collisionDelay+1;
@@ -500,6 +554,10 @@ public class GamePanel extends JPanel implements ActionListener
                                 if (inThisRoom.doorList.get(i).getDoorX() <= 10)
                                 {
                                     roomNumber = 5;
+                                    
+                                    inThisRoom.r = Math.random();
+                                    inThisRoom.r *= 3.0;
+                                    inThisRoom.x = (int) inThisRoom.r;
                                     player1.heroX = 988 - player1.heroWidth;
                                     player1.heroY = 335;
                                     collisionDelay = 0;
@@ -555,13 +613,14 @@ public class GamePanel extends JPanel implements ActionListener
             }
         }    
         
-        if (select == flicker && inThisRoom.roomFive)
+        if (select == flicker && roomNumber == 5)
         {
             inThisRoom.candleFlicker();
         }
     
     }
-
+    
+    
     /**
      * @param gameOptions the gameOptions to set
      */
