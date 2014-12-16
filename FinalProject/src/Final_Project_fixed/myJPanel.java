@@ -37,6 +37,7 @@ public class myJPanel extends JPanel implements ActionListener
         splash.toGame.addActionListener(this);
         splash.toOptions.addActionListener(this);
         splash.toCredits.addActionListener(this);
+        splash.toHowTo.addActionListener(this);
         add(splash);
         
         gp1.frameWidth = frameWidth;
