@@ -12,6 +12,7 @@ public class myJPanel extends JPanel implements ActionListener
     GamePanel gp1;
     OptionsPanel optionsPanel;
     CreditsPanel credits;
+    HowToPanel howTo;
     WhichKey listener;
     Player player1;
     myJFrame mjf;   
@@ -32,12 +33,14 @@ public class myJPanel extends JPanel implements ActionListener
         gp1 = new GamePanel();
         optionsPanel = new OptionsPanel(gp1);
         credits = new CreditsPanel();
+        howTo = new HowToPanel();
                 
         splash.setBounds(0, 0, 1000, 7000);
         splash.toGame.addActionListener(this);
         splash.toOptions.addActionListener(this);
         splash.toCredits.addActionListener(this);
         splash.toHowTo.addActionListener(this);
+        howTo.back.addActionListener(this);
         add(splash);
         
         gp1.frameWidth = frameWidth;
@@ -58,6 +61,7 @@ public class myJPanel extends JPanel implements ActionListener
         remove(credits);
         remove(optionsPanel);
         remove(gp1);
+        remove(howTo);
     }
 
     @Override
@@ -81,6 +85,10 @@ public class myJPanel extends JPanel implements ActionListener
         {
             panelStatus = 4;
         }
+        if(select == howTo.back)
+        {
+            panelStatus = 4;
+        }
         if (select == optionsPanel.back)
         {
             optionsPanel.saveOptions();
@@ -90,7 +98,10 @@ public class myJPanel extends JPanel implements ActionListener
         {
             panelStatus = 4;
         }
-        
+        if(select == splash.toHowTo)
+        {
+            panelStatus = 5;
+        }
         switch(panelStatus)
         {
             case 1: 
@@ -118,6 +129,12 @@ public class myJPanel extends JPanel implements ActionListener
             case 4: 
                 removePanels();
                 add(splash);
+                revalidate();
+                repaint();
+                break;
+            case 5:
+                removePanels();
+                add(howTo);
                 revalidate();
                 repaint();
                 break;

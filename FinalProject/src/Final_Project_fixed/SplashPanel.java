@@ -16,10 +16,10 @@ public class SplashPanel extends JPanel
         setBackground(Color.white);
         setOpaque(true);
 
-        toGame = new JButton("Game");
-        toOptions = new JButton("Options");
+        toGame = new JButton("Load Game");
+        toOptions = new JButton("New Game");
         toCredits = new JButton("Credits");
-        toHowTo - new jButton("How to Play");
+        toHowTo = new JButton("How to Play");
 
         add(toGame);
         add(toOptions);
@@ -36,10 +36,11 @@ public class SplashPanel extends JPanel
         toOptions.setBackground(Color.blue);
         toCredits.setBackground(Color.green);
         toHowTo.setBackground(Color.cyan);
-
-        toGame.setText("Load Game");
-        toOptions.setText("New Game");
-        toCredits.setText("Credits");
-        toHowTo.setText("How to Play");
+    }
+    @Override
+    public void paintComponent(Graphics g)
+    {
+        Image floorTexture = Toolkit.getDefaultToolkit().getImage("images/home.png");
+        g.drawImage(floorTexture, 0, 0, this);
     }
 }
