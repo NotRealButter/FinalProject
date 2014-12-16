@@ -162,6 +162,7 @@ public class GamePanel extends JPanel implements ActionListener
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
+        inRoom();
         if (roomNumber == 5)
         {
             g.drawImage(inThisRoom.roomFiveFloor, 0, 0, this);
@@ -293,6 +294,7 @@ public class GamePanel extends JPanel implements ActionListener
         //g2d.draw(maze.minotaurShape);
             if (addMonster == false)
             {
+                g.setColor(Color.RED);
                 g2d.draw(maze.trigger);   
             }
         }
