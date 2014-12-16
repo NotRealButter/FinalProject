@@ -14,19 +14,23 @@ public class Room
     Image roomFiveFloor = Toolkit.getDefaultToolkit().getImage("images/roomFive/roomFiveFloor.png");
     Image buttonActivated = Toolkit.getDefaultToolkit().getImage("images/roomFive/activatedInterior.png");
     Image roomThreeFloor = Toolkit.getDefaultToolkit().getImage("images/sand.jpg");
+    Image roomFourFloor = Toolkit.getDefaultToolkit().getImage("images/carpet.jpg");
     Image roomFivePit = Toolkit.getDefaultToolkit().getImage("images/roomFive/pit.png");
     Image roomFiveItem = Toolkit.getDefaultToolkit().getImage("images/roomFive/iconOfWisdom.png");
+    Image roomThreeItem = Toolkit.getDefaultToolkit().getImage("images/roomFive/iconOfWisdom.png");
     
     ArrayList<Wall> wallList = new ArrayList();
     ArrayList<Door> doorList = new ArrayList();
     ArrayList<Image> lionList = new ArrayList();
     ArrayList<Rectangle> lionRectums = new ArrayList();
     
+    Player player1;
     Timer flicker;
-    int walls = 0, doors = 0, flickerCount = 0, x = 0;
+    int walls = 0, doors = 0, flickerCount = 0, x = 0, itemCount = 0;
     double r = 1.0;
-    boolean roomTwo = false, roomTwoItem = false, roomFive = false, r5PuzzleSolved = false;
-    boolean r5Button1Press = false,r5Button2Press = false, r5Button3Press = false;   
+    boolean roomTwo = false, roomFive = false, r5PuzzleSolved = false;
+    boolean r5Button1Press = false,r5Button2Press = false, r5Button3Press = false;  
+    boolean testDoor = false;
     JLabel derp = new JLabel();
     Rectangle r5Button1, r5Button2, r5Button3, r5SpecialItem;
     
@@ -60,8 +64,10 @@ public class Room
        doorList.get(0).createDoor(0, 300, 10, 100);
        doorList.get(1).createDoor(990, 300, 10, 100);
        doorList.get(2).createDoor(450, 0, 100, 10);
+       if (testDoor == true)
+       {
        doorList.get(3).createDoor(450, 690, 100, 10);
-       
+       }
        
     }
    public void inRoomTwo() //Kristens room
