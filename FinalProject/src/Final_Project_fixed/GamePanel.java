@@ -242,12 +242,7 @@ public class GamePanel extends JPanel implements ActionListener
             }
         }
         
-        else
-        {
-            g.drawImage(floorTexture, 0, 0, this);
-  
-        }
-        for(int i = 0; i < inThisRoom.walls; i++)
+        for(int i = 0; i < 20; i++)
         {
             g.setColor(Color.BLACK);
             g.fillRect(inThisRoom.wallList.get(i).getWallX(), inThisRoom.wallList.get(i).getWallY(), inThisRoom.wallList.get(i).getWallWidth(), inThisRoom.wallList.get(i).getWallHeight());
