@@ -58,7 +58,6 @@ public class GamePanel extends JPanel implements ActionListener
         //add(content);
         back = new JButton("Back");
         back.setBounds(450, 520, 100, 20);
-        //add(back);
 
         health = new JLabel("health");
         health.setBounds(10, 600, 100, 20);
@@ -121,9 +120,12 @@ public class GamePanel extends JPanel implements ActionListener
     }
     public void resetGame()
     {
+        this.remove(back);
         roomNumber = 1;
         inRoom();
-        remove(back);
+        player1.hasCourage = false;
+        player1.hasSpirit = false;
+        player1.hasWisdom = false;
     }
    public void inRoom()
     {
@@ -330,6 +332,7 @@ public class GamePanel extends JPanel implements ActionListener
         {
             if(player1.health > 0)
             {
+                this.remove(back);
                     if (player1.hasCourage == true && player1.hasSpirit == true && player1.hasWisdom == true)
                     {
                         inThisRoom.testDoor = true;
@@ -385,6 +388,7 @@ public class GamePanel extends JPanel implements ActionListener
                             {
                             badGuy.objectdy = 1;
                             }
+                            player1.health--;
                         }
                 }
 
