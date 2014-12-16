@@ -13,7 +13,7 @@
    <string>Captain Banana Hammock</string>
   </void>
   <void property="startingHealth">
-   <int>3</int>
+   <int>9</int>
   </void>
  </object>
 </java>

@@ -15,7 +15,7 @@ public class GamePanel extends JPanel implements ActionListener
     Minotaur maze;
     private Options gameOptions;
     Room inThisRoom;
-    boolean addMonster;
+    boolean addMonster, badGuyHit = false;
     Door thisDoor;
     Wall thisWall;
     Rectangle openDoor, touchedWall;
@@ -35,7 +35,7 @@ public class GamePanel extends JPanel implements ActionListener
     int frameWidth, frameHeight;
      
 
-    Timer time, flashing, flicker;
+    Timer time, flashing, flicker, badGuyHitter;
   
     public GamePanel()
     {
@@ -75,6 +75,9 @@ public class GamePanel extends JPanel implements ActionListener
         time = new Timer(10, this);
         time.addActionListener(this);
         time.start(); 
+        
+        badGuyHitter = new Timer(500, this);
+        
 
         flashing = new Timer(100, this);
         flashing.addActionListener(this);
@@ -121,6 +124,12 @@ public class GamePanel extends JPanel implements ActionListener
     public void resetGame()
     {
         this.remove(back);
+        inThisRoom.wallList.clear();
+        for(int i = 0; i < 30; i++)
+        {
+            
+            inThisRoom.wallList.add(new Wall());
+        }
         roomNumber = 1;
         inRoom();
         player1.hasCourage = false;
@@ -327,7 +336,11 @@ public class GamePanel extends JPanel implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
         Object select = e.getSource();
-        
+        if(select == badGuyHitter)
+        {
+            badGuyHitter.stop();
+            badGuyHit = false;
+        }
         if (select == time)
         {
             if(player1.health > 0)
@@ -336,6 +349,10 @@ public class GamePanel extends JPanel implements ActionListener
                     if (player1.hasCourage == true && player1.hasSpirit == true && player1.hasWisdom == true)
                     {
                         inThisRoom.testDoor = true;
+                    }
+                    else
+                    {
+                        inThisRoom.testDoor = false;
                     }
 
                     switch(player1.dy)
@@ -388,7 +405,14 @@ public class GamePanel extends JPanel implements ActionListener
                             {
                             badGuy.objectdy = 1;
                             }
-                            player1.health--;
+                            if(!badGuyHit)
+                            {
+                                player1.health--;
+                                badGuyHitter.start();
+                                health.setText("Current Health:" + player1.health);
+                                badGuyHit = true;
+                            }
+                            
                         }
                 }
 
