@@ -15,7 +15,7 @@ public class Room
     Image buttonActivated = Toolkit.getDefaultToolkit().getImage("images/roomFive/activatedInterior.png");
     Image roomThreeFloor = Toolkit.getDefaultToolkit().getImage("images/sand.jpg");
     Image roomFivePit = Toolkit.getDefaultToolkit().getImage("images/roomFive/pit.png");
-
+    Image roomFiveItem = Toolkit.getDefaultToolkit().getImage("images/roomFive/iconOfWisdom.png");
     
     ArrayList<Wall> wallList = new ArrayList();
     ArrayList<Door> doorList = new ArrayList();
@@ -28,7 +28,7 @@ public class Room
     boolean roomTwo = false, roomTwoItem = false, roomFive = false, r5PuzzleSolved = false;
     boolean r5Button1Press = false,r5Button2Press = false, r5Button3Press = false;   
     JLabel derp = new JLabel();
-    Rectangle r5Button1, r5Button2, r5Button3;
+    Rectangle r5Button1, r5Button2, r5Button3, r5SpecialItem;
     
     Room()
     {
@@ -141,7 +141,7 @@ public class Room
    }
    public void inRoomFive()
    {
-        walls = 9;
+        walls = 29;
         roomFive = true;
         roomFive = false;
         roomTwo = false;
@@ -155,11 +155,18 @@ public class Room
         wallList.get(2).createWall(0, 690, 1000, 10);
         wallList.get(3).createWall(0, 0, 10, 700);
         //added walls
-        wallList.get(4).createWall(340, 100, 250, 20);
-        wallList.get(5).createWall(340, 300, 125, 20);
-        wallList.get(6).createWall(340, 100, 20, 200);
-        wallList.get(7).createWall(590, 100, 20, 220); 
-        wallList.get(8).createWall(465, 300, 125, 20);
+        wallList.get(20).createWall(349, 109, 249, 18);
+        wallList.get(21).createWall(349, 286, 40, 18);
+        wallList.get(22).createWall(582, 109, 18, 189);
+        wallList.get(23).createWall(349, 109, 18, 193); 
+        wallList.get(24).createWall(559, 286, 39, 20);
+        wallList.get(25).createWall(383, 350, 26, 60);
+        wallList.get(26).createWall(536, 350, 26, 60);
+        wallList.get(27).createWall(354, 350, 53, 20);
+        wallList.get(28).createWall(545, 349, 60, 28);
+
+
+
 
         //doors
         doors = 1;
@@ -200,7 +207,7 @@ public class Room
        r5Button2Press = false;
        r5Button3Press = false;
    }
-   public void r5DoorOpen()
+   public void r5ItemGet()
    {
        
    }

@@ -186,6 +186,11 @@ public class GamePanel extends JPanel implements ActionListener
             {
                 g.drawImage(inThisRoom.buttonActivated,711,376,this);
             }
+            if (inThisRoom.r5PuzzleSolved == true)
+            {
+                g.drawImage(inThisRoom.roomFiveItem,468,196,this);
+                inThisRoom.r5SpecialItem = new Rectangle (468,196,16,16);
+            }
         }
         else if (roomNumber == 3)
             {
@@ -359,8 +364,6 @@ public class GamePanel extends JPanel implements ActionListener
         }
             
         player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);           
-        player1.heroBounds();
-
         if (player1 != null)
         {
             player1.heroX += player1.dx;
@@ -418,7 +421,7 @@ public class GamePanel extends JPanel implements ActionListener
                     if(player1.heroShape.intersects(inThisRoom.r5Button3) && inThisRoom.r5Button1Press && inThisRoom.r5Button2Press )
                     {
                         inThisRoom.r5Button3Press = true;
-                        inThisRoom.r5DoorOpen();
+                        inThisRoom.r5PuzzleSolved = true;
                     }
                     if(player1.heroShape.intersects(inThisRoom.r5Button3) && !inThisRoom.r5Button2Press)
                     {
@@ -437,7 +440,7 @@ public class GamePanel extends JPanel implements ActionListener
                     if(player1.heroShape.intersects(inThisRoom.r5Button3) && inThisRoom.r5Button1Press && inThisRoom.r5Button2Press )
                     {
                         inThisRoom.r5Button3Press = true;
-                        inThisRoom.r5DoorOpen();
+                        inThisRoom.r5PuzzleSolved = true;
                     }
                     if(player1.heroShape.intersects(inThisRoom.r5Button3) && !inThisRoom.r5Button1Press)
                     {
@@ -456,29 +459,22 @@ public class GamePanel extends JPanel implements ActionListener
                     if(player1.heroShape.intersects(inThisRoom.r5Button2) && inThisRoom.r5Button1Press && inThisRoom.r5Button3Press )
                     {
                         inThisRoom.r5Button2Press = true;
-                        inThisRoom.r5DoorOpen();
+                        inThisRoom.r5PuzzleSolved = true;
                     }
                     if(player1.heroShape.intersects(inThisRoom.r5Button2) && !inThisRoom.r5Button1Press)
                     {
                         inThisRoom.buttonReset();
                     }
                 break;
+            }
+            if (inThisRoom.r5SpecialItem != null &&player1.heroShape.intersects(inThisRoom.r5SpecialItem))
+            {
+                inThisRoom.roomFiveItem = null;
+                player1.hasWisdom = true;
                 
             }
-//            if (player1.heroShape.intersects(inThisRoom.r5Button1))
-//            {
-//                inThisRoom.r5Button1Press = true;
-//            }
-//            if (player1.heroShape.intersects(inThisRoom.r5Button2))
-//            {
-//                inThisRoom.r5Button2Press = true;
-//            }
-//            if (player1.heroShape.intersects(inThisRoom.r5Button3))
-//            {
-//                inThisRoom.r5Button3Press = true;
-//            }
-        }    
-            
+        }
+                   
         if (thisWall != null)
         {   
             collisionDelay = collisionDelay+1;
@@ -621,6 +617,8 @@ public class GamePanel extends JPanel implements ActionListener
         }
     
     }
+    
+    
     /**
      * @param gameOptions the gameOptions to set
      */
