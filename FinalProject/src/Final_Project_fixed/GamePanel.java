@@ -33,7 +33,6 @@ public class GamePanel extends JPanel implements ActionListener
     int roomNumber = 1;
     int directionFacing = 3;
     int frameWidth, frameHeight;
-    
      
 
     Timer time, flashing, flicker;
@@ -230,7 +229,8 @@ public class GamePanel extends JPanel implements ActionListener
                 {
                     if(i == 3)
                     {
-                        inThisRoom.roomTwoItem = true;
+                        player1.hasSpirit = true;
+
                         inThisRoom.derp.setText("<html><center>You found the item!</center><html>");
                         inThisRoom.derp.setFont(inThisRoom.derp.getFont().deriveFont(20.0f));
                         inThisRoom.derp.setForeground(Color.RED);
@@ -292,7 +292,8 @@ public class GamePanel extends JPanel implements ActionListener
             if (addMonster == false)
             {
                 g.setColor(Color.RED);
-                g2d.draw(maze.trigger);   
+                g.drawImage(inThisRoom.roomThreeItem, 510, 340,this);
+                //g2d.draw(maze.trigger);   
             }
         }
         
@@ -312,6 +313,11 @@ public class GamePanel extends JPanel implements ActionListener
         
         if (select == time)
         {
+            if (player1.hasCourage == true && player1.hasSpirit == true && player1.hasWisdom == true)
+            {
+                inThisRoom.testDoor = true;
+            }
+        
             switch(player1.dy)
             {
             case -1:
@@ -384,6 +390,7 @@ public class GamePanel extends JPanel implements ActionListener
             if (player1.heroShape.intersects(maze.trigger))
             {
                 addMonster = true;
+                player1.hasCourage = true;
             }
 
             if (addMonster == true)
@@ -393,6 +400,7 @@ public class GamePanel extends JPanel implements ActionListener
                 if(player1.heroShape.intersects(maze.minotaurShape))
                 {
                     player1.health = player1.health-1;  
+                    player1.hasCourage = false;
                     player1.heroX = 12;
                     player1.heroY = 325;  
                     addMonster = false;
