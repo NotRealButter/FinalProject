@@ -9,6 +9,7 @@ import javax.swing.*;
 
 public class GamePanel extends JPanel implements ActionListener
 {
+    Image gameOver = Toolkit.getDefaultToolkit().getImage("images/gameOver.jpg");
     myJPanel gp1;
     Player player1;
     BouncingBetty badGuy;
@@ -18,11 +19,7 @@ public class GamePanel extends JPanel implements ActionListener
     boolean addMonster, badGuyHit = false;
     Door thisDoor;
     Wall thisWall;
-    Rectangle openDoor, touchedWall, winner;
-        
-
-            
-    Rectangle baddieShape;
+    Rectangle openDoor, touchedWall, winner, baddieShape;
    
     JButton back;
     JLabel health, name;
@@ -30,10 +27,7 @@ public class GamePanel extends JPanel implements ActionListener
     int flashcount = 0, collisionDelay = 0;
     int roomNumber = 1;
     int directionFacing = 3;
-    int frameWidth, frameHeight;
     
-     
-
     Timer time, flashing, flicker, badGuyHitter;
   
     public GamePanel()
@@ -333,7 +327,7 @@ public class GamePanel extends JPanel implements ActionListener
         }
         else if (player1.health == 0)
         {
-            Image gameOver = Toolkit.getDefaultToolkit().getImage("images/gameOver.jpg");
+
             g.drawImage(gameOver, 0, 0, this);
             add(back);
         }
@@ -521,11 +515,11 @@ public class GamePanel extends JPanel implements ActionListener
                             {
                                 switch(player1.dy)
                                 {
-                                    case -1:
+                                    case -2:
                                         player1.dy = 0;
                                         player1.heroY = player1.heroY+5;
                                     break;
-                                    case 1:
+                                    case 2:
                                         player1.dy = 0;
                                         player1.heroY = player1.heroY-5;
                                     break;

@@ -11,8 +11,6 @@ public class myJFrame extends JFrame
 		super ("Intro page");
 		
   	 	myJPanel mjp = new myJPanel();
-                mjp.frameWidth = frameWidth;
-                mjp.frameHeight = frameHeight;
        		add(mjp);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
                 setResizable(false);

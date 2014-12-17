@@ -15,9 +15,6 @@ public class myJPanel extends JPanel implements ActionListener
     HowToPanel howTo;
     WhichKey listener;
     Player player1;
-    myJFrame mjf;   
-        
-    int frameWidth,frameHeight;
     int panelStatus = 1;
     
     public myJPanel()
@@ -42,10 +39,7 @@ public class myJPanel extends JPanel implements ActionListener
         splash.toHowTo.addActionListener(this);
         howTo.back.addActionListener(this);
         add(splash);
-        
-        gp1.frameWidth = frameWidth;
-        gp1.frameHeight = frameHeight;
-                
+                     
         gp1.back.addActionListener(this);
         gp1.addKeyListener(listener);
                 
@@ -54,6 +48,7 @@ public class myJPanel extends JPanel implements ActionListener
         
         credits.back.addActionListener(this);
     }
+    
     public void removePanels()
     {
         optionsPanel.loadOptions();
