@@ -176,6 +176,8 @@ public class GamePanel extends JPanel implements ActionListener
     @Override
     public void paintComponent(Graphics g)
     {
+        
+        Graphics2D g2d = (Graphics2D) g;
         super.paintComponent(g);
         if(player1.health > 0)
         {
@@ -184,6 +186,9 @@ public class GamePanel extends JPanel implements ActionListener
             if (roomNumber == 1)
             {
                 g.drawImage(inThisRoom.roomOneFloor, 0, 0, this);
+                g.setColor(badGuy.badGuyColor);
+                g.fillRect(badGuy.objectX, badGuy.objectY, badGuy.objectWidth, badGuy.objectHeight);
+                g2d.draw(badGuy.badGuyShape); // i like the way this makes the betty look like it has a bit of a tail
             }
             else if(roomNumber == 2)
             {
@@ -297,7 +302,6 @@ public class GamePanel extends JPanel implements ActionListener
                     break;
             }
 
-            Graphics2D g2d = (Graphics2D) g;
             if (roomNumber == 3)
             {
             g.drawImage(maze.minotaurImage, maze.minotaurX, maze.minotaurY, this);
@@ -310,12 +314,10 @@ public class GamePanel extends JPanel implements ActionListener
                 }
             }
 
-            if (roomNumber == 4)
-            {
-                g.setColor(badGuy.badGuyColor);
-                g.fillRect(badGuy.objectX, badGuy.objectY, badGuy.objectWidth, badGuy.objectHeight);
-                g2d.draw(badGuy.badGuyShape); // i like the way this makes the betty look like it has a bit of a tail
-            }
+//            if (roomNumber == 1)
+//            {
+//
+//            }
         }
         else if (player1.health == 0)
         {
@@ -380,7 +382,7 @@ public class GamePanel extends JPanel implements ActionListener
                     player1.heroY += player1.dy;
 
 
-                if (roomNumber == 4)
+                if (roomNumber == 1)
                 {
                     badGuy.badGuyShape = new Rectangle(badGuy.objectX, badGuy.objectY, badGuy.objectHeight, badGuy.objectWidth);
                     badGuy.objectX += badGuy.objectdx;
@@ -391,25 +393,10 @@ public class GamePanel extends JPanel implements ActionListener
                         // collision bounds
                     if (player1.heroShape.intersects(badGuy.badGuyShape))
                         {
-                            if(badGuy.objectX > player1.heroX+player1.heroWidth-4)
-                            {
-                                badGuy.objectdx = 1;
-                            }
-                            if(badGuy.objectX < player1.heroX)
-                            {
-                                badGuy.objectdx = -1;
-                            }
-                            if(badGuy.objectY < player1.heroY)
-                            {
-                                badGuy.objectdy = -1;
-                            }
-                            if(badGuy.objectY > player1.heroY-4)
-                            {
-                            badGuy.objectdy = 1;
-                            }
+                            badGuy.playerCollision();
                             if(!badGuyHit)
                             {
-                                player1.health--;
+                                player1.health -= gameOptions.getDifficulty();
                                 badGuyHitter.start();
                                 health.setText("Current Health:" + player1.health);
                                 badGuyHit = true;
@@ -444,7 +431,7 @@ public class GamePanel extends JPanel implements ActionListener
                         maze.minotaurShape = new Rectangle( maze.minotaurX, maze.minotaurY, 50, 50);
                         if(player1.heroShape.intersects(maze.minotaurShape))
                         {
-                            player1.health = player1.health-1;  
+                            player1.health -= gameOptions.getDifficulty();  
                             health.setText("Current Health:" + player1.health);
                             player1.hasCourage = false;
                             player1.heroX = 12;

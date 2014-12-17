@@ -48,9 +48,9 @@ public class OptionsPanel extends JPanel implements ChangeListener
                 break;
             case 3:
                 difficulty.setValue(3);
-                break;
-            
+                break;            
         }
+        
         difficulty.setBorder(BorderFactory.createTitledBorder("Set enemy strength with this slider"));
         difficulty.setPaintTicks(true);
         difficulty.setPaintLabels(true);

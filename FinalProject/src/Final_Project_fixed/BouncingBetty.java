@@ -15,7 +15,6 @@ public class BouncingBetty
     {
         this.game = game;
         badGuyShape = new Rectangle(objectX, objectY, objectHeight, objectWidth);
-        
     }
     
     public void bettyBounds()
@@ -36,8 +35,26 @@ public class BouncingBetty
         {
             objectdy = -1;
         }
-        
-        
+    }
+    
+    public void playerCollision()
+    {
+        if(objectX > game.player1.heroX+game.player1.heroWidth-4)
+        {
+            objectdx = 1;
+        }
+        if(objectX < game.player1.heroX)
+        {
+            objectdx = -1;
+        }
+        if(objectY < game.player1.heroY)
+        {
+            objectdy = -1;
+        }
+        if(objectY > game.player1.heroY-4)
+        {
+        objectdy = 1;
+        }
     }
     public void colorFlash()
     {
