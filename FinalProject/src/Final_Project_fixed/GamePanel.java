@@ -343,7 +343,7 @@ public class GamePanel extends JPanel implements ActionListener
             }
 
         
-        if (player1.health == 0)
+        if (player1.health <= 0)
         {
 
             g.drawImage(gameOver, 0, 0, this);
