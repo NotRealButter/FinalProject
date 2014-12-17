@@ -214,6 +214,10 @@ public class GamePanel extends JPanel implements ActionListener
                 {
                    g.drawImage(inThisRoom.roomThreeFloor, 0, 0, this);     
                 }
+            else if (roomNumber == 1)
+            {
+                g.drawImage(inThisRoom.roomOneFloor, 0, 0, this);
+            }
 
             else if(roomNumber == 2)
             {

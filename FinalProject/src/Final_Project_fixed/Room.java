@@ -13,6 +13,7 @@ public class Room
     Image candleFlicker = Toolkit.getDefaultToolkit().getImage("images/Candle/candle1.png");
     Image roomFiveFloor = Toolkit.getDefaultToolkit().getImage("images/roomFive/roomFiveFloor.png");
     Image buttonActivated = Toolkit.getDefaultToolkit().getImage("images/roomFive/activatedInterior.png");
+    Image roomOneFloor = Toolkit.getDefaultToolkit().getImage("images/blueTile.png");
     Image roomThreeFloor = Toolkit.getDefaultToolkit().getImage("images/sand.jpg");
     Image roomFourFloor = Toolkit.getDefaultToolkit().getImage("images/carpet.jpg");
     Image roomFivePit = Toolkit.getDefaultToolkit().getImage("images/roomFive/pit.png");
