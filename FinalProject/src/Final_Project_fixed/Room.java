@@ -10,6 +10,7 @@ import javax.swing.Timer;
 
 public class Room 
 {
+    Image floorTexture = Toolkit.getDefaultToolkit().getImage("images/floor1.jpg");
     Image candleFlicker = Toolkit.getDefaultToolkit().getImage("images/Candle/candle1.png");
     Image roomFiveFloor = Toolkit.getDefaultToolkit().getImage("images/roomFive/roomFiveFloor.png");
     Image buttonActivated = Toolkit.getDefaultToolkit().getImage("images/roomFive/activatedInterior.png");

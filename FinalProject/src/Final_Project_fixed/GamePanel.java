@@ -9,33 +9,25 @@ import javax.swing.*;
 
 public class GamePanel extends JPanel implements ActionListener
 {
+    Image gameOver = Toolkit.getDefaultToolkit().getImage("images/gameOver.jpg");
     myJPanel gp1;
     Player player1;
     BouncingBetty badGuy;
     Minotaur maze;
-    private Options gameOptions;
+    Options gameOptions;
     Room inThisRoom;
     boolean addMonster, badGuyHit = false;
     Door thisDoor;
     Wall thisWall;
-    Rectangle openDoor, touchedWall, winner;
-        
-    Image floorTexture = Toolkit.getDefaultToolkit().getImage("images/floor1.jpg");
-
-            
-    Rectangle baddieShape;
-    Rectangle sword;
-    
+    Rectangle openDoor, touchedWall, winner, baddieShape;
+   
     JButton back;
     JLabel health, name, items, bookOne, bookTwo, bookThree;
     Graphics g;
     int flashcount = 0, collisionDelay = 0;
     int roomNumber = 1;
     int directionFacing = 3;
-    int frameWidth, frameHeight;
     
-     
-
     Timer time, flashing, flicker, badGuyHitter;
   
     public GamePanel()
@@ -159,6 +151,20 @@ public class GamePanel extends JPanel implements ActionListener
         player1.heroY = 355;
         directionFacing = 3;
     }
+    
+   public void bouncingBettyCommands()
+   {
+        badGuy.badGuyShape = new Rectangle(badGuy.objectX, badGuy.objectY, badGuy.objectHeight, badGuy.objectWidth);
+        badGuy.objectX += badGuy.objectdx;
+        badGuy.objectY += badGuy.objectdy;
+        badGuy.bettyBounds();
+
+            // collision bounds
+        if (player1.heroShape.intersects(badGuy.badGuyShape))
+            {
+                badGuy.playerCollision();
+            }
+   }
    public void inRoom()
     {
         switch (roomNumber)
@@ -213,7 +219,7 @@ public class GamePanel extends JPanel implements ActionListener
             }
             else if(roomNumber == 2)
             {
-                g.drawImage(floorTexture, 0, 0, this);
+                g.drawImage(inThisRoom.floorTexture, 0, 0, this);
                 for(int i = 0; i < 5; i++)
                 {
                     switch(i)
@@ -339,7 +345,7 @@ public class GamePanel extends JPanel implements ActionListener
         
         if (player1.health == 0)
         {
-            Image gameOver = Toolkit.getDefaultToolkit().getImage("images/gameOver.jpg");
+
             g.drawImage(gameOver, 0, 0, this);
         }
     }
@@ -366,6 +372,7 @@ public class GamePanel extends JPanel implements ActionListener
             
                 player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight); 
 
+
                     if (player1.hasCourage == true && player1.hasSpirit == true && player1.hasWisdom == true)
                     {
                         inThisRoom.testDoor = true;
@@ -375,56 +382,45 @@ public class GamePanel extends JPanel implements ActionListener
                         inThisRoom.testDoor = false;
                     }
 
-                    switch(player1.dy)
-                    {
-                    case -1:
-                        directionFacing = 1;
-                        break;
-                    case 1:
-                        directionFacing = 3;
-                        break;
-                    }
-                    switch(player1.dx)
-                    {
-                        case -1:
-                            directionFacing = 2;
-                            break;
-                        case 1:
-                            directionFacing = 4;
-                            break;
-                    }        
+                this.remove(back);
+                if (player1.hasCourage == true && player1.hasSpirit == true && player1.hasWisdom == true)
+                {
+                    inThisRoom.testDoor = true;
+                }
+                else
+                {
+                    inThisRoom.testDoor = false;
+                }
 
-                    player1.heroX += player1.dx;
-                    player1.heroY += player1.dy;
+
+                switch(player1.dy)
+                {
+                case -2:
+                    directionFacing = 1;
+                    break;
+                case 2:
+                    directionFacing = 3;
+                    break;
+                }
+                switch(player1.dx)
+                {
+                    case -2:
+                        directionFacing = 2;
+                        break;
+                    case 2:
+                        directionFacing = 4;
+                        break;
+                }        
+
+                player1.heroX += player1.dx;
+                player1.heroY += player1.dy;
 
 
                 if (roomNumber == 1)
                 {
-                    badGuy.badGuyShape = new Rectangle(badGuy.objectX, badGuy.objectY, badGuy.objectHeight, badGuy.objectWidth);
-                    badGuy.objectX += badGuy.objectdx;
-                    badGuy.objectY += badGuy.objectdy;
-
-                    badGuy.bettyBounds();
-
-                        // collision bounds
-                    if (player1.heroShape.intersects(badGuy.badGuyShape))
-                        {
-                            badGuy.playerCollision();
-                            if(!badGuyHit)
-                            {
-                                player1.health -= gameOptions.getDifficulty();
-                                badGuyHitter.start();
-                                health.setText("Current Health:" + player1.health);
-                                badGuyHit = true;
-                            }
-                        }
+                    bouncingBettyCommands();
                 }
-    
-                if (player1 != null)
-                {
-                    player1.heroX += player1.dx;
-                    player1.heroY += player1.dy;
-                }  
+
 
                 if (roomNumber != 3)
                 {
@@ -549,22 +545,22 @@ public class GamePanel extends JPanel implements ActionListener
                             {
                                 switch(player1.dy)
                                 {
-                                    case -1:
+                                    case -2:
                                         player1.dy = 0;
                                         player1.heroY = player1.heroY+5;
                                     break;
-                                    case 1:
+                                    case 2:
                                         player1.dy = 0;
                                         player1.heroY = player1.heroY-5;
                                     break;
                                 }
                                 switch(player1.dx)
                                 {
-                                    case -1:
+                                    case -2:
                                         player1.dx = 0;
                                         player1.heroX = player1.heroX+5;
                                         break;
-                                    case 1:
+                                    case 2:
                                         player1.dx = 0;
                                         player1.heroX = player1.heroX-5;
                                         break;
