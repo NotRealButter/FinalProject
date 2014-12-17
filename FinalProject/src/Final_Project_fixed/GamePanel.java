@@ -135,6 +135,8 @@ public class GamePanel extends JPanel implements ActionListener
     }
     public void resetGame()
     {
+        loadOptions();
+        createPlayer(gameOptions);
         inThisRoom.wallList.clear();
         for(int i = 0; i < 30; i++)
         {
@@ -368,6 +370,7 @@ public class GamePanel extends JPanel implements ActionListener
         }
         if (select == time)
         {
+            loadOptions();
             displaySetup ();
             
                 player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight); 

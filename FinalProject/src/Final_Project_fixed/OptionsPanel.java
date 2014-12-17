@@ -129,7 +129,8 @@ public class OptionsPanel extends JPanel implements ChangeListener
     /**
      * @return the gameOptions
      */
-    public Options getGameOptions() {
+    public Options getGameOptions() 
+    {
         return gameOptions;
     }
         
