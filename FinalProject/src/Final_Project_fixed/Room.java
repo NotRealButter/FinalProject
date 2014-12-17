@@ -182,9 +182,6 @@ public class Room
         wallList.get(27).createWall(354, 350, 53, 20);
         wallList.get(28).createWall(545, 349, 60, 28);
 
-
-
-
         //doors
         doors = 1;
 
@@ -193,7 +190,7 @@ public class Room
    public void candleFlicker()
    {
         //System.out.println(flickerCount);
-        
+
         switch(flickerCount)
         {
             case 1:
