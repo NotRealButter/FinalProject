@@ -28,7 +28,7 @@ public class HowToPanel extends JPanel
         setBounds(0, 0, 1000, 700);
         back = new JButton("Back");
         add(back);
-        back.setBounds(new Rectangle(10,10,100,50));
+        back.setBounds(new Rectangle(300,550,100,20));
     }
     
     @Override
