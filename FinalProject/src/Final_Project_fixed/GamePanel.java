@@ -27,7 +27,7 @@ public class GamePanel extends JPanel implements ActionListener
     Rectangle sword;
     
     JButton back;
-    JLabel health, name;
+    JLabel health, name, items, bookOne, bookTwo, bookThree;
     Graphics g;
     int flashcount = 0, collisionDelay = 0;
     int roomNumber = 1;
@@ -55,25 +55,47 @@ public class GamePanel extends JPanel implements ActionListener
         thisWall = new Wall();
         
         back = new JButton("Back");
-        back.setBounds(450, 520, 100, 20);
+        back.setBounds(670, 620, 100, 20);
         back.addActionListener(this);
+        add(back);
 
         health = new JLabel("health");
-        health.setBounds(10, 600, 100, 20);
+        health.setBounds(10, 590, 100, 20);
         health.setOpaque(true);
-        health.setBackground(Color.white);
+        health.setBackground(Color.LIGHT_GRAY);
         add(health);
+        
+        items = new JLabel("Inventory");
+        items.setBounds(10, 610, 100, 20);
+        items.setOpaque(true);
+        items.setBackground(Color.LIGHT_GRAY);
+        add(items);
+        
+        bookOne = new JLabel("Book 1");
+        bookOne.setBounds(10, 630, 100, 20);
+        bookOne.setOpaque(true);
+        bookOne.setBackground(Color.LIGHT_GRAY);
+        
+        bookTwo = new JLabel("Book 2");
+        bookTwo.setBounds(10, 650, 100, 20);
+        bookTwo.setOpaque(true);
+        bookTwo.setBackground(Color.LIGHT_GRAY);
+        
+        bookThree = new JLabel("Book 3");
+        bookThree.setBounds(10, 670, 100, 20);
+        bookThree.setOpaque(true);
+        bookThree.setBackground(Color.LIGHT_GRAY);
 
         name = new JLabel("name");
         name.setOpaque(true);
         name.setBounds (670, 600, 300, 20);
-        name.setBackground(Color.white);
+        name.setBackground(Color.LIGHT_GRAY);
         add(name);
         
         //timers
         time = new Timer(10, this);
         time.addActionListener(this);
-        time.start(); 
+        //time.start(); 
         
         badGuyHitter = new Timer(500, this);
         
@@ -121,7 +143,6 @@ public class GamePanel extends JPanel implements ActionListener
     }
     public void resetGame()
     {
-        this.remove(back);
         inThisRoom.wallList.clear();
         for(int i = 0; i < 30; i++)
         {
@@ -133,9 +154,10 @@ public class GamePanel extends JPanel implements ActionListener
         player1.hasCourage = false;
         player1.hasSpirit = false;
         player1.hasWisdom = false;
-        player1.health = 3;
+        player1.health = gameOptions.getStartingHealth();
         player1.heroX = 485;
         player1.heroY = 355;
+        directionFacing = 3;
     }
    public void inRoom()
     {
@@ -179,8 +201,7 @@ public class GamePanel extends JPanel implements ActionListener
         
         Graphics2D g2d = (Graphics2D) g;
         super.paintComponent(g);
-        if(player1.health > 0)
-        {
+        
             inRoom();
 
             if (roomNumber == 1)
@@ -226,6 +247,7 @@ public class GamePanel extends JPanel implements ActionListener
                         if(i == 3)
                         {
                             player1.hasSpirit = true;
+                            add(bookTwo);
                             g.drawImage(inThisRoom.roomThreeItem, 725, 500, this);
                         }
                         if(i!=3)// this resets player location if you want to use it
@@ -314,16 +336,11 @@ public class GamePanel extends JPanel implements ActionListener
                 }
             }
 
-//            if (roomNumber == 1)
-//            {
-//
-//            }
-        }
-        else if (player1.health == 0)
+        
+        if (player1.health == 0)
         {
             Image gameOver = Toolkit.getDefaultToolkit().getImage("images/gameOver.jpg");
             g.drawImage(gameOver, 0, 0, this);
-            add(back);
         }
     }
     public void resetWalls()
@@ -346,10 +363,9 @@ public class GamePanel extends JPanel implements ActionListener
         if (select == time)
         {
             displaySetup ();
-            if(player1.health > 0)
-            {
+            
                 player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight); 
-                this.remove(back);
+
                     if (player1.hasCourage == true && player1.hasSpirit == true && player1.hasWisdom == true)
                     {
                         inThisRoom.testDoor = true;
@@ -423,6 +439,7 @@ public class GamePanel extends JPanel implements ActionListener
                     {
                         addMonster = true;
                         player1.hasCourage = true;
+                        add(bookThree);
                     }
 
                     if (addMonster == true)
@@ -434,6 +451,7 @@ public class GamePanel extends JPanel implements ActionListener
                             player1.health -= gameOptions.getDifficulty();  
                             health.setText("Current Health:" + player1.health);
                             player1.hasCourage = false;
+                            remove(bookThree);
                             player1.heroX = 12;
                             player1.heroY = 325;  
                             addMonster = false;
@@ -514,7 +532,7 @@ public class GamePanel extends JPanel implements ActionListener
                     {
                         inThisRoom.roomFiveItem = null;
                         player1.hasWisdom = true;
-
+                        add(bookOne);
                     }
                 }
 
@@ -649,25 +667,25 @@ public class GamePanel extends JPanel implements ActionListener
                 inRoom();
                 repaint();            
                 revalidate();
-            }
-            else
-            {
-                add(back);
-            }
+            
+            
             //winning
             if (roomNumber == 4)
             {
                 winner = new Rectangle(684, 440, 33, 49);
                 if (player1.heroShape.intersects(winner))
                 {
-                    System.out.println("win");
+                    
                 }
             }
         }
-        if (select == back)
+        if (player1.health <= 0)
         {
-            resetGame();
-        }
+            if (select == back)
+            {
+                resetGame();
+            }
+        }    
         if (badGuy != null)
         {
             if (select == flashing)

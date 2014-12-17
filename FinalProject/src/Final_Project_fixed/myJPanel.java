@@ -72,6 +72,7 @@ public class myJPanel extends JPanel implements ActionListener
         if (select == splash.toGame)
         {
             panelStatus=1;
+            gp1.time.start();
         }
         if (select == splash.toOptions)
         {
@@ -84,6 +85,7 @@ public class myJPanel extends JPanel implements ActionListener
         if(select == gp1.back)
         {
             panelStatus = 4;
+            gp1.time.stop();
         }
         if(select == howTo.back)
         {
@@ -160,9 +162,9 @@ public class myJPanel extends JPanel implements ActionListener
  public class WhichKey implements KeyListener
 {
     @Override
-    public void keyTyped(KeyEvent keyInput)
+    public void keyTyped(KeyEvent key)
     {
-//nope
+        
     }
 
     @Override
