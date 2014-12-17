@@ -63,17 +63,17 @@ public class GamePanel extends JPanel implements ActionListener
         items.setBackground(Color.LIGHT_GRAY);
         add(items);
         
-        bookOne = new JLabel("Book 1");
+        bookOne = new JLabel("Icon of Wisdom");
         bookOne.setBounds(10, 630, 100, 20);
         bookOne.setOpaque(true);
         bookOne.setBackground(Color.LIGHT_GRAY);
         
-        bookTwo = new JLabel("Book 2");
+        bookTwo = new JLabel("Icon of Spirit");
         bookTwo.setBounds(10, 650, 100, 20);
         bookTwo.setOpaque(true);
         bookTwo.setBackground(Color.LIGHT_GRAY);
         
-        bookThree = new JLabel("Book 3");
+        bookThree = new JLabel("Icon of Courage");
         bookThree.setBounds(10, 670, 100, 20);
         bookThree.setOpaque(true);
         bookThree.setBackground(Color.LIGHT_GRAY);
