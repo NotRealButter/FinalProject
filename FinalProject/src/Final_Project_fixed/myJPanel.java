@@ -144,6 +144,7 @@ public class myJPanel extends JPanel implements ActionListener
 
             removePanels();
             add(gp1);
+            gp1.time.start();
             revalidate();
             repaint();
 

@@ -382,7 +382,7 @@ public class GamePanel extends JPanel implements ActionListener
                         inThisRoom.testDoor = false;
                     }
 
-                this.remove(back);
+                
                 if (player1.hasCourage == true && player1.hasSpirit == true && player1.hasWisdom == true)
                 {
                     inThisRoom.testDoor = true;
