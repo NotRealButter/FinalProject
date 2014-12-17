@@ -8,10 +8,10 @@ import javax.swing.event.*;
 
 public class OptionsPanel extends JPanel implements ChangeListener
 {
-    JButton back, content, ok;
+    JButton back, ok;
     Color colorVar;
+    JLabel nameText;
     JTextField nameSet;    
-    JSlider colorSet;
     JSlider healthSet;
     myJPanel p1;
     private Options gameOptions;
@@ -27,26 +27,16 @@ public class OptionsPanel extends JPanel implements ChangeListener
         
         gameOptions = new Options();
         loadOptions();
-        content = new JButton("Options");
-        content.setBounds(440, 0, 120, 20);
-        add(content);
+
         back = new JButton("Back");
         back.setBounds(450, 580, 100, 20);
         add(back);
-
+        
+        nameText = new JLabel("Enter Name Here");
+        nameText.setBounds(390, 80, 220, 20);
         nameSet = new JTextField(gameOptions.getName());
         nameSet.setBounds(390, 100, 220, 20);
-        colorSet = new JSlider(1, 3, 1);
-        colorVar = gameOptions.getColor();
-        setBackground(colorVar);
-        colorSet.setValue(gameOptions.getColorValue());
-        colorSet.setBorder(BorderFactory.createTitledBorder("Set color with this slider"));
-        colorSet.setPaintTicks(true);
-        colorSet.setPaintLabels(true);
-        colorSet.setSnapToTicks(true);
-        colorSet.setMajorTickSpacing(1);
-        colorSet.setBounds(390, 130, 220, 60);
-        colorSet.addChangeListener(this);
+        
 
         healthSet = new JSlider(3, 9, 3);
         switch(gameOptions.getStartingHealth())
@@ -81,7 +71,7 @@ public class OptionsPanel extends JPanel implements ChangeListener
         healthSet.setBounds(380, 200, 240, 60);     
 
         add(nameSet);
-        add(colorSet);
+        add(nameText);
         add(healthSet);
 
         ok = new JButton("OK");
@@ -91,7 +81,6 @@ public class OptionsPanel extends JPanel implements ChangeListener
     public void saveOptions()
     {
         getGameOptions().setName(nameSet.getText());
-        getGameOptions().setColor(colorVar);
         getGameOptions().setStartingHealth(healthSet.getValue());
         XML_240 x2 = new XML_240();
         x2.openWriterXML("Options.xml");
@@ -112,17 +101,7 @@ public class OptionsPanel extends JPanel implements ChangeListener
     @Override
     public void stateChanged(ChangeEvent c)
     {
-        JSlider set = (JSlider)c.getSource();
-
-        switch (colorSet.getValue())
-        {
-            case 1: colorVar = Color.blue;
-                    break;
-            case 2: colorVar = Color.green;
-                    break;
-            case 3: colorVar = Color.red;
-        }
-        setBackground(colorVar);
+        
     }
 
     /**

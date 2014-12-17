@@ -26,7 +26,7 @@ public class GamePanel extends JPanel implements ActionListener
     Rectangle baddieShape;
     Rectangle sword;
     
-    JButton back, content;
+    JButton back;
     JLabel health, name;
     Graphics g;
     int flashcount = 0, collisionDelay = 0;
@@ -54,9 +54,6 @@ public class GamePanel extends JPanel implements ActionListener
         thisDoor = new Door();
         thisWall = new Wall();
         
-        content = new JButton("this is where the game is");
-        content.setBounds(390, 500, 220, 20);
-        //add(content);
         back = new JButton("Back");
         back.setBounds(450, 520, 100, 20);
 
