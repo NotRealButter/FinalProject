@@ -12,7 +12,7 @@ public class OptionsPanel extends JPanel implements ChangeListener
     Color colorVar;
     JLabel nameText;
     JTextField nameSet;    
-    JSlider healthSet;
+    JSlider healthSet, difficulty;
     myJPanel p1;
     private Options gameOptions;
     
@@ -37,7 +37,27 @@ public class OptionsPanel extends JPanel implements ChangeListener
         nameSet = new JTextField(gameOptions.getName());
         nameSet.setBounds(390, 100, 220, 20);
         
-
+        difficulty = new JSlider(1, 3, 1);
+        switch(gameOptions.getDifficulty())
+        {
+            case 1:
+                difficulty.setValue(1);
+                break;
+            case 2:
+                difficulty.setValue(2);                
+                break;
+            case 3:
+                difficulty.setValue(3);
+                break;
+            
+        }
+        difficulty.setBorder(BorderFactory.createTitledBorder("Set enemy strength with this slider"));
+        difficulty.setPaintTicks(true);
+        difficulty.setPaintLabels(true);
+        difficulty.setSnapToTicks(true);
+        difficulty.setMajorTickSpacing(1);
+        difficulty.setBounds(380, 130, 240, 60); 
+        
         healthSet = new JSlider(3, 9, 3);
         switch(gameOptions.getStartingHealth())
         {
@@ -73,6 +93,7 @@ public class OptionsPanel extends JPanel implements ChangeListener
         add(nameSet);
         add(nameText);
         add(healthSet);
+        add (difficulty);
 
         ok = new JButton("OK");
         ok.setBounds (470, 270, 60, 30);
@@ -81,6 +102,7 @@ public class OptionsPanel extends JPanel implements ChangeListener
     public void saveOptions()
     {
         getGameOptions().setName(nameSet.getText());
+        getGameOptions().setDifficulty(difficulty.getValue());
         getGameOptions().setStartingHealth(healthSet.getValue());
         XML_240 x2 = new XML_240();
         x2.openWriterXML("Options.xml");

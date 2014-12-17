@@ -5,7 +5,7 @@ import java.awt.*;
 public class Options 
 {
 private String name;
-private Color color;
+private int difficulty;
 private int startingHealth;
 private boolean hasSpirit;
 private boolean hasCourage;
@@ -30,38 +30,6 @@ public Options()
     public void setName(String name) 
     {
         this.name = name;
-    }
-
-    /**
-     * @return the color
-     */
-    public Color getColor() 
-    {
-        return color;
-    }
-    public int getColorValue()
-    {
-        int color = 0;
-        if(this.color.equals(Color.blue))
-        {
-            color = 1;
-        }
-        if(this.color.equals(Color.green))
-        {
-            color = 2;
-        }
-        if(this.color.equals(Color.red))
-        {
-            color = 3;
-        }
-        return color;
-    }
-    /**
-     * @param color the color to set
-     */
-    public void setColor(Color color)
-    {
-        this.color = color;
     }
 
     /**
@@ -120,6 +88,20 @@ public Options()
      */
     public void setHasWisdom(boolean hasWisdom) {
         this.hasWisdom = hasWisdom;
+    }
+
+    /**
+     * @return the difficulty
+     */
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    /**
+     * @param difficulty the difficulty to set
+     */
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
     }
 
 

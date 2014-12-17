@@ -228,7 +228,7 @@ public class GamePanel extends JPanel implements ActionListener
                             player1.heroX = 486;
                             player1.heroY = 688-player1.heroHeight;
                             directionFacing = 1;
-                            player1.health--;
+                            player1.health -= gameOptions.getDifficulty();
                         }
                     }
                 }
@@ -329,7 +329,6 @@ public class GamePanel extends JPanel implements ActionListener
         inThisRoom.wallList.clear();
         for(int i = 0; i < 30; i++)
         {
-            
             inThisRoom.wallList.add(new Wall());
         }
     }
@@ -415,7 +414,6 @@ public class GamePanel extends JPanel implements ActionListener
                                 health.setText("Current Health:" + player1.health);
                                 badGuyHit = true;
                             }
-                            
                         }
                 }
     
