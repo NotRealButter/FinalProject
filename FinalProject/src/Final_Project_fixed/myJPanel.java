@@ -84,7 +84,6 @@ public class myJPanel extends JPanel implements ActionListener
         if(select == gp1.back)
         {
             panelStatus = 4;
-            gp1.resetGame();
         }
         if(select == howTo.back)
         {

@@ -13,7 +13,7 @@
    <string>Link</string>
   </void>
   <void property="startingHealth">
-   <int>6</int>
+   <int>3</int>
   </void>
  </object>
 </java>

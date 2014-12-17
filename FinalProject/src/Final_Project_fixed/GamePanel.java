@@ -56,6 +56,7 @@ public class GamePanel extends JPanel implements ActionListener
         
         back = new JButton("Back");
         back.setBounds(450, 520, 100, 20);
+        back.addActionListener(this);
 
         health = new JLabel("health");
         health.setBounds(10, 600, 100, 20);
@@ -133,6 +134,9 @@ public class GamePanel extends JPanel implements ActionListener
         player1.hasCourage = false;
         player1.hasSpirit = false;
         player1.hasWisdom = false;
+        player1.health = 3;
+        player1.heroX = 485;
+        player1.heroY = 355;
     }
    public void inRoom()
     {
@@ -331,6 +335,7 @@ public class GamePanel extends JPanel implements ActionListener
         {
             Image gameOver = Toolkit.getDefaultToolkit().getImage("images/gameOver.jpg");
             g.drawImage(gameOver, 0, 0, this);
+            add(back);
         }
     }
     public void resetWalls()
@@ -353,6 +358,7 @@ public class GamePanel extends JPanel implements ActionListener
         }
         if (select == time)
         {
+            displaySetup ();
             if(player1.health > 0)
             {
                 this.remove(back);
@@ -686,6 +692,10 @@ public class GamePanel extends JPanel implements ActionListener
                     System.out.println("win");
                 }
             }
+        }
+        if (select == back)
+        {
+            resetGame();
         }
         if (badGuy != null)
         {
