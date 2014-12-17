@@ -28,8 +28,8 @@ public class SplashPanel extends JPanel
 
         toGame.setBounds(100, 550, 100, 20);
         toOptions.setBounds(200, 550, 100, 20);
-        toCredits.setBounds(300, 550, 100, 20);
-        toHowTo.setBounds(400,550,100,20);
+        
+        toHowTo.setBounds(300,550,100,20);
 
 
         toGame.setBackground(Color.red);
