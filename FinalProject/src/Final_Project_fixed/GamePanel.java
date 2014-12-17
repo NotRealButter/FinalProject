@@ -77,7 +77,6 @@ public class GamePanel extends JPanel implements ActionListener
         
         badGuyHitter = new Timer(500, this);
         
-
         flashing = new Timer(100, this);
         flashing.addActionListener(this);
         flashing.start();
@@ -86,7 +85,7 @@ public class GamePanel extends JPanel implements ActionListener
         flicker.addActionListener(this);
         flicker.start();
   
-    displaySetup();
+        displaySetup();
         
         roomNumber = 1;
         addMonster = false;
@@ -94,7 +93,7 @@ public class GamePanel extends JPanel implements ActionListener
         badGuy = new BouncingBetty(this);
     }
     
-    public void refreshPlayer()
+    private void refreshPlayer()
     {
         if(gameOptions != null)
         {
@@ -102,7 +101,7 @@ public class GamePanel extends JPanel implements ActionListener
         }
     }
     
-    public void loadOptions()
+    private void loadOptions()
     {
         File optionsFile = new File("Options.xml");
         if(optionsFile.exists())
@@ -160,12 +159,11 @@ public class GamePanel extends JPanel implements ActionListener
         }        
     }
 
-
     public void defaultChar()
     {
         if(player1 == null)
         {
-            player1 = new Player("Link", Color.GREEN, 4);    
+            player1 = new Player("Link", 4);    
         }
     }
     
@@ -182,45 +180,11 @@ public class GamePanel extends JPanel implements ActionListener
         if(player1.health > 0)
         {
             inRoom();
-            if (roomNumber == 5)
-            {
-                g.drawImage(inThisRoom.roomFiveFloor, 0, 0, this);
-                g.drawImage(inThisRoom.candleFlicker, 330, 332,this);
-                g.drawImage(inThisRoom.candleFlicker, 580, 332,this);
-                g.drawImage(inThisRoom.candleFlicker, 380, 332,this);
-                g.drawImage(inThisRoom.candleFlicker, 530, 332,this);
-                g.drawImage(inThisRoom.candleFlicker, 380, 382,this);
-                g.drawImage(inThisRoom.candleFlicker, 530, 382,this);
-              //  g.drawImage(inThisRoom.roomFivePit, 100, 100,this);
 
-
-                if (inThisRoom.r5Button1Press == true)
-                {
-                    g.drawImage(inThisRoom.buttonActivated,173,375,this);
-                }
-                if (inThisRoom.r5Button2Press == true)
-                {
-                    g.drawImage(inThisRoom.buttonActivated,442,579,this);
-                }
-                if (inThisRoom.r5Button3Press == true)
-                {
-                    g.drawImage(inThisRoom.buttonActivated,711,376,this);
-                }
-                if (inThisRoom.r5PuzzleSolved == true)
-                {
-                    g.drawImage(inThisRoom.roomFiveItem,468,196,this);
-                    inThisRoom.r5SpecialItem = new Rectangle (468,196,16,16);
-                }
-            }
-            else if (roomNumber == 3)
-                {
-                   g.drawImage(inThisRoom.roomThreeFloor, 0, 0, this);     
-                }
-            else if (roomNumber == 1)
+            if (roomNumber == 1)
             {
                 g.drawImage(inThisRoom.roomOneFloor, 0, 0, this);
             }
-
             else if(roomNumber == 2)
             {
                 g.drawImage(floorTexture, 0, 0, this);
@@ -268,34 +232,56 @@ public class GamePanel extends JPanel implements ActionListener
                         }
                     }
                 }
-            }    
-                else if(roomNumber == 4)
-                    {
-                        g.drawImage(inThisRoom.roomFourFloor, 0, 0, this);
-                    }
-
-
+            } 
+            else if (roomNumber == 3)
+            {
+               g.drawImage(inThisRoom.roomThreeFloor, 0, 0, this);     
+            }
+            else if(roomNumber == 4)
+            {
+                g.drawImage(inThisRoom.roomFourFloor, 0, 0, this);
+            }          
+            else if (roomNumber == 5)
+            {
+                g.drawImage(inThisRoom.roomFiveFloor, 0, 0, this);
+                g.drawImage(inThisRoom.candleFlicker, 330, 332,this);
+                g.drawImage(inThisRoom.candleFlicker, 580, 332,this);
+                g.drawImage(inThisRoom.candleFlicker, 380, 332,this);
+                g.drawImage(inThisRoom.candleFlicker, 530, 332,this);
+                g.drawImage(inThisRoom.candleFlicker, 380, 382,this);
+                g.drawImage(inThisRoom.candleFlicker, 530, 382,this);
+             
+                if (inThisRoom.r5Button1Press == true)
+                {
+                    g.drawImage(inThisRoom.buttonActivated,173,375,this);
+                }
+                if (inThisRoom.r5Button2Press == true)
+                {
+                    g.drawImage(inThisRoom.buttonActivated,442,579,this);
+                }
+                if (inThisRoom.r5Button3Press == true)
+                {
+                    g.drawImage(inThisRoom.buttonActivated,711,376,this);
+                }
+                if (inThisRoom.r5PuzzleSolved == true)
+                {
+                    g.drawImage(inThisRoom.roomFiveItem,468,196,this);
+                    inThisRoom.r5SpecialItem = new Rectangle (468,196,16,16);
+                }
+            }
+            
             for(int i = 0; i < 20; i++)
             {
                 g.setColor(Color.BLACK);
                 g.fillRect(inThisRoom.wallList.get(i).getWallX(), inThisRoom.wallList.get(i).getWallY(), inThisRoom.wallList.get(i).getWallWidth(), inThisRoom.wallList.get(i).getWallHeight());
-
             }
             for(int i = 0; i < inThisRoom.doors; i++)
             {
                 g.setColor(Color.red);
                 g.fillRect(inThisRoom.doorList.get(i).getDoorX(), inThisRoom.doorList.get(i).getDoorY(), inThisRoom.doorList.get(i).getDoorWidth(), inThisRoom.doorList.get(i).getDoorHeight());
             }
-            if(gameOptions != null)
-            {
-                g.setColor(gameOptions.getColor());
-            }
-            else
-            {
-                g.setColor(Color.green);
-            }
 
-             switch (directionFacing)
+            switch (directionFacing)
             {
                 case 1:
                     g.drawImage(player1.backStanding, player1.heroX-3, player1.heroY-20, this);
@@ -331,7 +317,7 @@ public class GamePanel extends JPanel implements ActionListener
                 g2d.draw(badGuy.badGuyShape); // i like the way this makes the betty look like it has a bit of a tail
             }
         }
-        else
+        else if (player1.health == 0)
         {
             Image gameOver = Toolkit.getDefaultToolkit().getImage("images/gameOver.jpg");
             g.drawImage(gameOver, 0, 0, this);
@@ -361,6 +347,7 @@ public class GamePanel extends JPanel implements ActionListener
             displaySetup ();
             if(player1.health > 0)
             {
+                player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight); 
                 this.remove(back);
                     if (player1.hasCourage == true && player1.hasSpirit == true && player1.hasWisdom == true)
                     {
@@ -431,8 +418,7 @@ public class GamePanel extends JPanel implements ActionListener
                             
                         }
                 }
-
-                player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight);           
+    
                 if (player1 != null)
                 {
                     player1.heroX += player1.dx;

@@ -14,7 +14,6 @@ public class Player
     Image backStanding = Toolkit.getDefaultToolkit().getImage("images/back/New Link Back.png");
     
     String name = "Link";
-    Color color = Color.white;
     int health = 4;
     int heroX = 485,heroY = 355, heroWidth = 32, heroHeight = 30; 
     int dx = 0,dy = 0;
@@ -22,21 +21,19 @@ public class Player
     Rectangle heroShape;
 
        
-    public Player(String infName, Color infColor, int infHealth)
+    public Player(String infName, int infHealth)
     {
         name = infName;
-        color = infColor;
         health = infHealth;
     }
     public Player(Options options)
     {
         name = options.getName();
-        color = options.getColor();
         health = options.getStartingHealth();
     }
     String getInfo()
     {
-        return "Player name = " + name + " Player color = " + color + " Player health = " +health;
+        return "Player name = " + name + " Player health = " +health;
     }
     int setHealth()
     {
