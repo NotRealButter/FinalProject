@@ -8,7 +8,6 @@ public class BouncingBetty
     int flashcount = 1, objectdx = 1, objectdy = 1;
     Rectangle badGuyShape;
     Color badGuyColor;
-    Player player1;
     GamePanel game;
     
     BouncingBetty(GamePanel game)
@@ -16,10 +15,16 @@ public class BouncingBetty
         this.game = game;
         badGuyShape = new Rectangle(objectX, objectY, objectHeight, objectWidth);
     }
-    
+    public void resetBetty()
+    {
+        objectX = 10;
+        objectY = 10;
+        objectWidth = 10;
+        objectHeight = 10;
+    }
     public void bettyBounds()
     {
-         if (objectX <= 10)
+        if (objectX <= 10)
         {
             objectdx = 1;
         }
@@ -53,7 +58,14 @@ public class BouncingBetty
         }
         if(objectY > game.player1.heroY-4)
         {
-        objectdy = 1;
+            objectdy = 1;
+        }
+        if(!game.badGuyHit)
+        {
+            game.player1.health -= game.gameOptions.getDifficulty();
+            game.badGuyHitter.start();
+            game.health.setText("Current Health:" + game.player1.health);
+            game.badGuyHit = true;
         }
     }
     public void colorFlash()

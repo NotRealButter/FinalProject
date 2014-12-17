@@ -16,7 +16,7 @@ public class Player
     String name = "Link";
     int health = 4;
     int heroX = 485,heroY = 355, heroWidth = 32, heroHeight = 30; 
-    int dx = 0,dy = 0;
+    int dx = 0,dy = 0, normalMoveSpeed = 2;
     boolean hasCourage=false, hasWisdom=false, hasSpirit=false;
     Rectangle heroShape;
 

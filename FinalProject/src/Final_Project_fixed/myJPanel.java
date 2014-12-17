@@ -172,16 +172,16 @@ public class myJPanel extends JPanel implements ActionListener
         switch(keyCode)
         {
             case KeyEvent.VK_UP:
-                gp1.player1.dy = -1;
+                gp1.player1.dy = -2;
                 break;
             case KeyEvent.VK_DOWN:
-                gp1.player1.dy = 1;
+                gp1.player1.dy = 2;
                 break;
             case KeyEvent.VK_LEFT:
-                gp1.player1.dx = -1;
+                gp1.player1.dx = -2;
                 break;
             case KeyEvent.VK_RIGHT:
-                gp1.player1.dx = 1;
+                gp1.player1.dx = 2;
                 break;
             case KeyEvent.VK_SPACE:
                 break;

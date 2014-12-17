@@ -13,19 +13,17 @@ public class GamePanel extends JPanel implements ActionListener
     Player player1;
     BouncingBetty badGuy;
     Minotaur maze;
-    private Options gameOptions;
+    Options gameOptions;
     Room inThisRoom;
     boolean addMonster, badGuyHit = false;
     Door thisDoor;
     Wall thisWall;
     Rectangle openDoor, touchedWall, winner;
         
-    Image floorTexture = Toolkit.getDefaultToolkit().getImage("images/floor1.jpg");
 
             
     Rectangle baddieShape;
-    Rectangle sword;
-    
+   
     JButton back;
     JLabel health, name;
     Graphics g;
@@ -133,10 +131,24 @@ public class GamePanel extends JPanel implements ActionListener
         player1.hasCourage = false;
         player1.hasSpirit = false;
         player1.hasWisdom = false;
-        player1.health = 3;
+        player1.health = gameOptions.getStartingHealth();
         player1.heroX = 485;
         player1.heroY = 355;
     }
+    
+   public void bouncingBettyCommands()
+   {
+        badGuy.badGuyShape = new Rectangle(badGuy.objectX, badGuy.objectY, badGuy.objectHeight, badGuy.objectWidth);
+        badGuy.objectX += badGuy.objectdx;
+        badGuy.objectY += badGuy.objectdy;
+        badGuy.bettyBounds();
+
+            // collision bounds
+        if (player1.heroShape.intersects(badGuy.badGuyShape))
+            {
+                badGuy.playerCollision();
+            }
+   }
    public void inRoom()
     {
         switch (roomNumber)
@@ -192,7 +204,7 @@ public class GamePanel extends JPanel implements ActionListener
             }
             else if(roomNumber == 2)
             {
-                g.drawImage(floorTexture, 0, 0, this);
+                g.drawImage(inThisRoom.floorTexture, 0, 0, this);
                 for(int i = 0; i < 5; i++)
                 {
                     switch(i)
@@ -350,65 +362,43 @@ public class GamePanel extends JPanel implements ActionListener
             {
                 player1.heroShape = new Rectangle(player1.heroX, player1.heroY, player1.heroWidth, player1.heroHeight); 
                 this.remove(back);
-                    if (player1.hasCourage == true && player1.hasSpirit == true && player1.hasWisdom == true)
-                    {
-                        inThisRoom.testDoor = true;
-                    }
-                    else
-                    {
-                        inThisRoom.testDoor = false;
-                    }
+                if (player1.hasCourage == true && player1.hasSpirit == true && player1.hasWisdom == true)
+                {
+                    inThisRoom.testDoor = true;
+                }
+                else
+                {
+                    inThisRoom.testDoor = false;
+                }
 
-                    switch(player1.dy)
-                    {
-                    case -1:
-                        directionFacing = 1;
+                switch(player1.dy)
+                {
+                case -2:
+                    directionFacing = 1;
+                    break;
+                case 2:
+                    directionFacing = 3;
+                    break;
+                }
+                switch(player1.dx)
+                {
+                    case -2:
+                        directionFacing = 2;
                         break;
-                    case 1:
-                        directionFacing = 3;
+                    case 2:
+                        directionFacing = 4;
                         break;
-                    }
-                    switch(player1.dx)
-                    {
-                        case -1:
-                            directionFacing = 2;
-                            break;
-                        case 1:
-                            directionFacing = 4;
-                            break;
-                    }        
+                }        
 
-                    player1.heroX += player1.dx;
-                    player1.heroY += player1.dy;
+                player1.heroX += player1.dx;
+                player1.heroY += player1.dy;
 
 
                 if (roomNumber == 1)
                 {
-                    badGuy.badGuyShape = new Rectangle(badGuy.objectX, badGuy.objectY, badGuy.objectHeight, badGuy.objectWidth);
-                    badGuy.objectX += badGuy.objectdx;
-                    badGuy.objectY += badGuy.objectdy;
-
-                    badGuy.bettyBounds();
-
-                        // collision bounds
-                    if (player1.heroShape.intersects(badGuy.badGuyShape))
-                        {
-                            badGuy.playerCollision();
-                            if(!badGuyHit)
-                            {
-                                player1.health -= gameOptions.getDifficulty();
-                                badGuyHitter.start();
-                                health.setText("Current Health:" + player1.health);
-                                badGuyHit = true;
-                            }
-                        }
+                    bouncingBettyCommands();
                 }
-    
-                if (player1 != null)
-                {
-                    player1.heroX += player1.dx;
-                    player1.heroY += player1.dy;
-                }  
+
 
                 if (roomNumber != 3)
                 {
@@ -542,11 +532,11 @@ public class GamePanel extends JPanel implements ActionListener
                                 }
                                 switch(player1.dx)
                                 {
-                                    case -1:
+                                    case -2:
                                         player1.dx = 0;
                                         player1.heroX = player1.heroX+5;
                                         break;
-                                    case 1:
+                                    case 2:
                                         player1.dx = 0;
                                         player1.heroX = player1.heroX-5;
                                         break;
