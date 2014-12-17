@@ -18,7 +18,7 @@ public class GamePanel extends JPanel implements ActionListener
     boolean addMonster, badGuyHit = false;
     Door thisDoor;
     Wall thisWall;
-    Rectangle openDoor, touchedWall;
+    Rectangle openDoor, touchedWall, winner;
         
     Image floorTexture = Toolkit.getDefaultToolkit().getImage("images/floor1.jpg");
 
@@ -33,6 +33,7 @@ public class GamePanel extends JPanel implements ActionListener
     int roomNumber = 1;
     int directionFacing = 3;
     int frameWidth, frameHeight;
+    
      
 
     Timer time, flashing, flicker, badGuyHitter;
@@ -678,6 +679,15 @@ public class GamePanel extends JPanel implements ActionListener
             else
             {
                 add(back);
+            }
+            //winning
+            if (roomNumber == 4)
+            {
+                winner = new Rectangle(684, 440, 33, 49);
+                if (player1.heroShape.intersects(winner))
+                {
+                    System.out.println("win");
+                }
             }
         }
         if (badGuy != null)

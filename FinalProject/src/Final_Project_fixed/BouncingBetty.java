@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class BouncingBetty
 {
-    int objectX = 490, objectY = 340, objectWidth = 10, objectHeight = 10;
+    int objectX = 10, objectY = 10, objectWidth = 10, objectHeight = 10;
     int flashcount = 1, objectdx = 1, objectdy = 1;
     Rectangle badGuyShape;
     Color badGuyColor;
