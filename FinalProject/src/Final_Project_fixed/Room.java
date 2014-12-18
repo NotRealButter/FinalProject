@@ -66,10 +66,10 @@ public class Room
        doorList.get(0).createDoor(0, 300, 10, 100);
        doorList.get(1).createDoor(990, 300, 10, 100);
        doorList.get(2).createDoor(450, 0, 100, 10);
-       //if (testDoor == true)
-       //{
+       if (testDoor == true)
+       {
        doorList.get(3).createDoor(450, 690, 100, 10);
-       //}
+       }
        
     }
    public void inRoomTwo() //Kristens room
