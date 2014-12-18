@@ -140,6 +140,7 @@ public class myJPanel extends JPanel implements ActionListener
         if (select == optionsPanel.ok) 
         {
             optionsPanel.saveOptions();
+            optionsPanel.loadOptions();
             gp1.createPlayer(optionsPanel.getGameOptions());
 
             removePanels();
