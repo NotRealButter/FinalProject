@@ -689,7 +689,7 @@ public class GamePanel extends JPanel implements ActionListener
                 repaint();            
                 revalidate();
             
-            
+        }    
             //winning
             if (roomNumber == 4)
             {
@@ -702,7 +702,7 @@ public class GamePanel extends JPanel implements ActionListener
                     }
                 }
             }
-        }
+        
         if (player1.health <= 0)
         {
             if (select == back)
