@@ -66,10 +66,10 @@ public class Room
        doorList.get(0).createDoor(0, 300, 10, 100);
        doorList.get(1).createDoor(990, 300, 10, 100);
        doorList.get(2).createDoor(450, 0, 100, 10);
-       if (testDoor == true)
-       {
+       //if (testDoor == true)
+       //{
        doorList.get(3).createDoor(450, 690, 100, 10);
-       }
+       //}
        
     }
    public void inRoomTwo() //Kristens room
@@ -142,14 +142,14 @@ public class Room
        wallList.get(2).createWall(0, 690, 1000, 10);
        wallList.get(3).createWall(0, 0, 10, 700);
        
-       wallList.get(10).createWall(484, 200, 33, 49);
-       wallList.get(11).createWall(484, 320, 33, 49);
-       wallList.get(12).createWall(484, 440, 33, 49);
-       wallList.get(13).createWall(284, 200, 33, 49);
-       wallList.get(14).createWall(284, 320, 33, 49);
-       wallList.get(15).createWall(284, 440, 33, 49);
-       wallList.get(16).createWall(684, 200, 33, 49);
-       wallList.get(17).createWall(684, 320, 33, 49);
+       wallList.get(20).createWall(475, 200, 50, 78);
+       wallList.get(21).createWall(475, 320, 50, 78);
+       wallList.get(22).createWall(475, 440, 50, 78);
+       wallList.get(23).createWall(275, 200, 50, 78);
+       wallList.get(24).createWall(275, 320, 50, 78);
+       wallList.get(25).createWall(275, 440, 50, 78);
+       wallList.get(26).createWall(675, 200, 50, 78);
+       wallList.get(27).createWall(675, 320, 50, 78);
        
        
         //doors

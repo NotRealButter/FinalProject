@@ -10,6 +10,7 @@ import javax.swing.*;
 public class GamePanel extends JPanel implements ActionListener
 {
     Image gameOver = Toolkit.getDefaultToolkit().getImage("images/gameOver.jpg");
+    Image gameWon = Toolkit.getDefaultToolkit().getImage("images/win.jpg");
     myJPanel gp1;
     Player player1;
     BouncingBetty badGuy;
@@ -30,6 +31,10 @@ public class GamePanel extends JPanel implements ActionListener
     
     Timer time, flashing, flicker, badGuyHitter;
   
+    Image deskOne = Toolkit.getDefaultToolkit().getImage("images/girlDesk.png");
+    Image deskTwo = Toolkit.getDefaultToolkit().getImage("images/girlDesk2.png");
+    Image emptyDesk = Toolkit.getDefaultToolkit().getImage("images/emptyDesk.png");
+    
     public GamePanel()
     {
         super();
@@ -57,24 +62,24 @@ public class GamePanel extends JPanel implements ActionListener
         health.setBackground(Color.LIGHT_GRAY);
         add(health);
         
-        items = new JLabel("Inventory");
-        items.setBounds(10, 610, 100, 20);
+        items = new JLabel("Inventory:");
+        items.setBounds(10, 610, 60, 20);
         items.setOpaque(true);
         items.setBackground(Color.LIGHT_GRAY);
         add(items);
         
         bookOne = new JLabel("Book 1");
-        bookOne.setBounds(10, 630, 100, 20);
+        bookOne.setBounds(10, 630, 60, 20);
         bookOne.setOpaque(true);
         bookOne.setBackground(Color.LIGHT_GRAY);
         
         bookTwo = new JLabel("Book 2");
-        bookTwo.setBounds(10, 650, 100, 20);
+        bookTwo.setBounds(10, 650, 60, 20);
         bookTwo.setOpaque(true);
         bookTwo.setBackground(Color.LIGHT_GRAY);
         
         bookThree = new JLabel("Book 3");
-        bookThree.setBounds(10, 670, 100, 20);
+        bookThree.setBounds(10, 670, 60, 20);
         bookThree.setOpaque(true);
         bookThree.setBackground(Color.LIGHT_GRAY);
 
@@ -273,6 +278,17 @@ public class GamePanel extends JPanel implements ActionListener
             else if(roomNumber == 4)
             {
                 g.drawImage(inThisRoom.roomFourFloor, 0, 0, this);
+                g.drawImage(emptyDesk, 675, 440, this);
+                g.drawImage(deskOne, 475, 200, this);
+                g.drawImage(deskOne, 475, 320, this);
+                g.drawImage(deskOne, 475, 440, this);
+                g.drawImage(deskOne, 275, 200, this);
+                g.drawImage(deskTwo, 275, 320, this);
+                g.drawImage(deskTwo, 275, 440, this);
+                g.drawImage(deskTwo, 675, 200, this);
+                g.drawImage(deskTwo, 675, 320, this);
+                
+                
             }          
             else if (roomNumber == 5)
             {
@@ -341,12 +357,18 @@ public class GamePanel extends JPanel implements ActionListener
                     //g2d.draw(maze.trigger);   
                 }
             }
-
-        
+        if (roomNumber == 4 )    
+        {
+            if (player1.heroShape.intersects(winner))
+            {
+                g.drawImage(gameWon, 0, 0, this);
+                time.stop();
+            }
+        }
         if (player1.health <= 0)
         {
-
             g.drawImage(gameOver, 0, 0, this);
+            time.stop();
         }
     }
     public void resetWalls()
@@ -668,10 +690,13 @@ public class GamePanel extends JPanel implements ActionListener
             //winning
             if (roomNumber == 4)
             {
-                winner = new Rectangle(684, 440, 33, 49);
+                winner = new Rectangle(675, 440, 50, 78);
                 if (player1.heroShape.intersects(winner))
                 {
-                    
+                    if (select == back)
+                    {
+                        resetGame();
+                    }
                 }
             }
         }
